@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://duwf6pfc8wr5i"]
+
+[ext_resource type="Script" uid="uid://b3aut4et2ullu" path="res://drone.gd" id="1_uvgqj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_etgmo"]
+radius = 0.3
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_etgmo"]
+top_radius = 0.2
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvgqj"]
+albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
+
+[node name="Drone" type="CharacterBody3D" groups=["Commands"]]
+script = ExtResource("1_uvgqj")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.5
+path_max_distance = 1000.01
+navigation_layers = 3
+avoidance_enabled = true
+radius = 0.3
+max_speed = 5.0
+avoidance_priority = 0.75
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_etgmo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CylinderMesh_etgmo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")

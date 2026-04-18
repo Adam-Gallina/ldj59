@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3133broymnip"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_373ln"]
+size = Vector2(5, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7s6e"]
+albedo_color = Color(0.282763, 0.282763, 0.282763, 1)
+
+[node name="Floor" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_373ln")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_c7s6e")
