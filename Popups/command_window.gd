@@ -11,7 +11,21 @@ class CommandOutput:
 
 
 @onready var _history : TextEdit = $CanvasLayer/Output
+var _command_history : Array[String] = []
+var _curr_command = -1
 @onready var _input : LineEdit = $CanvasLayer/LineEdit
+
+
+func _process(_delta: float) -> void:
+	if _command_history.size() > 0:
+		if Input.is_action_just_pressed('previous_command'):
+			_curr_command -= 1
+			if _curr_command <= 0: _curr_command = 0
+			fill_from_history(_curr_command)
+		if Input.is_action_just_pressed('next_command'):
+			_curr_command += 1
+			if _curr_command >= _command_history.size(): _curr_command = _command_history.size()
+			fill_from_history(_curr_command)
 
 
 func is_open() -> bool: return visible
@@ -26,6 +40,17 @@ func close():
 
 func log_message(msg:String):
 	_history.text += '\n' + msg
+	_history.get_v_scroll_bar().value = _history.get_v_scroll_bar().max_value
+
+func fill_from_history(i):
+	if i < 0: i = 0
+	
+	if i >= _command_history.size():
+		_input.text = ''
+	else:
+		_input.text = _command_history[i]
+
+
 
 
 #func process_command(_cmd:String, _args:Array[String]) -> CommandOutput:
@@ -38,6 +63,8 @@ func _on_command_submitted(new_text:String) -> void:
 
 	_input.text = ''
 	log_message('> ' + new_text)
+	_command_history.append(new_text)
+	_curr_command = _command_history.size()
 
 	var processed = false
 

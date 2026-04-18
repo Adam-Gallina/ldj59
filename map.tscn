@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=15 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
@@ -8,10 +8,11 @@
 [ext_resource type="Script" uid="uid://dgfh011c42udq" path="res://room.gd" id="6_iw27f"]
 [ext_resource type="PackedScene" uid="uid://b3133broymnip" path="res://basic_floor.tscn" id="7_05x41"]
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="7_71pa8"]
+[ext_resource type="PackedScene" uid="uid://cau85qtm6u2b6" path="res://basic_waypoint.tscn" id="9_gqbix"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_05x41"]
-vertices = PackedVector3Array(-1.75, 0.5, -2.75, -1.75, 0.5, 0.75, 2.75, 0.5, 0.75, 2.75, 0.5, -2.75)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(2.75, 0.5, 0.75, 2.75, 0.5, -1.5, 1.5, 0.5, -1.75, 1.5, 0.5, -2.75, -1.75, 0.5, -2.75, -1.75, 0.5, 0.75, 2, 1, -2.5, 2, 1, -2, 2.5, 1, -2, 2.5, 1, -2.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 2), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -237,6 +238,9 @@ RoomID = "r1"
 [node name="Floor" parent="Room1" instance=ExtResource("7_05x41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1)
 
+[node name="Waypoint" parent="Room1" instance=ExtResource("9_gqbix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37121, 0, -2.35068)
+
 [node name="Room2" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_gqbix")
 navigation_layers = 3
@@ -267,5 +271,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 
 
 [node name="Drone" parent="." instance=ExtResource("7_71pa8")]
 DroneID = "b1"
+
+[node name="Drone2" parent="." instance=ExtResource("7_71pa8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10041, 4.76837e-07, -0.836415)
+DroneID = "b2"
 
 [connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]

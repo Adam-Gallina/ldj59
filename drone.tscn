@@ -18,12 +18,13 @@ albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
 script = ExtResource("1_uvgqj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.25
 path_height_offset = 0.5
 path_max_distance = 1000.01
 navigation_layers = 3
 avoidance_enabled = true
 radius = 0.3
-max_speed = 5.0
+max_speed = 3.0
 avoidance_priority = 0.75
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
