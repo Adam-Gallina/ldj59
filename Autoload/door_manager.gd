@@ -1,9 +1,18 @@
 extends Node
 
+signal walls_loaded()
+
 var _doors : Dictionary = {}
 func get_doors() -> Dictionary: return _doors
 var _rooms : Dictionary = {}
 func get_rooms() -> Dictionary: return _rooms
+
+## { room RID : [bordered walls] }
+var _room_walls : Dictionary = {}
+## { door : [bordered room RIDs] }
+var _door_rooms : Dictionary = {}
+var _revealed_rooms : Array = []
+const ROOM_SEARCH_DIRS = [Vector3(1, 0, 1), Vector3(1, 0, -1), Vector3(-1, 0, -1), Vector3(-1, 0, 1)]
 
 func _init():
 	add_to_group(Constants.COMMAND_GROUP)
@@ -19,7 +28,6 @@ func _ready():
 			_doors[d.DoorID] = d
 		else:
 			printerr('DoorManager: Trying to add non-DoorBase to doors - ', d)
-
 	
 	var rooms = get_tree().get_nodes_in_group(Constants.ROOM_GROUP)
 	for r in rooms:
@@ -30,42 +38,132 @@ func _ready():
 		else:
 			printerr('DoorManager: Trying to add non-DoorBase to doors - ', r)
 
+	load_walls.call_deferred()
+
+func load_walls():
+	await NavigationServer3D.map_changed
+
+	var walls = get_tree().get_nodes_in_group(Constants.WALL_GROUP)
+	var m = NavigationServer3D.get_maps()[0]
+	var regions = NavigationServer3D.map_get_regions(m)
+	for r in regions:
+		_room_walls[r] = []
+
+	for w in walls:
+		var model = w.get_node('%Model')
+		hide_model(model)
+		for d in ROOM_SEARCH_DIRS:
+			for r in regions:
+				if NavigationServer3D.region_owns_point(r, w.global_position + d):
+					if model not in _room_walls[r]:
+						_room_walls[r].append(model)
+					break
+	
+	var doors = get_tree().get_nodes_in_group(Constants.DOOR_GROUP)
+	for door in doors:
+		var model = door.get_node('%Model')
+		hide_model(model)
+		_door_rooms[door] = []
+
+		var dirs = [door.basis.z, -door.basis.z]
+		for d in dirs:
+			for r in regions:
+				if NavigationServer3D.region_owns_point(r, door.global_position + d):
+					if model not in _room_walls[r]:
+						_room_walls[r].append(model)
+						_door_rooms[door].append(r)
+					break
+
+	var rooms = get_tree().get_nodes_in_group(Constants.ROOM_GROUP)
+	for room in rooms:
+		var rid = room.get_rid()
+		for n in room.get_children():
+			var model = n
+			if n is not VisualInstance3D:
+				model = n.get_node_or_null('%Model')
+				if model == null:
+					printerr('DoorManager: Could not find model of ', n, ' (room: ', room, ')')
+					continue
+			_room_walls[rid].append(model)
+			hide_model(model)
+
+	walls_loaded.emit()
+
+
+func reveal_room(rid):
+	for w in _room_walls[rid]:
+		reveal_model(w)
+	if rid not in _revealed_rooms:
+		_revealed_rooms.append(rid)
+
+func room_is_revealed(rid):
+	return rid in _revealed_rooms
+
+func hide_model(model):
+	model.layers = 0
+
+func reveal_model(model):
+	model.layers = 1
+
+func model_is_revealed(model):
+	return model.layers > 0
+
 
 func process_command(cmd:String, args:Array[String]):
 	var succeeded = 0
 	var output : Array[String] = []
 
-	if cmd == 'open':
+	if cmd == 'scan':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['scan requires at least one argument (scan doorID[s])'])
+		for a in args:
+			if _doors.get(a) and model_is_revealed(_doors[a].get_node('%Model')):
+				if _doors[a].is_active() or _doors[a].is_open():
+					for r in _door_rooms[_doors[a]]:
+						reveal_room(r)
+					succeeded += 1
+				else:
+					output.append('{0} failed to scan'.format([a]))
+			else:
+				output.append('Unrecognized door_id \'' + a + '\'')
+	elif cmd == 'open':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['open requires at least one argument (open doorID[s])'])
 		for a in args:
 			if _doors.get(a):
 				if _doors[a].open():
 					succeeded += 1
+					for r in _door_rooms[_doors[cmd]]:
+						reveal_room(r)
 				else:
-					output.append('{a} failed to open')
+					output.append('{0} failed to open'.format([a]))
 			else:
 				output.append('Unrecognized door_id \'' + a + '\'')
 	elif cmd == 'close':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['close requires at least one argument (close doorID[s]'])
 		for a in args:
 			if _doors.get(a):
 				if _doors[a].close():
 					succeeded += 1
 				else:
-					output.append('{a} failed to close')
+					output.append('{0} failed to close'.format([a]))
 			else:
 				output.append('Unrecognized door_id \'' + a + '\'')
-	else:
-		if _doors.get(cmd):
-			if _doors[cmd].is_open():
-				if _doors[cmd].close():
-					succeeded += 1
-				else:
-					output.append('{a} failed to close')
+	elif _doors.get(cmd):
+		if _doors[cmd].is_open():
+			if _doors[cmd].close():
+				succeeded += 1
 			else:
-				if _doors[cmd].open():
-					succeeded += 1
-				else:
-					output.append('{a} failed to open')
+				output.append('{0} failed to close'.format([cmd]))
 		else:
-			return null
+			if _doors[cmd].open():
+				succeeded += 1
+				for r in _door_rooms[_doors[cmd]]:
+					reveal_room(r)
+			else:
+				output.append('{0} failed to open'.format([cmd]))
+	else:
+		return null
 	
 	return CommandWindow.CommandOutput.new(succeeded > 0, output)

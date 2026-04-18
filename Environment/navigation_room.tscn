@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2jebwnoodr65"]
+
+[ext_resource type="Script" uid="uid://dgfh011c42udq" path="res://Environment/room.gd" id="1_h8h5b"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_05x41"]
+agent_height = 1.0
+agent_radius = 0.25
+agent_max_climb = 0.0
+agent_max_slope = 0.02
+
+[node name="Room" type="NavigationRegion3D" groups=["Rooms"]]
+navigation_mesh = SubResource("NavigationMesh_05x41")
+navigation_layers = 3
+script = ExtResource("1_h8h5b")

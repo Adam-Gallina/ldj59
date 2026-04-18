@@ -43,5 +43,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")
 
 [node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+layers = 4
 pixel_size = 0.005
 texture = ExtResource("2_d5du7")

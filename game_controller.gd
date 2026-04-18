@@ -1,18 +1,27 @@
 extends Node3D
 
-@onready var _command_window : PopupWindow = $CommandWindow
 @onready var _radar_window : PopupWindow = $RadarWindow
 
+@onready var _start_room : RoomBase = $Room1
+
 func _ready():
-	_command_window.close()
+	CommandManager.close()
 	_radar_window.close()
+
+	reveal_start.call_deferred()
+
+
+func reveal_start():
+	await DoorManager.walls_loaded
+
+	DoorManager.reveal_room(_start_room.get_rid())
 
 
 func _on_cmd_pressed():
-	if _command_window.is_open():
-		_command_window.close()
+	if CommandManager.is_open():
+		CommandManager.close()
 	else:
-		_command_window.open()
+		CommandManager.open()
 
 
 func _on_radar_pressed() -> void:

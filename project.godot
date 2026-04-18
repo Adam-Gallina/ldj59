@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Constants="*res://Autoload/constants.gd"
 DoorManager="*res://Autoload/door_manager.gd"
+CommandManager="*res://Popups/command_window.tscn"
 
 [global_group]
 
@@ -26,6 +27,7 @@ Commands="Nodes that can process commands"
 Doors=""
 Rooms=""
 Drones=""
+Walls=""
 
 [input]
 
@@ -62,6 +64,9 @@ select={
 
 [layer_names]
 
+3d_render/layer_1="All"
+3d_render/layer_2="3D Only"
+3d_render/layer_3="Map Only"
 3d_physics/layer_1="Environment"
 3d_navigation/layer_1="Floor"
 3d_physics/layer_2="Walls"

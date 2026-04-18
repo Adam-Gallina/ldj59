@@ -9,6 +9,8 @@ class CommandOutput:
 		Success = success
 		Output = output
 
+const NativeCommands : Array[String] = ['ping']
+
 
 @onready var _history : TextEdit = $CanvasLayer/Output
 var _command_history : Array[String] = []
@@ -65,7 +67,7 @@ func _on_command_submitted(new_text:String) -> void:
 				log_message(o)
 			processed = true
 
-	if not processed:
+	if not processed and cmd not in NativeCommands:
 		log_message('Unknown command')
 
 

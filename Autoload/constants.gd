@@ -1,6 +1,7 @@
 extends Node
 
 const COMMAND_GROUP = 'Commands'
+const WALL_GROUP = 'Walls'
 const DOOR_GROUP = 'Doors'
 const ROOM_GROUP = 'Rooms'
 const DRONE_GROUP = 'Drones'
