@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5fk55hpj6vdq"]
+
+[ext_resource type="Script" uid="uid://c715cv3ndd05q" path="res://Popups/radar_window.gd" id="1_k42f2"]
+[ext_resource type="PackedScene" uid="uid://2lsysx0ihdq3" path="res://UI/knob.tscn" id="1_ldsf8"]
+[ext_resource type="PackedScene" uid="uid://dedwufelcydyp" path="res://Icons/radar_ping.tscn" id="2_chgsx"]
+[ext_resource type="PackedScene" uid="uid://c8nreylx5ly20" path="res://Effects/line_mesh_3d.tscn" id="3_65m12"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65m12"]
+albedo_color = Color(0, 1, 0.00863743, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chgsx"]
+albedo_color = Color(0, 1, 0.00863743, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdgpr"]
+albedo_color = Color(0, 1, 0.00863743, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_65m12"]
+points = PackedVector3Array(12, 0, 0, 0, 12.635, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="RadarWindow" type="Window" groups=["Commands"]]
+physics_object_picking = true
+title = "RADAR"
+position = Vector2i(25, 391)
+size = Vector2i(600, 200)
+unresizable = true
+script = ExtResource("1_k42f2")
+RadarPingScene = ExtResource("2_chgsx")
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 103.0
+offset_bottom = 38.0
+text = "Direction: "
+
+[node name="DirectionKnob" parent="." instance=ExtResource("1_ldsf8")]
+position = Vector2(73, 113)
+MaxValue = 359
+ChangeSpeed = 15.0
+AllowWrap = true
+MaxRotation = 359
+
+[node name="Label" type="Label" parent="."]
+offset_left = 195.0
+offset_top = 18.0
+offset_right = 247.0
+offset_bottom = 41.0
+text = "Angle: "
+
+[node name="AngleKnob" parent="." instance=ExtResource("1_ldsf8")]
+position = Vector2(217, 114)
+MinValue = 10
+MaxValue = 75
+Value = 30
+MinRotation = 10
+MaxRotation = 75
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 326.0
+offset_top = 18.0
+offset_right = 402.0
+offset_bottom = 41.0
+text = "Strength: "
+
+[node name="StrengthKnob" parent="." instance=ExtResource("1_ldsf8")]
+position = Vector2(366, 115)
+MinValue = 30
+Value = 50
+MinRotation = -130
+MaxRotation = 130
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 486.0
+offset_top = 17.0
+offset_right = 566.0
+offset_bottom = 40.0
+text = "Precision: "
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 379.0
+offset_top = -1.0
+offset_right = 496.0
+offset_bottom = 22.0
+text = "Scanning from: elev"
+
+[node name="PrecisionKnob" parent="." instance=ExtResource("1_ldsf8")]
+position = Vector2(523, 115)
+MinValue = 20
+MaxValue = 60
+Value = 40
+ChangeSpeed = 2.0
+MinRotation = -130
+MaxRotation = 130
+
+[node name="LineMesh3D" parent="." instance=ExtResource("3_65m12")]
+material_override = SubResource("StandardMaterial3D_65m12")
+MaxWidth = 0.1
+
+[node name="CapLineMesh3D" parent="." instance=ExtResource("3_65m12")]
+material_override = SubResource("StandardMaterial3D_chgsx")
+MaxWidth = 0.1
+
+[node name="PulseLineMesh3D" parent="." instance=ExtResource("3_65m12")]
+material_override = SubResource("StandardMaterial3D_cdgpr")
+MaxWidth = 0.05
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_65m12")
+target_position = Vector3(0, -10, 0)
+collision_mask = 16
+
+[connection signal="close_requested" from="." to="." method="close"]
+[connection signal="value_changed" from="DirectionKnob" to="." method="_on_direction_changed"]
+[connection signal="value_changed" from="AngleKnob" to="." method="_on_angle_changed"]
+[connection signal="value_changed" from="StrengthKnob" to="." method="_on_strength_changed"]
+[connection signal="value_changed" from="PrecisionKnob" to="." method="_on_precision_changed"]

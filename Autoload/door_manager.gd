@@ -12,6 +12,8 @@ func _ready():
 	var doors = get_tree().get_nodes_in_group(Constants.DOOR_GROUP)
 	for d in doors:
 		if d is DoorBase:
+			if d.DoorID == '': continue
+			
 			if _doors.get(d.DoorID):
 				printerr('DoorManager: Trying to store door with duplicate ID - ', d.DoorID, '. ', d, ' conflicts with ', _doors.get(d.DoorID))
 			_doors[d.DoorID] = d

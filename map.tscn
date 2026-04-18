@@ -1,14 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=17 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
 [ext_resource type="PackedScene" uid="uid://cs3gtsyc6b0yp" path="res://Popups/command_window.tscn" id="2_wijl4"]
+[ext_resource type="PackedScene" uid="uid://b5fk55hpj6vdq" path="res://Popups/radar_window.tscn" id="3_sb2pt"]
 [ext_resource type="PackedScene" uid="uid://bk0j7ke65ekgl" path="res://basic_door.tscn" id="4_p5pve"]
 [ext_resource type="PackedScene" uid="uid://uheid67dpk41" path="res://basic_wall.tscn" id="4_urblq"]
 [ext_resource type="Script" uid="uid://dgfh011c42udq" path="res://room.gd" id="6_iw27f"]
 [ext_resource type="PackedScene" uid="uid://b3133broymnip" path="res://basic_floor.tscn" id="7_05x41"]
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="7_71pa8"]
 [ext_resource type="PackedScene" uid="uid://cau85qtm6u2b6" path="res://basic_waypoint.tscn" id="9_gqbix"]
+[ext_resource type="Script" uid="uid://bapip6hkbryfi" path="res://router.gd" id="11_sb2pt"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_05x41"]
 vertices = PackedVector3Array(2.75, 0.5, 0.75, 2.75, 0.5, -1.5, 1.5, 0.5, -1.75, 1.5, 0.5, -2.75, -1.75, 0.5, -2.75, -1.75, 0.5, 0.75, 2, 1, -2.5, 2, 1, -2, 2.5, 1, -2, 2.5, 1, -2.5)
@@ -52,17 +54,50 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -68.0
+offset_top = -101.0
+offset_right = -23.0
+offset_bottom = -70.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "CMD"
+
+[node name="RadarButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
 offset_top = -57.0
 offset_right = -23.0
 offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "CMD"
+text = "RADAR"
+
+[node name="MapButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -229.0
+offset_right = -23.0
+offset_bottom = -198.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Debug: map"
 
 [node name="CommandWindow" parent="." instance=ExtResource("2_wijl4")]
 
+[node name="RadarWindow" parent="." node_paths=PackedStringArray("_curr_target", "Routers") instance=ExtResource("3_sb2pt")]
+_curr_target = NodePath("../Room1/Router")
+Routers = [NodePath("../Room1/Router")]
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+cull_mask = 1048573
 projection = 1
 size = 10.236
 script = ExtResource("1_c7s6e")
@@ -241,6 +276,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1)
 [node name="Waypoint" parent="Room1" instance=ExtResource("9_gqbix")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37121, 0, -2.35068)
 
+[node name="Router" type="Node3D" parent="Room1"]
+script = ExtResource("11_sb2pt")
+RouterID = "elev"
+
 [node name="Room2" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_gqbix")
 navigation_layers = 3
@@ -277,3 +316,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10041, 4.76837e-07, -0.8364
 DroneID = "b2"
 
 [connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]
+[connection signal="pressed" from="CanvasLayer/RadarButton" to="." method="_on_radar_pressed"]
+[connection signal="pressed" from="CanvasLayer/MapButton" to="." method="_on_debug_map_pressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://duwf6pfc8wr5i"]
+[gd_scene load_steps=6 format=3 uid="uid://duwf6pfc8wr5i"]
 
 [ext_resource type="Script" uid="uid://b3aut4et2ullu" path="res://drone.gd" id="1_uvgqj"]
+[ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="2_d5du7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_etgmo"]
 radius = 0.3
@@ -14,7 +15,8 @@ height = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvgqj"]
 albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
 
-[node name="Drone" type="CharacterBody3D" groups=["Commands"]]
+[node name="Drone" type="CharacterBody3D" groups=["Commands", "Drones"]]
+collision_layer = 17
 script = ExtResource("1_uvgqj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -34,6 +36,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_etgmo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+layers = 2
 mesh = SubResource("CylinderMesh_etgmo")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")
+
+[node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+pixel_size = 0.005
+texture = ExtResource("2_d5du7")

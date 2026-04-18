@@ -1,4 +1,4 @@
-extends Window
+extends PopupWindow
 class_name CommandWindow
 
 class CommandOutput:
@@ -28,16 +28,6 @@ func _process(_delta: float) -> void:
 			fill_from_history(_curr_command)
 
 
-func is_open() -> bool: return visible
-
-func open():
-	show()
-	_input.grab_focus()
-
-func close():
-	hide()
-
-
 func log_message(msg:String):
 	_history.text += '\n' + msg
 	_history.get_v_scroll_bar().value = _history.get_v_scroll_bar().max_value
@@ -51,9 +41,7 @@ func fill_from_history(i):
 		_input.text = _command_history[i]
 
 
-
-
-#func process_command(_cmd:String, _args:Array[String]) -> CommandOutput:
+#func process_command(_cmd:String, _args:Array[String]) -> CommandWindow.CommandOutput:
 #	return null
 func _on_command_submitted(new_text:String) -> void:
 	var inp = new_text.to_lower().split(' ')
@@ -79,3 +67,8 @@ func _on_command_submitted(new_text:String) -> void:
 
 	if not processed:
 		log_message('Unknown command')
+
+
+func open():
+	super()
+	_input.grab_focus()

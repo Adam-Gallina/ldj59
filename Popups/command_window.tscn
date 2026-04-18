@@ -4,6 +4,7 @@
 
 [node name="CommandWindow" type="Window"]
 mode = 3
+title = "CMD "
 position = Vector2i(45, 55)
 size = Vector2i(200, 200)
 script = ExtResource("1_d8106")

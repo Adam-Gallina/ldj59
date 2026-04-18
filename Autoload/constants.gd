@@ -3,6 +3,7 @@ extends Node
 const COMMAND_GROUP = 'Commands'
 const DOOR_GROUP = 'Doors'
 const ROOM_GROUP = 'Rooms'
+const DRONE_GROUP = 'Drones'
 
 const COMMAND_FUNC = 'process_command'
 
