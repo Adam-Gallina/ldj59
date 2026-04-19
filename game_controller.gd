@@ -43,6 +43,7 @@ func _ready():
 		await $Rooms/Room5/Generator.interaction_start(null)
 	if DEBUG_server_always_active:
 		await $Rooms/Room9/Server.interaction_start(null)
+		await $Rooms/Room9/Server.interaction_start(null)
 
 
 func reveal_start():

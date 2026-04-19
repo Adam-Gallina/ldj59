@@ -1,4 +1,5 @@
 extends PopupWindow
+class_name FileWindow
 
 func set_file(filename, filepath):
 	title = filename

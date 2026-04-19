@@ -63,3 +63,18 @@ func _on_body_entered(body:Node3D, zone:int):
 	
 func _on_body_exited(_body:Node3D, _z:int):
 	_tracked_body = null
+
+
+
+func process_command(cmd:String, _args:Array[String]):
+	if not is_active(): return null
+
+	if cmd == 'routers':
+		var routers = get_tree().root.get_node('Map/RadarWindow').Routers
+		var out = []
+		for r in routers:
+			var status = 'Online' if r.PowerSource.is_active() else 'Offline'
+			out.append('{0}\t| {1}'.format([r.RouterID, status]))
+		return CommandManager.CommandOutput.new(true, out)
+
+	return null

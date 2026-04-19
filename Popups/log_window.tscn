@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfjxyang2aohu"]
+[gd_scene load_steps=5 format=3 uid="uid://cfjxyang2aohu"]
 
 [ext_resource type="Script" uid="uid://dodxuewdrl6vr" path="res://Popups/log_window.gd" id="1_iaf63"]
 [ext_resource type="PackedScene" uid="uid://djxqixlr73ckx" path="res://Popups/file_button.tscn" id="2_5pqvg"]
 [ext_resource type="PackedScene" uid="uid://dboioetadrk0" path="res://Popups/file_window.tscn" id="2_53mxp"]
+[ext_resource type="PackedScene" uid="uid://bc8bhswhxd3wv" path="res://Popups/image_window.tscn" id="4_3x6hi"]
 
 [node name="DataWindow" type="Window"]
 title = "DATA"
@@ -11,6 +12,7 @@ size = Vector2i(200, 300)
 script = ExtResource("1_iaf63")
 FileButtonScene = ExtResource("2_5pqvg")
 FileWindowScene = ExtResource("2_53mxp")
+ImageWindowScene = ExtResource("4_3x6hi")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchors_preset = 15

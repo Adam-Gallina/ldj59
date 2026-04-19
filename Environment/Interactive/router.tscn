@@ -10,7 +10,7 @@ height = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn6st"]
 albedo_color = Color(0.490659, 0.70366, 0.70366, 1)
 
-[node name="Router" type="Node3D"]
+[node name="Router" type="Node3D" groups=["Commands"]]
 script = ExtResource("1_adyp5")
 
 [node name="Model" type="MeshInstance3D" parent="."]

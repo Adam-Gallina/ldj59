@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc8bhswhxd3wv"]
+
+[ext_resource type="Script" uid="uid://dvmhoobtv38t2" path="res://Popups/image_window.gd" id="1_bs3lk"]
+[ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="2_bs3lk"]
+
+[node name="ImageWindow" type="Window"]
+auto_translate_mode = 1
+position = Vector2i(285, 220)
+size = Vector2i(200, 200)
+script = ExtResource("1_bs3lk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bs3lk")
+stretch_mode = 4
+
+[connection signal="close_requested" from="." to="." method="queue_free"]
