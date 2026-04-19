@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://iweseymoqhwe"]
+[gd_scene load_steps=5 format=3 uid="uid://iweseymoqhwe"]
 
 [ext_resource type="Script" uid="uid://bapip6hkbryfi" path="res://Environment/Interactive/router.gd" id="1_adyp5"]
+[ext_resource type="Texture2D" uid="uid://duj6mmdnw4gir" path="res://Icons/Images/RouterIcon.png" id="2_w4kbf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_w4kbf"]
 top_radius = 0.125
@@ -18,3 +19,19 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.403574, 0)
 mesh = SubResource("CylinderMesh_w4kbf")
 surface_material_override/0 = SubResource("StandardMaterial3D_qn6st")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+modulate = Color(0.532883, 1, 0.973115, 1)
+pixel_size = 0.003
+texture = ExtResource("2_w4kbf")
+
+[node name="Label3D" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.257673, -0.0795771, 0.119615)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.3925, 0.662928, 0.639412, 1)
+text = "SomeID"
+font_size = 92
+outline_size = 22
+horizontal_alignment = 0

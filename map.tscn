@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=56 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bn7bedo34qkmn" path="res://Environment/Interactive/blast_door_control.tscn" id="16_a6rn7"]
 [ext_resource type="PackedScene" uid="uid://d1aovyvwl5lol" path="res://Enemies/enemy.tscn" id="16_wbpbn"]
 [ext_resource type="PackedScene" uid="uid://c8xbk6qega6s7" path="res://Environment/Interactive/blast_door.tscn" id="17_4on3e"]
+[ext_resource type="PackedScene" uid="uid://cudpe824xra7q" path="res://Environment/file.tscn" id="19_jk4ss"]
 
 [sub_resource type="Environment" id="Environment_sb2pt"]
 background_mode = 1
@@ -1758,6 +1759,12 @@ Door = NodePath("../BlastDoor")
 
 [node name="BlastDoor" parent="Rooms/Room10" instance=ExtResource("17_4on3e")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, -1)
+
+[node name="File" parent="Rooms/Room10" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28831, 0, 1.24492)
+skeleton = NodePath("../../Room5")
+filename = "M0NK3_ADV.txt"
+filepath = "res://Popups/Documents/advanced_commands.txt"
 
 [node name="Room11" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)

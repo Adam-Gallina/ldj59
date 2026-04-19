@@ -14,8 +14,6 @@ var _last_window : Window
 func _ready() -> void:
 	add_file('MISSION_BRIEFING.txt', 'res://Popups/Documents/mission_briefing.txt')
 	add_file('M0NK3_COMMANDS.txt', 'res://Popups/Documents/basic_commands.txt')
-	add_file('M0NK3_ADV.txt', 'res://Popups/Documents/advanced_commands.txt')
-	add_file('gearbo.png', 'res://Icons/Images/Gear.png')
 
 func add_file(filename, filepath):
 	var b = FileButtonScene.instantiate()

@@ -88,9 +88,17 @@ func get_curr_room() -> Node3D:
 func get_room_interactions() -> InteractiveBase:
 	var room = get_curr_room()
 	for n in room.get_children():
-		if n is InteractiveBase:
+		if n is InteractiveBase and not n is ScannableFile:
 			return n
+	
+	return null
 
+func get_room_files() -> ScannableFile:
+	var room = get_curr_room()
+	for n in room.get_children():
+		if n is ScannableFile:
+			return n
+	
 	return null
 
 
@@ -127,6 +135,18 @@ func process_command(cmd:String, args:Array[String]):
 			return CommandWindow.CommandOutput.new(true, [])
 		else:
 			return CommandWindow.CommandOutput.new(false, [DroneID + ': Failed to interface with ' + i.Descriptor])
+	elif args[0] == 'download':
+		var i = get_room_files()
+		if i == null:
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': No files found'])
+
+		move(i.global_position)
+		await move_complete
+		var result = await do_interaction(i)
+		if result:
+			return CommandWindow.CommandOutput.new(true, [])
+		else:
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': Failed to scan ' + i.Descriptor])
 	elif args[0] == 'control':
 		if _control_window.is_open():
 			_control_window.close()
