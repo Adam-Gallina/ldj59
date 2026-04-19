@@ -101,6 +101,9 @@ func do_scan(pos:Vector3, rotation:float, angle:float, strength:float) -> Array[
 
 func process_command(cmd:String, args:Array[String]) -> CommandWindow.CommandOutput:
 	if cmd == 'radar':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['radar requires one argument:', '\tradar start', '\tradar stop', '\tradar [radar source ID]'])
+
 		if args[0] == 'start':
 			start_radar()
 			return CommandWindow.CommandOutput.new(true, [])
@@ -113,7 +116,6 @@ func process_command(cmd:String, args:Array[String]) -> CommandWindow.CommandOut
 			start_radar()
 			return CommandWindow.CommandOutput.new(true, [])
 		elif args[0][0] == 'b':
-			print(get_tree())
 			for d in get_tree().get_nodes_in_group(Constants.DRONE_GROUP):
 				if d.DroneID == args[0]:
 					_curr_target = d

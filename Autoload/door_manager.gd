@@ -61,31 +61,26 @@ func load_walls():
 	
 	var doors = get_tree().get_nodes_in_group(Constants.DOOR_GROUP)
 	for door in doors:
-		var model = door.get_node('%Model')
-		hide_model(model)
+		hide_model(door)
 		_door_rooms[door] = []
 
 		var dirs = [door.basis.z, -door.basis.z]
 		for d in dirs:
 			for r in regions:
 				if NavigationServer3D.region_owns_point(r, door.global_position + d):
-					if model not in _room_walls[r]:
-						_room_walls[r].append(model)
+					if door not in _room_walls[r]:
+						_room_walls[r].append(door)
 						_door_rooms[door].append(r)
 					break
 
 	var rooms = get_tree().get_nodes_in_group(Constants.ROOM_GROUP)
 	for room in rooms:
 		var rid = room.get_rid()
+		_room_walls[rid].append(room)
+		hide_model(room)
 		for n in room.get_children():
-			var model = n
-			if n is not VisualInstance3D:
-				model = n.get_node_or_null('%Model')
-				if model == null:
-					printerr('DoorManager: Could not find model of ', n, ' (room: ', room, ')')
-					continue
-			_room_walls[rid].append(model)
-			hide_model(model)
+			_room_walls[rid].append(n)
+			hide_model(n)
 
 	walls_loaded.emit()
 
@@ -100,10 +95,16 @@ func room_is_revealed(rid):
 	return rid in _revealed_rooms
 
 func hide_model(model):
-	model.layers = 0
+	if model is VisualInstance3D:
+		model.layers = 0
+	else:
+		model.hide_model()
 
 func reveal_model(model):
-	model.layers = 1
+	if model is VisualInstance3D:
+		model.layers = 1
+	else:
+		model.reveal_model()
 
 func model_is_revealed(model):
 	return model.layers > 0

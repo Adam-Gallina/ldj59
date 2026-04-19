@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhasqteun8mgn"]
+
+[ext_resource type="Script" uid="uid://m0ocpose5mm6" path="res://Effects/scanner_pulse.gd" id="1_rxxy5"]
+[ext_resource type="PackedScene" uid="uid://c8nreylx5ly20" path="res://Effects/line_mesh_3d.tscn" id="2_cf0fj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxxy5"]
+albedo_color = Color(1, 0.607843, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cf0fj"]
+albedo_color = Color(1, 0.607843, 0, 1)
+
+[node name="ScannerPulse" type="Node3D"]
+script = ExtResource("1_rxxy5")
+
+[node name="RadiusLineMesh3D" parent="." instance=ExtResource("2_cf0fj")]
+layers = 36
+material_override = SubResource("StandardMaterial3D_rxxy5")
+MaxWidth = 0.1
+
+[node name="PointerLineMesh3D" parent="." instance=ExtResource("2_cf0fj")]
+layers = 36
+material_override = SubResource("StandardMaterial3D_cf0fj")
+MaxWidth = 0.1
+
+[node name="PointLineMesh3D" parent="." instance=ExtResource("2_cf0fj")]
+layers = 36
+material_override = SubResource("StandardMaterial3D_cf0fj")
+MaxWidth = 0.15

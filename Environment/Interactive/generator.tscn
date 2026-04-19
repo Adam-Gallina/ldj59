@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dntcd01bpty7h"]
+[gd_scene load_steps=6 format=3 uid="uid://dntcd01bpty7h"]
 
 [ext_resource type="Script" uid="uid://cycvt21oxg363" path="res://Environment/Interactive/generator.gd" id="1_q8sae"]
+[ext_resource type="Script" uid="uid://d2cgl764k8fuo" path="res://Environment/Interactive/scannable.gd" id="2_tfb5h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h3yq5"]
 size = Vector3(0.75, 0.5, 0.75)
@@ -27,3 +28,10 @@ unique_name_in_owner = true
 mesh = SubResource("BoxMesh_h3yq5")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_q8sae")
+
+[node name="Scannable" type="Node" parent="." groups=["Scannable"]]
+script = ExtResource("2_tfb5h")
+Frequency = 60.0
+Amplitude = 100.0
+Wavelength = 40.0
+metadata/_custom_type_script = "uid://d2cgl764k8fuo"

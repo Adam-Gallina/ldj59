@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk0j7ke65ekgl"]
+[gd_scene load_steps=6 format=3 uid="uid://bk0j7ke65ekgl"]
 
 [ext_resource type="Script" uid="uid://bqm4v3vnyxt4h" path="res://Environment/door.gd" id="1_ba8gm"]
+[ext_resource type="Texture2D" uid="uid://cdjfpfemgy2mx" path="res://Icons/Images/Gear.png" id="2_2f3am"]
+[ext_resource type="Texture2D" uid="uid://bpxwlvlumw8st" path="res://Icons/Images/DoorBar.png" id="3_phi6q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v6xrn"]
 size = Vector3(1, 2, 0.2)
@@ -22,3 +24,29 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0phs7")
 navigation_layers = 0
 start_position = Vector3(0, 0, 1)
 end_position = Vector3(0, 0, -1)
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.255726, 2.5, 0)
+sorting_offset = -1.0
+modulate = Color(0.303357, 0.411747, 0.411747, 1)
+pixel_size = 0.0005
+texture = ExtResource("3_phi6q")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Sprite3D2"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, -8.74228e-08, -1, -8.74228e-08, -3.82137e-15, -8.74228e-08, 1, 0.509546, 0, 0)
+sorting_offset = -1.0
+pixel_size = 0.0005
+texture = ExtResource("3_phi6q")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.771398, 2.5, 0)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+text = "d12"
+font_size = 52
+outline_size = 0
+
+[node name="Sprite3D" type="Sprite3D" parent="Label3D"]
+modulate = Color(0.301961, 0.411765, 0.411765, 1)
+pixel_size = 0.003
+texture = ExtResource("2_2f3am")

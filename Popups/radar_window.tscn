@@ -93,14 +93,17 @@ MinRotation = -130
 MaxRotation = 130
 
 [node name="LineMesh3D" parent="." instance=ExtResource("3_65m12")]
+layers = 36
 material_override = SubResource("StandardMaterial3D_65m12")
 MaxWidth = 0.1
 
 [node name="CapLineMesh3D" parent="." instance=ExtResource("3_65m12")]
+layers = 36
 material_override = SubResource("StandardMaterial3D_chgsx")
 MaxWidth = 0.1
 
 [node name="PulseLineMesh3D" parent="." instance=ExtResource("3_65m12")]
+layers = 36
 material_override = SubResource("StandardMaterial3D_cdgpr")
 MaxWidth = 0.05
 

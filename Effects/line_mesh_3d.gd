@@ -76,7 +76,7 @@ func display_donut(center : Vector3, inner_radius : float, max_points : int = 18
 
 	var p = Vector3.FORWARD * (inner_radius + MaxWidth / 2)
 	for i in range(max_points):
-		points.append(center + p)
+		points.append(center + p + point_offset)
 		p = p.rotated(Vector3.UP, ang)
 	
 	display_line(points)
@@ -90,7 +90,7 @@ func display_arc(center:Vector3, inner_radius:float, start_ang:float, end_ang:fl
 	var p = Vector3.FORWARD * (inner_radius + MaxWidth / 2)
 	p = p.rotated(Vector3.UP, deg_to_rad(start_ang))
 	for i in range(max_points):
-		points.append(center + p)
+		points.append(center + p + point_offset)
 		p = p.rotated(Vector3.UP, ang)
 	
 	display_line(points)

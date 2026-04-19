@@ -4,6 +4,7 @@ class_name DoorBase
 @export var DoorID : String
 @export var OpenOffset = 1.
 @onready var _model : Node3D = get_node('%Model')
+@onready var _label : Label3D = $Label3D
 
 @export var StartOpen = false
 var _open = false
@@ -17,6 +18,9 @@ func _ready() -> void:
 		open(true)
 	else:
 		close(true)
+
+	_label.text = DoorID
+	_label.rotation.y = -rotation.y
 
 func is_open() -> bool:
 	return _open
@@ -45,3 +49,14 @@ func close(override_power=false) -> bool:
 	_nav_link.navigation_layers = 0
 
 	return true
+
+
+func hide_model():
+	_label.hide()
+	$Sprite3D2.hide()
+	get_node('%Model').layers = 0
+
+func reveal_model():
+	_label.show()
+	$Sprite3D2.show()
+	get_node('%Model').layers = 1

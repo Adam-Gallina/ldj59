@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2jebwnoodr65"]
+[gd_scene load_steps=4 format=3 uid="uid://b2jebwnoodr65"]
 
 [ext_resource type="Script" uid="uid://dgfh011c42udq" path="res://Environment/room.gd" id="1_h8h5b"]
+[ext_resource type="Texture2D" uid="uid://08rbwym5w5ta" path="res://Icons/Images/RoomIcon.png" id="2_6c5hj"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_05x41"]
 agent_height = 1.0
@@ -12,3 +13,15 @@ agent_max_slope = 0.02
 navigation_mesh = SubResource("NavigationMesh_05x41")
 navigation_layers = 3
 script = ExtResource("1_h8h5b")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0)
+modulate = Color(0.513577, 0.346578, 0.341227, 1)
+pixel_size = 0.004
+texture = ExtResource("2_6c5hj")
+
+[node name="Label3D" type="Label3D" parent="Sprite3D"]
+modulate = Color(0, 0, 0, 1)
+text = "r66"
+font_size = 87
+outline_size = 0

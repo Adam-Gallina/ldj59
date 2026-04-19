@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://cli381degrfda"]
+
+[ext_resource type="PackedScene" uid="uid://2lsysx0ihdq3" path="res://UI/knob.tscn" id="1_kisy2"]
+[ext_resource type="Script" uid="uid://jekpm6m81gmi" path="res://Popups/scanner_window.gd" id="1_xhnyg"]
+[ext_resource type="PackedScene" uid="uid://dhasqteun8mgn" path="res://Effects/scanner_pulse.tscn" id="4_684bp"]
+
+[node name="ScannerWindow" type="Window" node_paths=PackedStringArray("ScannerEffects")]
+physics_object_picking = true
+title = "SCANNER"
+position = Vector2i(920, 50)
+size = Vector2i(150, 535)
+unresizable = true
+script = ExtResource("1_xhnyg")
+ScannerEffects = [NodePath("ScannerPulse"), NodePath("ScannerPulse2"), NodePath("ScannerPulse3"), NodePath("ScannerPulse4")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 38.0
+offset_right = 103.0
+offset_bottom = 61.0
+text = "Frequency: "
+
+[node name="FrequencyKnob" parent="." instance=ExtResource("1_kisy2")]
+position = Vector2(73, 134)
+MinValue = 10
+MaxValue = 150
+Value = 40
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 206.0
+offset_right = 103.0
+offset_bottom = 229.0
+text = "Amplitude: "
+
+[node name="AmplitudeKnob" parent="." instance=ExtResource("1_kisy2")]
+position = Vector2(73, 300)
+MinValue = 30
+MaxValue = 150
+Value = 90
+MinRotation = -130
+MaxRotation = 130
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 370.0
+offset_right = 103.0
+offset_bottom = 393.0
+text = "Wavelength: "
+
+[node name="WavelengthKnob" parent="." instance=ExtResource("1_kisy2")]
+position = Vector2(73, 467)
+MinValue = 20
+MaxValue = 150
+Value = 80
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 15.35, 10.42, 41.8, -9.955)
+width = 5.0
+default_color = Color(1, 0.606153, 0, 1)
+
+[node name="WaveStart" type="Node2D" parent="."]
+position = Vector2(10, 17)
+
+[node name="WaveEnd" type="Node2D" parent="."]
+position = Vector2(130, 17)
+
+[node name="ScannerPulse" parent="." instance=ExtResource("4_684bp")]
+
+[node name="ScannerPulse2" parent="." instance=ExtResource("4_684bp")]
+
+[node name="ScannerPulse3" parent="." instance=ExtResource("4_684bp")]
+
+[node name="ScannerPulse4" parent="." instance=ExtResource("4_684bp")]
+
+[connection signal="value_changed" from="FrequencyKnob" to="." method="_on_frequency_knob_value_changed"]
+[connection signal="value_changed" from="AmplitudeKnob" to="." method="_on_amplitude_knob_value_changed"]
+[connection signal="value_changed" from="WavelengthKnob" to="." method="_on_wavelength_knob_value_changed"]

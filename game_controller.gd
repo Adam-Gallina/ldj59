@@ -1,12 +1,14 @@
 extends Node3D
 
 @onready var _radar_window : PopupWindow = $RadarWindow
+@onready var _scanner_window : PopupWindow = $ScannerWindow
 
 @onready var _start_room : RoomBase = $Room1
 
 func _ready():
 	CommandManager.close()
 	_radar_window.close()
+	_scanner_window.close()
 
 	reveal_start.call_deferred()
 
@@ -30,6 +32,8 @@ func _on_radar_pressed() -> void:
 	else:
 		_radar_window.open()
 
-
-func _on_debug_map_pressed() -> void:
-	pass # Replace with function body.
+func _on_scanner_pressed() -> void:
+	if _scanner_window.is_open():
+		_scanner_window.close()
+	else:
+		_scanner_window.open()
