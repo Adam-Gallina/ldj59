@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqes51hoed078"]
+
+[ext_resource type="Script" uid="uid://hq7whw3d8vun" path="res://Environment/Interactive/server.gd" id="1_tjcjb"]
+[ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="2_sc8gk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tjcjb"]
+size = Vector3(0.75, 0.5, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sc8gk"]
+size = Vector3(0.75, 0.5, 0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axi7t"]
+albedo_color = Color(0.0346984, 0.068321, 0.119835, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_etgmo"]
+top_radius = 0.2
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvgqj"]
+albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
+
+[node name="Server" type="StaticBody3D" node_paths=PackedStringArray("FakeDrone")]
+script = ExtResource("1_tjcjb")
+DroneScene = ExtResource("2_sc8gk")
+DroneID = "b2"
+FakeDrone = NodePath("MeshInstance3D")
+Descriptor = "Server"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_tjcjb")
+
+[node name="Model" type="MeshInstance3D" parent="CollisionShape3D"]
+unique_name_in_owner = true
+mesh = SubResource("BoxMesh_sc8gk")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_axi7t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.978765)
+mesh = SubResource("CylinderMesh_etgmo")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.422822, 0)
+radius = 0.4
+use_3d_avoidance = true

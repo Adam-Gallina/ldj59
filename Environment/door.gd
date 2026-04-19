@@ -9,6 +9,8 @@ class_name DoorBase
 @export var StartOpen = false
 var _open = false
 
+@export var CanScan = true
+
 @onready var _nav_link : NavigationLink3D = $NavigationLink3D
 
 @export var PowerSource : Node3D

@@ -111,6 +111,11 @@ func process_command(cmd:String, args:Array[String]) -> CommandWindow.CommandOut
 			stop_radar()
 			return CommandWindow.CommandOutput.new(true, [])
 		elif _routers.get(args[0]):
+			if not _routers[args[0]].is_revealed():
+				return CommandWindow.CommandOutput.new(false, ['Could not find {0}'.format([args[0]])])
+			elif _routers[args[0]].PowerSource != null and not _routers[args[0]].PowerSource.is_active():
+				return CommandWindow.CommandOutput.new(false, ['{0} did not respond'.format([args[0]])])
+
 			_curr_target = _routers[args[0]]
 			_target_label = 'Scanning from: ' + args[0]
 			start_radar()

@@ -50,10 +50,12 @@ func move(pos:Vector3) -> bool:
 func do_interaction(interaction:InteractiveBase) -> bool:
 	if _curr_interaction != null:
 		if _curr_interaction.interaction_end(self):
-			print(DroneID + ': Ending interface')
+			if _curr_interaction == interaction:
+				_curr_interaction = null
+				return true
 			_curr_interaction = null
 		else:
-			print(DroneID + ': Could not end interface with ' + _curr_interaction.Descriptor)
+			CommandManager.log_message(DroneID + ': Could not end interface with ' + _curr_interaction.Descriptor)
 			return false
 
 	if interaction.interaction_start(self):
@@ -113,7 +115,7 @@ func process_command(cmd:String, args:Array[String]):
 		move(i.global_position)
 		await move_complete
 		if do_interaction(i):
-			return CommandWindow.CommandOutput.new(true, [DroneID + ': Started interface with ' + i.Descriptor])
+			return CommandWindow.CommandOutput.new(true, [])
 		else:
 			return CommandWindow.CommandOutput.new(false, [DroneID + ': Failed to interface with ' + i.Descriptor])
 	elif args[0] == 'control':

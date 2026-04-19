@@ -120,6 +120,10 @@ func process_command(cmd:String, args:Array[String]):
 		for a in args:
 			if _doors.get(a) and model_is_revealed(_doors[a].get_node('%Model')):
 				if _doors[a].is_active() or _doors[a].is_open():
+					if not _doors[a].CanScan:
+						output.append('{0} did not respond'.format([a]))
+						continue
+
 					for r in _door_rooms[_doors[a]]:
 						reveal_room(r)
 					succeeded += 1

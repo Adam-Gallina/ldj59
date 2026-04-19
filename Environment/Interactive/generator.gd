@@ -1,8 +1,7 @@
 extends InteractiveBase
 
 
-func interaction_start(drone:DroneBase) -> bool:
-    print(drone, ' toggled')
+func interaction_start(_drone:DroneBase) -> bool:
     _active = not _active
 
     if _active:
@@ -12,8 +11,3 @@ func interaction_start(drone:DroneBase) -> bool:
 
     return true
     
-func hide_model():
-    get_node('%Model').layers = 0
-
-func reveal_model():
-    get_node('%Model').layers = 1

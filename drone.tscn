@@ -17,7 +17,7 @@ height = 1.0
 albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
 
 [node name="Drone" type="CharacterBody3D" groups=["Commands", "Drones"]]
-collision_layer = 17
+collision_layer = 49
 script = ExtResource("1_uvgqj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
