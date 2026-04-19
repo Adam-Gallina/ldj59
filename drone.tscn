@@ -17,7 +17,8 @@ height = 1.0
 albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
 
 [node name="Drone" type="CharacterBody3D" groups=["Commands", "Drones"]]
-collision_layer = 49
+collision_layer = 48
+collision_mask = 33
 script = ExtResource("1_uvgqj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -29,7 +30,6 @@ avoidance_enabled = true
 radius = 0.3
 max_speed = 3.0
 avoidance_priority = 0.75
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

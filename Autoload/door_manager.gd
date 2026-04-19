@@ -11,6 +11,12 @@ func get_rooms() -> Dictionary: return _rooms
 var _room_walls : Dictionary = {}
 ## { door : [bordered room RIDs] }
 var _door_rooms : Dictionary = {}
+func get_rooms_by_door(door):
+	return _door_rooms.get(door)
+## { room : [bordered door RIDs] }
+var _room_doors : Dictionary = {}
+func get_doors_by_room(room_rid):
+	return _room_doors.get(room_rid)
 var _revealed_rooms : Array = []
 const ROOM_SEARCH_DIRS = [Vector3(1, 0, 1), Vector3(1, 0, -1), Vector3(-1, 0, -1), Vector3(-1, 0, 1)]
 
@@ -58,7 +64,11 @@ func load_walls():
 					if model not in _room_walls[r]:
 						_room_walls[r].append(model)
 					break
-	
+					
+	_room_doors = {}
+	for r in regions:
+		_room_doors[r] = []
+
 	var doors = get_tree().get_nodes_in_group(Constants.DOOR_GROUP)
 	for door in doors:
 		hide_model(door)
@@ -68,11 +78,12 @@ func load_walls():
 		for d in dirs:
 			for r in regions:
 				if NavigationServer3D.region_owns_point(r, door.global_position + d):
+					_room_doors[r].append(door)
 					if door not in _room_walls[r]:
 						_room_walls[r].append(door)
 						_door_rooms[door].append(r)
 					break
-
+					
 	var rooms = get_tree().get_nodes_in_group(Constants.ROOM_GROUP)
 	for room in rooms:
 		var rid = room.get_rid()
@@ -81,6 +92,7 @@ func load_walls():
 		for n in room.get_children():
 			_room_walls[rid].append(n)
 			hide_model(n)
+
 
 	walls_loaded.emit()
 

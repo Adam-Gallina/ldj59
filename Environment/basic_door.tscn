@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk0j7ke65ekgl"]
+[gd_scene load_steps=7 format=3 uid="uid://bk0j7ke65ekgl"]
 
 [ext_resource type="Script" uid="uid://bqm4v3vnyxt4h" path="res://Environment/door.gd" id="1_ba8gm"]
 [ext_resource type="Texture2D" uid="uid://cdjfpfemgy2mx" path="res://Icons/Images/Gear.png" id="2_2f3am"]
 [ext_resource type="Texture2D" uid="uid://bpxwlvlumw8st" path="res://Icons/Images/DoorBar.png" id="3_phi6q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2f3am"]
+size = Vector3(1, 2, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_v6xrn"]
 size = Vector3(1, 2, 0.2)
@@ -10,14 +13,18 @@ size = Vector3(1, 2, 0.2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0phs7"]
 albedo_color = Color(0, 0.699931, 1, 1)
 
-[node name="Door" type="Node3D" groups=["Doors"]]
+[node name="Door" type="AnimatableBody3D" groups=["Doors"]]
 script = ExtResource("1_ba8gm")
 OpenOffset = 0.95
 
-[node name="Model" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2f3am")
+
+[node name="Model" type="MeshInstance3D" parent="CollisionShape3D"]
+unique_name_in_owner = true
 mesh = SubResource("BoxMesh_v6xrn")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_0phs7")
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="."]

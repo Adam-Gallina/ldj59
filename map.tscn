@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=53 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
@@ -12,10 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="7_71pa8"]
 [ext_resource type="PackedScene" uid="uid://b2jebwnoodr65" path="res://Environment/navigation_room.tscn" id="8_sb2pt"]
 [ext_resource type="PackedScene" uid="uid://dntcd01bpty7h" path="res://Environment/Interactive/generator.tscn" id="10_sb2pt"]
-[ext_resource type="Script" uid="uid://bapip6hkbryfi" path="res://Environment/Interactive/router.gd" id="11_sb2pt"]
 [ext_resource type="PackedScene" uid="uid://iweseymoqhwe" path="res://Environment/Interactive/router.tscn" id="13_2wwcf"]
 [ext_resource type="PackedScene" uid="uid://cqes51hoed078" path="res://Environment/Interactive/server.tscn" id="14_ooc2g"]
+[ext_resource type="PackedScene" uid="uid://bn7bedo34qkmn" path="res://Environment/Interactive/blast_door_control.tscn" id="16_a6rn7"]
 [ext_resource type="PackedScene" uid="uid://d1aovyvwl5lol" path="res://Enemies/enemy.tscn" id="16_wbpbn"]
+[ext_resource type="PackedScene" uid="uid://c8xbk6qega6s7" path="res://Environment/Interactive/blast_door.tscn" id="17_4on3e"]
 
 [sub_resource type="Environment" id="Environment_sb2pt"]
 background_mode = 1
@@ -124,8 +125,8 @@ size = Vector2(6, 4)
 size = Vector3(3, 1, 4)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_bssq0"]
-vertices = PackedVector3Array(-2.75, 0.5, -0.75, -2.75, 0.5, 1.75, 2.75, 0.5, 1.75, 2.75, 0.5, -0.75)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(2.75, 0.5, 1.65, 2.75, 0.5, 0.4, 1.75, 0.5, 0.4, -2.75, 0.5, 1.65, -2.75, 0.5, -0.85, 1.5, 0.5, -0.6, 2, 1, -0.6, 2, 1, -0.1, 2.5, 1, -0.1, 2.5, 1, -0.6)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 4), PackedInt32Array(5, 2, 4), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -193,9 +194,13 @@ size = Vector2(26, 4)
 [sub_resource type="PlaneMesh" id="PlaneMesh_n2jt6"]
 size = Vector2(4, 8)
 
-[node name="Map" type="Node3D"]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("DroneButtons", "DroneSpawnPos") groups=["Commands"]]
 script = ExtResource("1_e0an3")
+DroneButtons = [NodePath("CanvasLayer/Drone1Button"), NodePath("CanvasLayer/Drone2Button"), NodePath("CanvasLayer/Drone3Button")]
+DroneScene = ExtResource("7_71pa8")
+DroneSpawnPos = NodePath("Room10")
 DEBUG_gen_start_active = true
+DEBUG_server_always_active = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -303,35 +308,12 @@ grow_vertical = 2
 texture = ExtResource("2_6qsgm")
 expand_mode = 1
 
-[node name="Drone4Button" type="Button" parent="CanvasLayer"]
+[node name="RadarWindow" parent="." node_paths=PackedStringArray("Routers") instance=ExtResource("3_sb2pt")]
 visible = false
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -109.0
-offset_top = 319.0
-offset_right = -16.0
-offset_bottom = 412.0
-grow_horizontal = 0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Drone4Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_6qsgm")
-expand_mode = 1
-
-[node name="RadarWindow" parent="." node_paths=PackedStringArray("_curr_target", "Routers") instance=ExtResource("3_sb2pt")]
-visible = false
-_curr_target = NodePath("Router")
 Routers = [NodePath("Router"), NodePath("../Room9/Router"), NodePath("../Room12/Router")]
 
-[node name="Router" type="Node3D" parent="RadarWindow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4262, 0, -1.50045)
-script = ExtResource("11_sb2pt")
+[node name="Router" parent="RadarWindow" instance=ExtResource("13_2wwcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60228, 0, -1.63309)
 RouterID = "elev"
 
 [node name="Scannable" type="Node" parent="RadarWindow/Router" groups=["Scannable"]]
@@ -636,6 +618,12 @@ transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-0
 
 [node name="BasicWall197" parent="Walls" instance=ExtResource("4_urblq")]
 transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 5, 0, -14)
+
+[node name="BasicWall365" parent="Walls" instance=ExtResource("4_urblq")]
+transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 4, 0, -14)
+
+[node name="BasicWall366" parent="Walls" instance=ExtResource("4_urblq")]
+transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 2, 0, -14)
 
 [node name="BasicWall198" parent="Walls" instance=ExtResource("4_urblq")]
 transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 6, 0, -14)
@@ -1455,6 +1443,7 @@ DoorID = "d1"
 
 [node name="Door5" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+DoorID = "d30"
 PowerSource = NodePath("../../Room5/Generator")
 
 [node name="Door11" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
@@ -1534,11 +1523,6 @@ PowerSource = NodePath("../../Room5/Generator")
 [node name="Door23" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 3, 0, -14)
 DoorID = "d98"
-PowerSource = NodePath("../../Room5/Generator")
-
-[node name="Door24" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 3, 0, -17)
-DoorID = "d99"
 PowerSource = NodePath("../../Room5/Generator")
 
 [node name="Door2" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
@@ -1710,6 +1694,15 @@ RoomID = "r10"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 mesh = SubResource("PlaneMesh_jk4ss")
 
+[node name="DoorControl" parent="Room10" node_paths=PackedStringArray("ScannedRoom", "ScannedEnemy", "Door") instance=ExtResource("16_a6rn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26675, 0, -0.240368)
+ScannedRoom = NodePath("../../Room11")
+ScannedEnemy = NodePath("../../Enemy")
+Door = NodePath("../BlastDoor")
+
+[node name="BlastDoor" parent="Room10" instance=ExtResource("17_4on3e")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, -1)
+
 [node name="Room11" parent="." instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
 navigation_mesh = SubResource("NavigationMesh_jk4ss")
@@ -1799,17 +1792,12 @@ mesh = SubResource("PlaneMesh_n2jt6")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
 
-[node name="Drone" parent="." instance=ExtResource("7_71pa8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556619, 0, -0.774642)
-DroneID = "b1"
-
 [node name="Enemy" parent="." instance=ExtResource("16_wbpbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19178, 0, -19.2262)
 
 [connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]
 [connection signal="pressed" from="CanvasLayer/RadarButton" to="." method="_on_radar_pressed"]
 [connection signal="pressed" from="CanvasLayer/ScannerButton" to="." method="_on_scanner_pressed"]
-[connection signal="pressed" from="CanvasLayer/Drone1Button" to="." method="_on_drone_button_pressed" binds= ["b1"]]
 [connection signal="body_entered" from="Room9/Server/Door16Area3D" to="Room9/Server" method="_on_body_entered" binds= [0]]
 [connection signal="body_exited" from="Room9/Server/Door16Area3D" to="Room9/Server" method="_on_body_exited" binds= [0]]
 [connection signal="body_entered" from="Room9/Server/Door17Area3D" to="Room9/Server" method="_on_body_entered" binds= [1]]

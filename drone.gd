@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name DroneBase
 
 signal move_complete()
+signal destroyed()
 
 @export var DroneID : String
 
@@ -36,7 +37,8 @@ func _on_navigation_finished():
 
 func move(pos:Vector3) -> bool:
 	if _curr_interaction != null:
-		if _curr_interaction.interaction_end(self):
+		var result = await _curr_interaction.interaction_end(self)
+		if result:
 			print(DroneID + ': Ending interface')
 			_curr_interaction = null
 		else:
@@ -49,7 +51,8 @@ func move(pos:Vector3) -> bool:
 
 func do_interaction(interaction:InteractiveBase) -> bool:
 	if _curr_interaction != null:
-		if _curr_interaction.interaction_end(self):
+		var r = await _curr_interaction.interaction_end(self)
+		if r:
 			if _curr_interaction == interaction:
 				_curr_interaction = null
 				return true
@@ -58,12 +61,19 @@ func do_interaction(interaction:InteractiveBase) -> bool:
 			CommandManager.log_message(DroneID + ': Could not end interface with ' + _curr_interaction.Descriptor)
 			return false
 
-	if interaction.interaction_start(self):
+	var result = await interaction.interaction_start(self)
+	if result:
 		if not interaction.InteractOneShot:
 			_curr_interaction = interaction
 		return true
 
 	return false
+
+func destroy(send_alert=true):
+	if send_alert:
+		CommandManager.log_message('Lost connection with {0}'.format([DroneID]))
+	queue_free()
+	destroyed.emit()
 
 
 func get_curr_room() -> Node3D:
@@ -114,7 +124,8 @@ func process_command(cmd:String, args:Array[String]):
 
 		move(i.global_position)
 		await move_complete
-		if do_interaction(i):
+		var result = await do_interaction(i)
+		if result:
 			return CommandWindow.CommandOutput.new(true, [])
 		else:
 			return CommandWindow.CommandOutput.new(false, [DroneID + ': Failed to interface with ' + i.Descriptor])
@@ -124,5 +135,8 @@ func process_command(cmd:String, args:Array[String]):
 		else:
 			_control_window.open()
 		return CommandManager.CommandOutput.new(true, [])
+	elif args[0] == 'explode':
+		destroy(false)
+		return CommandWindow.CommandOutput.new(true, ['{0}: Goodbye o/'.format([DroneID])])
 	
 	return CommandWindow.CommandOutput.new(false, [DroneID + ': Unknown command'])

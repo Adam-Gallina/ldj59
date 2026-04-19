@@ -11,8 +11,9 @@ signal activated()
 @onready var _active : bool = StartActive
 func is_active() -> bool: return _active
 
-func interaction_start(drone:DroneBase) -> bool:
-	print(drone, ' started')
+func interaction_start(_drone:DroneBase) -> bool:
+	await get_tree().process_frame
+	
 
 	if InteractOneShot:
 		_active = not _active
@@ -24,8 +25,8 @@ func interaction_start(drone:DroneBase) -> bool:
 
 	return true
 
-func interaction_end(drone:DroneBase) -> bool:
-	print(drone, ' ended')
+func interaction_end(_drone:DroneBase) -> bool:
+	await get_tree().process_frame
 
 	if not InteractOneShot:
 		_active = false
