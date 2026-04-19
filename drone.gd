@@ -5,11 +5,14 @@ signal move_complete()
 
 @export var DroneID : String
 
+@onready var _control_window : PopupWindow = $ControlWindow
 @onready var _nav_agent : NavigationAgent3D = $NavigationAgent3D
 
 var _curr_interaction : InteractiveBase
 
 func _ready():
+	_control_window.hide()
+	_control_window.title = DroneID
 	_nav_agent.velocity_computed.connect(_on_velocity_calculated)
 	_nav_agent.navigation_finished.connect(_on_navigation_finished)
 
@@ -113,3 +116,11 @@ func process_command(cmd:String, args:Array[String]):
 			return CommandWindow.CommandOutput.new(true, [DroneID + ': Started interface with ' + i.Descriptor])
 		else:
 			return CommandWindow.CommandOutput.new(false, [DroneID + ': Failed to interface with ' + i.Descriptor])
+	elif args[0] == 'control':
+		if _control_window.is_open():
+			_control_window.close()
+		else:
+			_control_window.open()
+		return CommandManager.CommandOutput.new(true, [])
+	
+	return CommandWindow.CommandOutput.new(false, [DroneID + ': Unknown command'])

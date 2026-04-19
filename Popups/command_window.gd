@@ -30,6 +30,9 @@ func _process(_delta: float) -> void:
 			fill_from_history(_curr_command)
 
 
+func send_command(text:String):
+	_on_command_submitted(text)
+
 func log_message(msg:String):
 	_history.text += '\n' + msg
 	_history.get_v_scroll_bar().value = _history.get_v_scroll_bar().max_value
@@ -45,13 +48,14 @@ func fill_from_history(i):
 
 #func process_command(_cmd:String, _args:Array[String]) -> CommandWindow.CommandOutput:
 #	return null
-func _on_command_submitted(new_text:String) -> void:
+func _on_command_submitted(new_text:String, override_input=true) -> void:
 	var inp = new_text.to_lower().split(' ')
 	var cmd = inp[0]
 	inp.remove_at(0)
 	var args = inp
 
-	_input.text = ''
+	if override_input:
+		_input.text = ''
 	log_message('> ' + new_text)
 	_command_history.append(new_text)
 	_curr_command = _command_history.size()

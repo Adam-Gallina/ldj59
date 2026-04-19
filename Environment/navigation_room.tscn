@@ -21,6 +21,7 @@ pixel_size = 0.004
 texture = ExtResource("2_6c5hj")
 
 [node name="Label3D" type="Label3D" parent="Sprite3D"]
+sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 text = "r66"
 font_size = 87

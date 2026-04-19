@@ -73,6 +73,7 @@ position = Vector2(130, 17)
 
 [node name="ScannerPulse4" parent="." instance=ExtResource("4_684bp")]
 
+[connection signal="close_requested" from="." to="." method="close"]
 [connection signal="value_changed" from="FrequencyKnob" to="." method="_on_frequency_knob_value_changed"]
 [connection signal="value_changed" from="AmplitudeKnob" to="." method="_on_amplitude_knob_value_changed"]
 [connection signal="value_changed" from="WavelengthKnob" to="." method="_on_wavelength_knob_value_changed"]

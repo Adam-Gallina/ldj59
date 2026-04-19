@@ -37,3 +37,7 @@ func _on_scanner_pressed() -> void:
 		_scanner_window.close()
 	else:
 		_scanner_window.open()
+
+
+func _on_drone_button_pressed(droneID:String) -> void:
+	CommandManager.send_command(droneID + ' control')
