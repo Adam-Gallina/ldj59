@@ -39,10 +39,8 @@ func move(pos:Vector3) -> bool:
 	if _curr_interaction != null:
 		var result = await _curr_interaction.interaction_end(self)
 		if result:
-			print(DroneID + ': Ending interface')
 			_curr_interaction = null
 		else:
-			print(DroneID + ': Could not end interface with ' + _curr_interaction.Descriptor)
 			return false
 
 	_nav_agent.avoidance_priority = .5

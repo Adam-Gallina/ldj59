@@ -1,0 +1,2 @@
+open <Door ID> <...>: Open any number of provided Door IDs
+close <Door ID> <...>: Close any number of provided Door IDs

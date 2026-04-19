@@ -1,0 +1,1 @@
+<bot ID> move <ID>: Move to the provided ID. Can be used to move to rooms, doors, other bots, etc

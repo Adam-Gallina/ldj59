@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4bu58rb8rc7g"]
+
+[ext_resource type="Script" uid="uid://m0n4hc1i22wq" path="res://Popups/message_window.gd" id="1_1k3kn"]
+
+[node name="MessageWindow" type="Window"]
+title = "MSG"
+position = Vector2i(720, 210)
+size = Vector2i(300, 200)
+script = ExtResource("1_1k3kn")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "~ Chat started with TONY TORIAL"
+editable = false
+wrap_mode = 1
+
+[connection signal="close_requested" from="." to="." method="close"]

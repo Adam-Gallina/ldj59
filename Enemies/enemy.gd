@@ -133,9 +133,7 @@ func start_attack_move(target:Node3D) -> bool:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	print('found ', body)
 	_drone_targets.append(body)
 
 func _on_body_exited(body: Node3D) -> void:
-	print('lost ', body)
 	_drone_targets.erase(body)

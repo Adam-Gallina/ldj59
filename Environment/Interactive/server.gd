@@ -19,13 +19,11 @@ func interaction_start(drone:DroneBase) -> bool:
 		for z in ScanZones:
 			z.monitoring = false
 
-		var d = DroneScene.instantiate()
-		d.DroneID = 'x7'
+		get_tree().root.get_node('Map').MaxDrones += 1
+		var d = get_tree().root.get_node('Map').spawn_drone('x7', FakeDrone.global_position)
 		await interaction_end(d)
 		d.DroneID = DroneID
 
-		get_tree().root.get_node('Map').add_child(d)
-		d.global_position = FakeDrone.global_position
 		FakeDrone.hide()
 
 		return true

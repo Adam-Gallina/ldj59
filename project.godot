@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Constants="*res://Autoload/constants.gd"
 DoorManager="*res://Autoload/door_manager.gd"
 CommandManager="*res://Popups/command_window.tscn"
+DataWindow="*res://Popups/log_window.tscn"
 
 [global_group]
 

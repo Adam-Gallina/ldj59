@@ -23,7 +23,7 @@ albedo_color = Color(0.173268, 0.438902, 0.174738, 1)
 [node name="Server" type="StaticBody3D" node_paths=PackedStringArray("FakeDrone")]
 script = ExtResource("1_tjcjb")
 DroneScene = ExtResource("2_sc8gk")
-DroneID = "b2"
+DroneID = "m2"
 FakeDrone = NodePath("MeshInstance3D")
 Descriptor = "Server"
 
