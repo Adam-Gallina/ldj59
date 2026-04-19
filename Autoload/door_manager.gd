@@ -151,6 +151,10 @@ func process_command(cmd:String, args:Array[String]):
 					output.append('{0} failed to close'.format([a]))
 			else:
 				output.append('Unrecognized door_id \'' + a + '\'')
+	elif cmd == 'doors':
+		for r in _room_walls.keys():
+			reveal_room(r)
+		return CommandWindow.CommandOutput.new(true)
 	elif _doors.get(cmd):
 		if _doors[cmd].is_open():
 			if _doors[cmd].close():

@@ -5,12 +5,17 @@ extends Node3D
 
 @onready var _start_room : RoomBase = $Room1
 
+@export var DEBUG_gen_start_active = false
+
 func _ready():
 	CommandManager.close()
 	_radar_window.close()
 	_scanner_window.close()
 
 	reveal_start.call_deferred()
+
+	if DEBUG_gen_start_active:
+		$Room5/Generator.interaction_start(null)
 
 
 func reveal_start():
