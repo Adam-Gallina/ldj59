@@ -1,0 +1,16 @@
+XX-XX-20XX
+
+Ever since ■■■■■■■■ arrived, the security server and lab door have been going haywire.
+I got them mostly working again, but they're both still emitting strange signals
+
+Security Server: 
+	Wave: 65
+	Freq: 30
+	Amp:■■■■
+
+Lab Door: 
+	Wave: ■■
+	Freq: 124
+	Amp: 60
+
+(The document is burned and unreadable in convenient places)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ctrxitdxmda6g" path="res://Environment/Interactive/file.gd" id="1_t2sp1"]
 [ext_resource type="Texture2D" uid="uid://bmc18hrqyneks" path="res://Icons/Images/FileIcon.png" id="2_ey25g"]
 
-[node name="File" type="MeshInstance3D"]
+[node name="File" type="Node3D"]
 script = ExtResource("1_t2sp1")
 ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 Descriptor = "File"

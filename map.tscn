@@ -469,13 +469,6 @@ Routers = [NodePath("Router"), NodePath("../Rooms/Room6/Router"), NodePath("../R
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48498, 0, -1.47323)
 RouterID = "elev"
 
-[node name="Scannable" type="Node" parent="RadarWindow/Router" groups=["Scannable"]]
-script = ExtResource("4_0t07s")
-Frequency = 130.0
-Amplitude = 40.0
-Wavelength = 140.0
-metadata/_custom_type_script = "uid://d2cgl764k8fuo"
-
 [node name="MessageWindow" parent="." instance=ExtResource("7_4on3e")]
 
 [node name="ScannerWindow" parent="." instance=ExtResource("4_sb2pt")]
@@ -1778,6 +1771,11 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52997, 0.007267, -1.45434)
 RouterID = "sec"
 
+[node name="File3" parent="Rooms/Room6" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.444439, 0, -1.45865)
+filename = "StillWeird.txt"
+filepath = "res://Popups/Documents/weird_signals.txt"
+
 [node name="Room7" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
 navigation_mesh = SubResource("NavigationMesh_wbpbn")
@@ -1838,6 +1836,13 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Room9/Server/Door18Area3D"]
 shape = SubResource("BoxShape3D_2wwcf")
 
+[node name="Scannable" type="Node" parent="Rooms/Room9/Server" groups=["Scannable"]]
+script = ExtResource("4_0t07s")
+Frequency = 30.18
+Amplitude = 134.865
+Wavelength = 65.676
+metadata/_custom_type_script = "uid://d2cgl764k8fuo"
+
 [node name="Door16" parent="Rooms/Room9" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 4)
 DoorID = "d16"
@@ -1868,6 +1873,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26675, 0, -0.240368)
 ScannedRoom = NodePath("../../Room11")
 ScannedEnemy = NodePath("../../../Enemy")
 Door = NodePath("../BlastDoor")
+
+[node name="Scannable" type="Node" parent="Rooms/Room10/DoorControl" groups=["Scannable"]]
+script = ExtResource("4_0t07s")
+Frequency = 124.0
+Amplitude = 60.0
+Wavelength = 74.0
+metadata/_custom_type_script = "uid://d2cgl764k8fuo"
 
 [node name="BlastDoor" parent="Rooms/Room10" instance=ExtResource("17_4on3e")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, -1)
@@ -1972,7 +1984,6 @@ skeleton = NodePath("../../..")
 
 [node name="File2" parent="Rooms/Room17" instance=ExtResource("19_jk4ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.631068, 0, 9.48738)
-skeleton = NodePath("../../Room5")
 filename = "ATTN_MORON.txt"
 filepath = "res://Popups/Documents/mission_briefing.txt"
 
