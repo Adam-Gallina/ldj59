@@ -16,11 +16,15 @@ var _buttons : Dictionary
 @export var DEBUG_gen_start_active = false
 @export var DEBUG_server_always_active = false
 
+@onready var _data_notification : TextureRect = $CanvasLayer/DataButton/TextureRect
+var _data_pinging = false
+var _data_elapsed = 0
 @onready var _message_notification : TextureRect = $CanvasLayer/MessageButton/TextureRect
-@onready var _data_notification : TextureRect = $CanvasLayer/LogButton/TextureRect
-@export var NotificationMaxSize : float = 1.35
+var _message_pinging = false
+var _message_elapsed = 0
+@export var NotificationClear : Color
+@export var NotificationColor : Color
 @export var NotificationSpeed : float = .75
-var _notif_elapsed = 0.
 
 func _ready():
 	CommandManager.close()
@@ -29,12 +33,10 @@ func _ready():
 	DataWindow.close()
 	DataWindow.message_received.connect(_on_file_received)
 	DataWindow.message_read.connect(_on_file_read)
-	_data_notification.hide()
 
 	_message_window.close()
 	_message_window.message_received.connect(_on_message_received)
 	_message_window.message_read.connect(_on_message_read)
-	_message_notification.hide()
 
 	_buttons = {}
 	for b in DroneButtons:
@@ -63,14 +65,16 @@ func reveal_start():
 
 
 func _process(delta: float) -> void:
-	_notif_elapsed += delta
-
-	var t = (1 + sin(_notif_elapsed * NotificationSpeed * (2 * PI))) / 2
-	var s = 1 + (NotificationMaxSize - 1) * t
-	if _message_notification.visible:
-		_message_notification.scale = Vector2(s, s)
-	if _data_notification.visible:
-		_data_notification.scale = Vector2(s, s)
+	if _message_pinging:
+		_message_elapsed -= delta
+		if _message_elapsed <= 0:
+			_message_elapsed = NotificationSpeed
+			_message_notification.self_modulate = NotificationColor if _message_notification.self_modulate == NotificationClear else NotificationClear
+	if _data_pinging:
+		_data_elapsed -= delta
+		if _data_elapsed <= 0:
+			_data_elapsed = NotificationSpeed
+			_data_notification.self_modulate = NotificationColor if _data_notification.self_modulate == NotificationClear else NotificationClear
 
 
 func _on_cmd_pressed():
@@ -93,16 +97,17 @@ func _on_msg_pressed() -> void:
 		_message_window.open()
 
 func _on_message_received():
-	_message_notification.show()
-
+	_message_pinging = true
 func _on_message_read():
-	_message_notification.hide()
+	_message_pinging = false
+	_message_notification.self_modulate = NotificationClear
+
 
 func _on_file_received():
-	_data_notification.show()
-
+	_data_pinging = true
 func _on_file_read():
-	_data_notification.hide()
+	_data_pinging = false
+	_data_notification.self_modulate = NotificationClear
 
 
 func _on_radar_pressed() -> void:
@@ -126,7 +131,7 @@ func spawn_drone(droneID:String, spawn_pos:Vector3):
 	for b in DroneButtons:
 		if _buttons[b] == null:
 			_buttons[b] = d
-			b.show()
+			#b.show()
 			b.pressed.connect(_on_drone_button_pressed.bind(droneID))
 			break
 

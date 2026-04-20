@@ -1,69 +1,169 @@
-[gd_scene load_steps=4 format=3 uid="uid://cli381degrfda"]
+[gd_scene load_steps=9 format=3 uid="uid://cli381degrfda"]
 
 [ext_resource type="PackedScene" uid="uid://2lsysx0ihdq3" path="res://UI/knob.tscn" id="1_kisy2"]
 [ext_resource type="Script" uid="uid://jekpm6m81gmi" path="res://Popups/scanner_window.gd" id="1_xhnyg"]
+[ext_resource type="Texture2D" uid="uid://cemtr0cl5dvfl" path="res://Popups/Images/Metal046B_1K-JPG_Color.jpg" id="2_684bp"]
+[ext_resource type="Texture2D" uid="uid://cqn0rtq1l2h4b" path="res://Popups/Images/ScannerDial.png" id="3_gajr4"]
 [ext_resource type="PackedScene" uid="uid://dhasqteun8mgn" path="res://Effects/scanner_pulse.tscn" id="4_684bp"]
+[ext_resource type="Texture2D" uid="uid://6ld14kt0oeua" path="res://Popups/Images/ScannerDisplay.png" id="5_iur60"]
+
+[sub_resource type="Gradient" id="Gradient_iur60"]
+colors = PackedColorArray(0.827451, 0.827451, 0.827451, 1, 0.827451, 0.827451, 0.827451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e8wf5"]
+gradient = SubResource("Gradient_iur60")
 
 [node name="ScannerWindow" type="Window" node_paths=PackedStringArray("ScannerEffects")]
 physics_object_picking = true
 title = "SCANNER"
-position = Vector2i(920, 50)
+position = Vector2i(920, 36)
 size = Vector2i(150, 535)
 unresizable = true
 script = ExtResource("1_xhnyg")
 ScannerEffects = [NodePath("ScannerPulse"), NodePath("ScannerPulse2"), NodePath("ScannerPulse3"), NodePath("ScannerPulse4")]
 
-[node name="Label" type="Label" parent="."]
-offset_left = 13.0
-offset_top = 38.0
-offset_right = 103.0
-offset_bottom = 61.0
-text = "Frequency: "
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="FrequencyKnob" parent="." instance=ExtResource("1_kisy2")]
-position = Vector2(73, 134)
+[node name="TextureRect" type="Sprite2D" parent="Control"]
+self_modulate = Color(1, 0.644683, 0.644683, 1)
+show_behind_parent = true
+position = Vector2(28, 88)
+texture = ExtResource("2_684bp")
+
+[node name="TextureRect2" type="Sprite2D" parent="Control"]
+position = Vector2(76, 161)
+scale = Vector2(0.521838, 0.521838)
+texture = ExtResource("3_gajr4")
+
+[node name="FrequencyLabel" type="Label" parent="Control/TextureRect2"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -228.568
+offset_top = -211.85
+offset_right = -80.5685
+offset_bottom = -167.85
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "FREQ: 150"
+
+[node name="FrequencyKnob" parent="Control/TextureRect2" instance=ExtResource("1_kisy2")]
+position = Vector2(-1.9163, -11.4979)
+scale = Vector2(1.05397, 1.05397)
 MinValue = 10
 MaxValue = 150
-Value = 40
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 13.0
-offset_top = 206.0
-offset_right = 103.0
-offset_bottom = 229.0
-text = "Amplitude: "
-
-[node name="AmplitudeKnob" parent="." instance=ExtResource("1_kisy2")]
-position = Vector2(73, 300)
-MinValue = 30
-MaxValue = 150
-Value = 90
+Value = 10
 MinRotation = -130
 MaxRotation = 130
 
-[node name="Label3" type="Label" parent="."]
-offset_left = 13.0
-offset_top = 370.0
-offset_right = 103.0
-offset_bottom = 393.0
-text = "Wavelength: "
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 231.0
+offset_right = 161.0
+offset_bottom = 389.0
+texture = ExtResource("3_gajr4")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="WavelengthKnob" parent="." instance=ExtResource("1_kisy2")]
-position = Vector2(73, 467)
+[node name="AmplitudeLabel" type="Label" parent="Control/TextureRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -32.0
+offset_right = 47.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "AMP: 150"
+
+[node name="AmplitudeKnob" parent="Control/TextureRect3" instance=ExtResource("1_kisy2")]
+position = Vector2(77, 72)
+scale = Vector2(0.55, 0.55)
+MinValue = 30
+MaxValue = 150
+Value = 70
+MinRotation = -130
+MaxRotation = 130
+
+[node name="TextureRect4" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 381.0
+offset_right = 161.0
+offset_bottom = 539.0
+texture = ExtResource("3_gajr4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="WavelengthLabel" type="Label" parent="Control/TextureRect4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -32.0
+offset_right = 47.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "WAVE: 150"
+
+[node name="WavelengthKnob" parent="Control/TextureRect4" instance=ExtResource("1_kisy2")]
+position = Vector2(78, 73)
+scale = Vector2(0.55, 0.55)
 MinValue = 20
 MaxValue = 150
 Value = 80
+MinRotation = -130
+MaxRotation = 130
 
 [node name="Line2D" type="Line2D" parent="."]
+z_index = 3
 points = PackedVector2Array(0, 0, 15.35, 10.42, 41.8, -9.955)
 width = 5.0
 default_color = Color(1, 0.606153, 0, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(75, 44)
+scale = Vector2(0.538926, 0.538926)
+texture = ExtResource("5_iur60")
+
+[node name="TextureRect" type="TextureRect" parent="Sprite2D"]
+z_index = 2
+z_as_relative = false
+offset_left = -104.0
+offset_top = -43.0
+offset_right = 104.0
+offset_bottom = 46.0
+texture = SubResource("GradientTexture2D_e8wf5")
+expand_mode = 1
+
 [node name="WaveStart" type="Node2D" parent="."]
-position = Vector2(10, 17)
+position = Vector2(16, 44)
 
 [node name="WaveEnd" type="Node2D" parent="."]
-position = Vector2(130, 17)
+position = Vector2(134, 44)
 
 [node name="ScannerPulse" parent="." instance=ExtResource("4_684bp")]
 
@@ -74,6 +174,6 @@ position = Vector2(130, 17)
 [node name="ScannerPulse4" parent="." instance=ExtResource("4_684bp")]
 
 [connection signal="close_requested" from="." to="." method="close"]
-[connection signal="value_changed" from="FrequencyKnob" to="." method="_on_frequency_knob_value_changed"]
-[connection signal="value_changed" from="AmplitudeKnob" to="." method="_on_amplitude_knob_value_changed"]
-[connection signal="value_changed" from="WavelengthKnob" to="." method="_on_wavelength_knob_value_changed"]
+[connection signal="value_changed" from="Control/TextureRect2/FrequencyKnob" to="." method="_on_frequency_knob_value_changed"]
+[connection signal="value_changed" from="Control/TextureRect3/AmplitudeKnob" to="." method="_on_amplitude_knob_value_changed"]
+[connection signal="value_changed" from="Control/TextureRect4/WavelengthKnob" to="." method="_on_wavelength_knob_value_changed"]

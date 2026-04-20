@@ -1,15 +1,17 @@
-[gd_scene load_steps=60 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=63 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
 [ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="2_6qsgm"]
-[ext_resource type="Texture2D" uid="uid://cxyrxf685rnxy" path="res://Icons/Images/Alert.png" id="3_bssq0"]
 [ext_resource type="Script" uid="uid://bfsecx50nwsee" path="res://tutorial.gd" id="3_r5om4"]
 [ext_resource type="PackedScene" uid="uid://b5fk55hpj6vdq" path="res://Popups/radar_window.tscn" id="3_sb2pt"]
 [ext_resource type="Script" uid="uid://d2cgl764k8fuo" path="res://Environment/Interactive/scannable.gd" id="4_0t07s"]
 [ext_resource type="PackedScene" uid="uid://bk0j7ke65ekgl" path="res://Environment/basic_door.tscn" id="4_p5pve"]
 [ext_resource type="PackedScene" uid="uid://cli381degrfda" path="res://Popups/scanner_window.tscn" id="4_sb2pt"]
 [ext_resource type="PackedScene" uid="uid://uheid67dpk41" path="res://Environment/basic_wall.tscn" id="4_urblq"]
+[ext_resource type="Texture2D" uid="uid://b3rtliuugatki" path="res://UI/Screen.png" id="4_y1wlr"]
+[ext_resource type="Texture2D" uid="uid://bryxkwuaikey0" path="res://UI/ScreenButtonOutline.png" id="5_n2jt6"]
+[ext_resource type="Texture2D" uid="uid://cqry51o1qr061" path="res://UI/ScreenButtonBkgd.png" id="6_h75vw"]
 [ext_resource type="PackedScene" uid="uid://b4bu58rb8rc7g" path="res://Popups/message_window.tscn" id="7_4on3e"]
 [ext_resource type="PackedScene" uid="uid://b3133broymnip" path="res://Environment/basic_floor.tscn" id="7_05x41"]
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="7_71pa8"]
@@ -22,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://d1aovyvwl5lol" path="res://Enemies/enemy.tscn" id="16_wbpbn"]
 [ext_resource type="PackedScene" uid="uid://c8xbk6qega6s7" path="res://Environment/Interactive/blast_door.tscn" id="17_4on3e"]
 [ext_resource type="PackedScene" uid="uid://cudpe824xra7q" path="res://Environment/file.tscn" id="19_jk4ss"]
+[ext_resource type="PackedScene" uid="uid://dymdjkeg73suf" path="res://Environment/Interactive/lab_computer.tscn" id="22_4sf5t"]
 
 [sub_resource type="Gradient" id="Gradient_r5om4"]
 colors = PackedColorArray(0.25098, 0.25098, 0.25098, 1, 0.25098, 0.25098, 0.25098, 1)
@@ -34,8 +37,8 @@ background_mode = 1
 background_color = Color(0.0519757, 0.0655258, 0.0504311, 1)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_0t07s"]
-vertices = PackedVector3Array(-1.25, 0.403574, -1, -1.75, 0.403574, -1, -1.75, 0.403574, 1.75, 1.75, 0.403574, -1.75, -1, 0.403574, -1.75, 1.75, 0.403574, 1.75)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 0), PackedInt32Array(0, 3, 5), PackedInt32Array(0, 5, 2)]
+vertices = PackedVector3Array(-1.75, 0.403574, -1.75, -1.75, 0.403574, 1, -1.25, 0.403574, 1, 1, 0.403574, -1.25, 1, 0.403574, -1.75, -1, 0.403574, 1.75, 1.75, 0.403574, 1.75, 1.75, 0.403574, -1)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(7, 6, 3), PackedInt32Array(3, 6, 5), PackedInt32Array(3, 5, 2), PackedInt32Array(3, 2, 0)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -70,8 +73,8 @@ agent_max_climb = 0.0
 agent_max_slope = 0.02
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6qsgm"]
-vertices = PackedVector3Array(-2.75, 0.5, -4.75, -2.75, 0.5, 2.75, 2.75, 0.5, 2.75, 2.75, 0.5, -4.75)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(2.75, 0.5, -4.75, 1.75, 0.5, -4.75, 2, 0.5, -4, 1.25, 0.5, -3.75, 1.25, 0.5, -4.75, -2.75, 0.5, -4.75, 2.75, 0.5, 2.75, -2.75, 0.5, 2.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(2, 0, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(5, 3, 7), PackedInt32Array(7, 3, 6)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -125,8 +128,8 @@ agent_max_slope = 0.02
 size = Vector2(4, 8)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_4on3e"]
-vertices = PackedVector3Array(1.75, 0.5, -3.75, 0.5, 0.5, -3.75, 0.75, 0.5, -1.75, 1.75, 0.5, 3.75, -0.75, 0.5, -1.75, -0.5, 0.5, -3.75, -1.75, 0.5, -3.75, -1.75, 0.5, 3.75, -0.25, 0.5, -1.25, -0.25, 1, -3.25, -0.25, 1, -2.75, 0.25, 1, -2.75, 0.25, 1, -3.25)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(4, 8, 7), PackedInt32Array(2, 3, 8), PackedInt32Array(8, 3, 7), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10)]
+vertices = PackedVector3Array(1.75, 0.5, 3.75, 1.75, 0.5, 2.5, 1.25, 0.5, 2.75, 1.75, 0.5, -3.75, 0.5, 0.5, -3.75, 0.75, 0.5, -1.75, 1.75, 0.5, 1.75, -0.75, 0.5, -1.75, -0.5, 0.5, -3.75, -1.75, 0.5, -3.75, -1.75, 0.5, 3.75, 1, 0.5, 2, -0.25, 0.5, -1.25, -0.25, 1, -3.25, -0.25, 1, -2.75, 0.25, 1, -2.75, 0.25, 1, -3.25)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(9, 8, 7), PackedInt32Array(2, 0, 10), PackedInt32Array(2, 10, 11), PackedInt32Array(11, 10, 7), PackedInt32Array(7, 10, 9), PackedInt32Array(7, 12, 11), PackedInt32Array(11, 12, 6), PackedInt32Array(6, 12, 5), PackedInt32Array(16, 15, 13), PackedInt32Array(13, 15, 14)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -150,15 +153,12 @@ agent_max_slope = 0.02
 size = Vector2(6, 3)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jk4ss"]
-vertices = PackedVector3Array(-1, 0.5, -1.75, -1.25, 0.5, -5.75, -3.75, 0.5, -5.75, -3.75, 0.5, 2.75, 1.75, 0.5, 2.75, 1.75, 0.5, -1.75, 2.25, 0.5, 3, 3.25, 0.5, -2, 2.25, 0.5, 5.75, 6.75, 0.5, 5.75, 6.75, 0.5, -5.75, 3.25, 0.5, -5.75)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(6, 5, 7), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 7), PackedInt32Array(9, 7, 10), PackedInt32Array(7, 11, 10)]
+vertices = PackedVector3Array(6.75, 0.5, -5.75, 3.25, 0.5, -5.75, 3, 0.5, -1.75, 2, 0.5, 2.75, 2.25, 0.5, 5.75, 6.75, 0.5, 5.75, -3.75, 0.5, -1.75, -3.75, 0.5, 2.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 2), PackedInt32Array(5, 2, 0), PackedInt32Array(7, 6, 3), PackedInt32Array(3, 6, 2)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
 agent_max_slope = 0.02
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_jky6x"]
-size = Vector2(3, 4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4sf5t"]
 size = Vector2(4, 4)
@@ -173,8 +173,8 @@ size = Vector2(6, 5)
 size = Vector2(5, 3)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_r5om4"]
-vertices = PackedVector3Array(-1.75, 0.410841, -1.75, -1.75, 0.410841, 1, -1.25, 0.410841, 1, -1, 0.410841, 1.75, 1.75, 0.410841, 1.75, 1.75, 0.410841, -1.75)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0)]
+vertices = PackedVector3Array(2.5, 0.410841, 1, 2.75, 0.410841, 1.75, 3.75, 0.410841, 1.75, 3.75, 0.410841, -1.25, 3, 0.410841, -1, -1.5, 0.410841, 0.75, -2.75, 0.410841, 1, -2.75, 0.410841, 1.75, 1.75, 0.410841, 1.75, -2.75, 0.410841, -1.75, -2.75, 0.410841, -0.5, -1.5, 0.410841, -0.25, 2, 0.410841, 1, 2.75, 0.410841, -1.75, -2.5, 0.910841, 0, -2.5, 0.910841, 0.5, -2, 0.910841, 0.5, -2, 0.910841, 0)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(11, 10, 9), PackedInt32Array(0, 12, 4), PackedInt32Array(4, 12, 13), PackedInt32Array(13, 12, 11), PackedInt32Array(13, 11, 9), PackedInt32Array(8, 5, 12), PackedInt32Array(12, 5, 11), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -183,9 +183,12 @@ agent_max_slope = 0.02
 [sub_resource type="PlaneMesh" id="PlaneMesh_3mr0t"]
 size = Vector2(4, 4)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_jky6x"]
+size = Vector2(3, 4)
+
 [sub_resource type="NavigationMesh" id="NavigationMesh_jky6x"]
-vertices = PackedVector3Array(-1.75, 0.5, -0.75, -1.75, 0.5, 1.75, 1.75, 0.5, 1.75, 1.75, 0.5, -0.75)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(0.75, 0.5, 1, 1.75, 0.5, 1, 1.75, 0.5, -0.75, -1.75, 0.5, 1.75, 1, 0.5, 1.75, -1.75, 0.5, -0.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(3, 5, 0), PackedInt32Array(0, 5, 2)]
 agent_height = 1.0
 agent_radius = 0.25
 agent_max_climb = 0.0
@@ -211,6 +214,10 @@ DroneButtons = [NodePath("CanvasLayer/Drone1Button"), NodePath("CanvasLayer/Dron
 MaxDrones = 1
 DroneScene = ExtResource("7_71pa8")
 DroneSpawnPos = NodePath("Rooms/Room1")
+DEBUG_gen_start_active = true
+DEBUG_server_always_active = true
+NotificationClear = Color(0.72549, 0.72549, 0.72549, 1)
+NotificationColor = Color(1, 0.0823529, 0, 0.6)
 
 [node name="Tutorial" type="Node" parent="."]
 script = ExtResource("3_r5om4")
@@ -308,99 +315,189 @@ wrap_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CommandButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -141.0
-offset_right = -23.0
-offset_bottom = -110.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "CMD"
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_y1wlr")
 
-[node name="LogButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="DataButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 1)
+offset_left = 1031.0
+offset_top = 17.0
+offset_right = 1159.0
+offset_bottom = 145.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_n2jt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/DataButton"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -237.0
-offset_right = -23.0
-offset_bottom = -206.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 131.0
+offset_top = -2.0
+offset_right = 131.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
 text = "DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LogButton"]
-self_modulate = Color(1, 0.214128, 0, 1)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/DataButton"]
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
+show_behind_parent = true
 layout_mode = 0
-offset_left = -12.0
-offset_top = -10.0
-offset_right = 7.0
-offset_bottom = 9.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("3_bssq0")
-expand_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_h75vw")
 
-[node name="MessageButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="MessageButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 1)
+offset_left = 1031.0
+offset_top = 139.0
+offset_right = 1159.0
+offset_bottom = 267.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_n2jt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/MessageButton"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -188.0
-offset_right = -23.0
-offset_bottom = -157.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 131.0
+offset_top = -2.0
+offset_right = 131.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
 text = "MSG"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/MessageButton"]
-self_modulate = Color(1, 0.214128, 0, 1)
-layout_mode = 0
-offset_left = -12.0
-offset_top = -10.0
-offset_right = 7.0
-offset_bottom = 9.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("3_bssq0")
-expand_mode = 1
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_h75vw")
 
-[node name="RadarButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="CommandButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color(0.133412, 0.133412, 0.133412, 1)
+offset_left = 1031.0
+offset_top = 261.0
+offset_right = 1159.0
+offset_bottom = 389.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_n2jt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/CommandButton"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -85.0
-offset_top = -97.0
-offset_right = -23.0
-offset_bottom = -66.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "RADAR"
+offset_left = 131.0
+offset_top = -2.0
+offset_right = 131.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "CMD"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ScannerButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CommandButton"]
+self_modulate = Color(0.724026, 0.724026, 0.724026, 1)
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_h75vw")
+
+[node name="RadarButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color(0.133412, 0.133412, 0.133412, 1)
+offset_left = 994.0
+offset_top = 555.0
+offset_right = 1122.0
+offset_bottom = 683.0
+rotation = -1.47306
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_n2jt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/RadarButton"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -58.0
-offset_right = -25.0
-offset_bottom = -27.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 131.0
+offset_top = -2.0
+offset_right = 131.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "RADR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RadarButton"]
+self_modulate = Color(0.724026, 0.724026, 0.724026, 1)
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_h75vw")
+
+[node name="ScanButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color(0.133333, 0.133333, 0.133333, 1)
+offset_left = 976.0
+offset_top = 659.0
+offset_right = 1104.0
+offset_bottom = 787.0
+rotation = -1.56789
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_n2jt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/ScanButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 131.0
+offset_top = -2.0
+offset_right = 131.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
 text = "SCAN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScanButton"]
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_h75vw")
 
 [node name="Drone1Button" type="Button" parent="CanvasLayer"]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -905,16 +1002,16 @@ transform = Transform3D(-1.04308e-07, -3.61999e-06, 1, -3.61999e-06, 1, 3.61999e
 transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 6, 0, -22)
 
 [node name="BasicWall327" parent="Walls" instance=ExtResource("4_urblq")]
-transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 4, 0, -22)
+transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 5, 0, -22)
 
 [node name="BasicWall330" parent="Walls" instance=ExtResource("4_urblq")]
-transform = Transform3D(1.68852e-08, 3.61999e-06, -1, -3.61999e-06, 1, 3.61999e-06, 1, 3.61999e-06, 1.68852e-08, 3, 0, -23)
+transform = Transform3D(1, 3.61999e-06, 6.05966e-08, -3.61999e-06, 1, 3.61999e-06, -6.05966e-08, -3.61999e-06, 1, 1, 0, -22)
 
 [node name="BasicWall331" parent="Walls" instance=ExtResource("4_urblq")]
-transform = Transform3D(1.68852e-08, 3.61999e-06, -1, -3.61999e-06, 1, 3.61999e-06, 1, 3.61999e-06, 1.68852e-08, 3, 0, -24)
+transform = Transform3D(-1, -3.61999e-06, 2.68262e-08, -3.61999e-06, 1, 3.61999e-06, -2.68262e-08, 3.61999e-06, -1, 2, 0, -22)
 
 [node name="BasicWall332" parent="Walls" instance=ExtResource("4_urblq")]
-transform = Transform3D(1.68852e-08, 3.61999e-06, -1, -3.61999e-06, 1, 3.61999e-06, 1, 3.61999e-06, 1.68852e-08, 3, 0, -25)
+transform = Transform3D(-1, -3.61999e-06, 2.68262e-08, -3.61999e-06, 1, 3.61999e-06, -2.68262e-08, 3.61999e-06, -1, 3, 0, -22)
 
 [node name="BasicWall117" parent="Walls" instance=ExtResource("4_urblq")]
 transform = Transform3D(-1.04308e-07, -3.61999e-06, 1, -3.61999e-06, 1, 3.61999e-06, -1, -3.61999e-06, -1.04308e-07, 0, 0, -14)
@@ -1264,20 +1361,14 @@ transform = Transform3D(8.34544e-08, 0, -1, 0, 1, 0, 1, 0, 8.34544e-08, 11, 0, -
 [node name="CornerWall52" parent="Walls" instance=ExtResource("11_jky6x")]
 transform = Transform3D(8.34544e-08, 0, -1, 0, 1, 0, 1, 0, 8.34544e-08, 7, 0, -26)
 
-[node name="CornerWall53" parent="Walls" instance=ExtResource("11_jky6x")]
-transform = Transform3D(8.34544e-08, 0, -1, 0, 1, 0, 1, 0, 8.34544e-08, 3, 0, -26)
-
 [node name="CornerWall54" parent="Walls" instance=ExtResource("11_jky6x")]
 transform = Transform3D(8.34544e-08, 0, -1, 0, 1, 0, 1, 0, 8.34544e-08, 0, 0, -26)
 
 [node name="CornerWall55" parent="Walls" instance=ExtResource("11_jky6x")]
 transform = Transform3D(1, 0, 1.27166e-07, 0, 1, 0, -1.27166e-07, 0, 1, 0, 0, -26)
 
-[node name="CornerWall56" parent="Walls" instance=ExtResource("11_jky6x")]
-transform = Transform3D(1, 0, 1.27166e-07, 0, 1, 0, -1.27166e-07, 0, 1, 3, 0, -22)
-
 [node name="CornerWall57" parent="Walls" instance=ExtResource("11_jky6x")]
-transform = Transform3D(-1.70877e-07, 0, 1, 0, 1, 0, -1, 0, -1.70877e-07, 3, 0, -22)
+transform = Transform3D(1, 0, 1.27166e-07, 0, 1, 0, -1.27166e-07, 0, 1, 0, 0, -22)
 
 [node name="CornerWall58" parent="Walls" instance=ExtResource("11_jky6x")]
 transform = Transform3D(-1.70877e-07, 0, 1, 0, 1, 0, -1, 0, -1.70877e-07, 7, 0, -22)
@@ -1299,127 +1390,93 @@ transform = Transform3D(1, 0, 3.02011e-07, 0, 1, 0, -3.02011e-07, 0, 1, 11, 0, -
 [node name="Door" parent="Doors" instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 DoorID = "d1"
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door5" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
 DoorID = "d7"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door7" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -10)
 DoorID = "d5"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door12" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 1, 0, -6)
 DoorID = "d6"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door15" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -10)
 DoorID = "d60"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door16" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, -18)
 DoorID = "d12"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door17" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 0, -16)
 DoorID = "d11"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door18" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 0, -22)
 DoorID = "d13"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door19" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 11, 0, -24)
 DoorID = "d14"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door20" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 5, 0, -22)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 4, 0, -22)
 DoorID = "d15"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door23" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 3, 0, -14)
 DoorID = "d98"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door2" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, -13)
 DoorID = "d3"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door3" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, -13)
 DoorID = "d4"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door4" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -11)
 DoorID = "d2"
 StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door_16" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -3)
 DoorID = "d16"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door_17" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -6)
 DoorID = "d17"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Door_18" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 5, 0, -10)
 DoorID = "d18"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
-PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
-UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="Rooms" type="Node3D" parent="."]
 
@@ -1438,6 +1495,11 @@ skeleton = NodePath("../../..")
 [node name="Router" parent="Rooms/Room1" instance=ExtResource("13_2wwcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47298, 0, -1.47323)
 RouterID = "elev"
+
+[node name="File3" parent="Rooms/Room1" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47638, 0, 1.42396)
+filename = "M0NK3welcome.txt"
+filepath = "res://Popups/Documents/drone_faces.txt"
 
 [node name="Room2" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
@@ -1478,6 +1540,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("PlaneMesh_oysan")
 skeleton = NodePath("../../..")
 
+[node name="File3" parent="Rooms/Room4" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42081, 0, -4.29026)
+filename = "Msg_Home.txt"
+filepath = "res://Popups/Documents/dear_mom.txt"
+
 [node name="Room5" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -9)
 navigation_mesh = SubResource("NavigationMesh_ooc2g")
@@ -1511,12 +1578,6 @@ skeleton = NodePath("../../..")
 [node name="Router" parent="Rooms/Room6" instance=ExtResource("13_2wwcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52997, 0.007267, -1.45434)
 RouterID = "sec"
-
-[node name="File3" parent="Rooms/Room6" instance=ExtResource("19_jk4ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.444439, 0, -1.45865)
-filename = "StillWeird.txt"
-filepath = "res://Popups/Documents/weird_signals.txt"
-ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 
 [node name="Room7" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
@@ -1579,18 +1640,10 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Room9/Server/Door18Area3D"]
 shape = SubResource("BoxShape3D_2wwcf")
 
-[node name="Scannable" type="Node" parent="Rooms/Room9/Server" groups=["Scannable"]]
-script = ExtResource("4_0t07s")
-Frequency = 30.18
-Amplitude = 134.865
-Wavelength = 65.676
-metadata/_custom_type_script = "uid://d2cgl764k8fuo"
-
 [node name="File3" parent="Rooms/Room9" instance=ExtResource("19_jk4ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3815, 0, 2.18606)
 filename = "LabRouters.txt"
 filepath = "res://Popups/Documents/lab_router.txt"
-ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 
 [node name="Room10" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -16)
@@ -1623,11 +1676,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
 navigation_mesh = SubResource("NavigationMesh_jk4ss")
 RoomID = "r11"
 
-[node name="Floor2" parent="Rooms/Room11" instance=ExtResource("7_05x41")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -4)
-mesh = SubResource("PlaneMesh_jky6x")
-skeleton = NodePath("../../..")
-
 [node name="Floor3" parent="Rooms/Room11" instance=ExtResource("7_05x41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
 mesh = SubResource("PlaneMesh_4sf5t")
@@ -1649,18 +1697,31 @@ mesh = SubResource("PlaneMesh_6sq2s")
 skeleton = NodePath("../../..")
 
 [node name="Room12" parent="Rooms" instance=ExtResource("8_sb2pt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -24)
 navigation_mesh = SubResource("NavigationMesh_r5om4")
 RoomID = "r12"
 
 [node name="Floor" parent="Rooms/Room12" instance=ExtResource("7_05x41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("PlaneMesh_3mr0t")
 skeleton = NodePath("../../..")
 
-[node name="Router" parent="Rooms/Room12" node_paths=PackedStringArray("PowerSource") instance=ExtResource("13_2wwcf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5489, 0.007267, 1.531)
+[node name="Router" parent="Rooms/Room12" instance=ExtResource("13_2wwcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33322, 0.007267, 1.531)
 RouterID = "lub"
-PowerSource = NodePath("../../Room9/Server")
+
+[node name="Floor2" parent="Rooms/Room12" instance=ExtResource("7_05x41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = SubResource("PlaneMesh_jky6x")
+skeleton = NodePath("../../..")
+
+[node name="File3" parent="Rooms/Room12" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33509, 0, -1.41099)
+filename = "ToDo.txt"
+filepath = "res://Popups/Documents/lost_key.txt"
+
+[node name="LabComputer" parent="Rooms/Room12" instance=ExtResource("22_4sf5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35025, 0, 0.127911)
 
 [node name="Room13" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -16)
@@ -1692,6 +1753,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 mesh = SubResource("PlaneMesh_bssq0")
 skeleton = NodePath("../../..")
 
+[node name="File3" parent="Rooms/Room15" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31215, 0, 1.34948)
+filename = "SECRET_DONT_READ.txt"
+filepath = "res://Popups/Documents/password.txt"
+
+[node name="Scannable" type="Node" parent="Rooms/Room15/File3" groups=["Scannable"]]
+script = ExtResource("4_0t07s")
+Frequency = 30.18
+Amplitude = 134.865
+Wavelength = 65.676
+metadata/_custom_type_script = "uid://d2cgl764k8fuo"
+
 [node name="Room16" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -25)
 navigation_mesh = SubResource("NavigationMesh_jky6x")
@@ -1715,8 +1788,7 @@ skeleton = NodePath("../../..")
 [node name="File2" parent="Rooms/Room17" instance=ExtResource("19_jk4ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.42035, 0, 1.46558)
 filename = "ATTN_MORON.txt"
-filepath = "res://Popups/Documents/mission_briefing.txt"
-ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
+filepath = "res://Popups/Documents/locked_doors.txt"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, 7, 0)
@@ -1727,11 +1799,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19178, 0, -19.2262)
 [node name="Enemy2" parent="." instance=ExtResource("16_wbpbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476371, 0, -7.88002)
 
-[connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]
-[connection signal="pressed" from="CanvasLayer/LogButton" to="." method="_on_data_pressed"]
+[connection signal="pressed" from="CanvasLayer/DataButton" to="." method="_on_data_pressed"]
 [connection signal="pressed" from="CanvasLayer/MessageButton" to="." method="_on_msg_pressed"]
+[connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]
 [connection signal="pressed" from="CanvasLayer/RadarButton" to="." method="_on_radar_pressed"]
-[connection signal="pressed" from="CanvasLayer/ScannerButton" to="." method="_on_scanner_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScanButton" to="." method="_on_scanner_pressed"]
 [connection signal="body_entered" from="Rooms/Room9/Server/Door16Area3D" to="Rooms/Room9/Server" method="_on_body_entered" binds= [0]]
 [connection signal="body_exited" from="Rooms/Room9/Server/Door16Area3D" to="Rooms/Room9/Server" method="_on_body_exited" binds= [0]]
 [connection signal="body_entered" from="Rooms/Room9/Server/Door17Area3D" to="Rooms/Room9/Server" method="_on_body_entered" binds= [1]]

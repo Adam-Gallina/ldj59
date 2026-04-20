@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://2lsysx0ihdq3"]
 
-[ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="1_k1gwu"]
+[ext_resource type="Texture2D" uid="uid://cc8m7cygsu8sg" path="res://Popups/Images/Knob.png" id="1_w6du6"]
 [ext_resource type="Script" uid="uid://dnhlldrhtaysa" path="res://UI/knob.gd" id="2_w6du6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldsf8"]
-radius = 67.42
+radius = 99.0051
 
 [node name="Knob" type="Sprite2D"]
-texture = ExtResource("1_k1gwu")
+texture = ExtResource("1_w6du6")
 script = ExtResource("2_w6du6")
 
 [node name="Area2D" type="Area2D" parent="."]

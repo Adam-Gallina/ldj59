@@ -23,6 +23,10 @@ CommandManager="*res://Popups/command_window.tscn"
 DataWindow="*res://Popups/log_window.tscn"
 WindowManager="*res://Autoload/window_manager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 Commands="Nodes that can process commands"

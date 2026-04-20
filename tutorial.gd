@@ -9,6 +9,7 @@ extends Node
 
 @onready var _scary_door1 = get_node('../Doors/Door7')
 @onready var _scary_door2 = get_node('../Doors/Door5')
+@onready var _scary_door3 = get_node('../Doors/Door15')
 
 func _ready() -> void:
 	_tut_1.hide()
@@ -26,6 +27,8 @@ func start_tutorial():
 	if DEBUG_fast_forward:
 		ping()
 		return
+
+	_scary_door3.lock()
 
 	_tut_1.show()
 
@@ -113,20 +116,16 @@ func scan():
 	await delay_message(2.75, 'The network is pretty isolated, but most machinery in the lab broadcasts on a unique signal')
 	await delay_message(2.5, 'I\'m not entirely sure of the use case for that...but at least our job is easier')
 	await delay_message(2, 'The boys hacked a short-wave scanner onto your M0NK3 before we sent you down, and hooked it up to the terminal')
-	await delay_message(2.75, 'It\'s the button labelled "SCANNER". What do you expect. We aren\'t really paying them for their creativity')
+	await delay_message(2.75, 'It\'s the button labelled "SCAN". What do you expect. We aren\'t really paying them for their creativity')
 
-	await get_node('../CanvasLayer/ScannerButton').pressed
+	await get_node('../CanvasLayer/ScanButton').pressed
 
 	await delay_message(1, 'With only the one scanner you won\'t be able to get an exact read on anything, but it\'ll give you an idea of the distance')
 	await delay_message(3, 'Your briefing file will have the generator details, be back when you find it')
 	await delay_message(2, 'Remember, "scan" to figure out the layout behind a door, and "move" to explore')
 
 	var gen = get_node('../Rooms/Room5/Generator')
-	var d = get_tree().get_nodes_in_group(Constants.DRONE_GROUP)[0]
-	var dist = 10
-	while dist > 3.5:
-		dist = gen.global_position.distance_to(d.global_position)
-		await get_tree().physics_frame
+	await gen.revealed
 	
 	generator()
 
@@ -139,7 +138,9 @@ func generator():
 	while cmd != 'm1 interface':
 		cmd = await CommandManager.command_raw_sent
 		if cmd != 'm1 interface':
-			await delay_message(.5, 'It\'ll find the generator on it\'s own with "m1 interface"')
+			await delay_message(.5, 'It\'ll find the generator on its own with "m1 interface"')
+			if cmd == 'interface':
+				break
 
 	var gen = get_node('../Rooms/Room5/Generator')
 	await gen.activated
@@ -156,7 +157,7 @@ func monsters():
 	var cmd = ''
 	while not cmd.contains('d5') and not cmd.contains('d7'):
 		cmd = await CommandManager.command_raw_sent
-		if cmd == 'd5' or cmd == 'd6' or cmd.contains('open'):
+		if (cmd == 'd5' or cmd == 'd6' or cmd.contains('open')) and not cmd.contains('move'):
 			break
 
 	_scary_door1.close()
@@ -170,10 +171,20 @@ func monsters():
 	await delay_message(.1, 'WAITWAITWAIT')
 	await delay_message(4, 'Ok I locked it in time')
 	await delay_message(3, 'I meant explore the open rooms, not blindly fling doors open and get mauled to death!')
+
+	var room = get_node('../Rooms/Room6')
+	if not DoorManager.room_is_revealed(room.get_rid()):
+		await delay_message(3, 'You didn\'t even scan before trying to walk in...')
+		await get_tree().create_timer(2.5).timeout
+		CommandManager.send_command('scan d7')
+		await delay_message(.5, 'Ok I got it for you')
+		await delay_message(1, 'Anywho')
+
+
 	await delay_message(2.5, 'The boys threw on a radar function, it uses the wifi signals from the routers yada yada')
 	await delay_message(3, 'It\'s on here somewhere...')
 	await delay_message(1, 'Oh')
-	await delay_message(1.5, 'The button labelled "RADAR". Silly me')
+	await delay_message(1.5, 'The button labelled "RADR". Silly me')
 
 	var radar = get_node('../RadarWindow')
 	if not radar.is_open():
@@ -192,7 +203,7 @@ func monsters():
 	await delay_message(2.5, 'Looks like there\'s a little closet adjacent, open the closet and try getting it to move into it')
 
 	var door = get_node('../Doors/Door12')
-	while enemy.global_position.x < 3 or door.is_open():
+	while enemy.global_position.z < -6 or door.is_open():
 		await get_tree().physics_frame
 
 	hit = null
@@ -203,9 +214,34 @@ func monsters():
 	await delay_message(1.5, 'Ok I\'ll unlock those doors now. Sorry I shouted at you')
 	_scary_door1.unlock()
 	_scary_door2.unlock()
+	_scary_door3.unlock()
 
-	file()
+	routers()
 
-func file():
-	pass
-	
+func routers():
+	var r = get_node('../Rooms/Room6/Router')
+	while not r.is_revealed():
+		await get_tree().physics_frame
+
+	await delay_message(.1, 'Would you look at that, a gen-yoo-ine router')
+	await delay_message(2, 'The boys were just telling me your radar should actually work off any router, not just the one we sent in the elevator')
+	await delay_message(3, 'Command is "radar", and then whichever router you want to go through')
+
+	files()
+
+func files():
+	var file = get_node('../Rooms/Room17/File2')
+	await file.revealed
+
+	await delay_message(.5, 'Ooh a note lying on the ground')
+	await delay_message(1.5, 'Must have gotten knocked down when they evacuated')
+	await delay_message(2.25, 'The M0NK3 does have a basic camera under the command "download", you can use it like interface')
+
+	lab()
+
+func lab():
+	var door = get_node('../Rooms/Room10/DoorControl')
+	await door.activated
+
+	await delay_message(.5, 'Alright, lab time')
+	await delay_message(2.4, 'Researchers say the docs we need are stored in the main lab computer')

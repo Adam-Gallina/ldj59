@@ -1,0 +1,10 @@
+You and your M0NK3
+
+Did you know that your M0NK3 has a customizable face?
+
+That's right! Simply send it the command 'face' and a number 0-4!
+
+M0NK3 not happy enough? "<M0NK3 ID> face 2"
+M0NK3 needs to lock in? "<M0NK3 ID> face 1"
+
+And there's 3 more face options where those came from!

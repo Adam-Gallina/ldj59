@@ -1,9 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5fk55hpj6vdq"]
+[gd_scene load_steps=14 format=3 uid="uid://b5fk55hpj6vdq"]
 
 [ext_resource type="Script" uid="uid://c715cv3ndd05q" path="res://Popups/radar_window.gd" id="1_k42f2"]
 [ext_resource type="PackedScene" uid="uid://2lsysx0ihdq3" path="res://UI/knob.tscn" id="1_ldsf8"]
 [ext_resource type="PackedScene" uid="uid://dedwufelcydyp" path="res://Icons/radar_ping.tscn" id="2_chgsx"]
 [ext_resource type="PackedScene" uid="uid://c8nreylx5ly20" path="res://Effects/line_mesh_3d.tscn" id="3_65m12"]
+[ext_resource type="Texture2D" uid="uid://dbqwpe806x3ce" path="res://Popups/Images/RadarPanel.png" id="3_cdgpr"]
+
+[sub_resource type="Gradient" id="Gradient_jvmcy"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkudj"]
+gradient = SubResource("Gradient_jvmcy")
+
+[sub_resource type="Gradient" id="Gradient_2i0sr"]
+colors = PackedColorArray(0.827451, 0.827451, 0.827451, 1, 0.827451, 0.827451, 0.827451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iifk7"]
+gradient = SubResource("Gradient_2i0sr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65m12"]
 albedo_color = Color(0, 1, 0.00863743, 1)
@@ -21,74 +34,135 @@ points = PackedVector3Array(12, 0, 0, 0, 12.635, 0, 0, 0, 5, 0, 0, 0)
 physics_object_picking = true
 title = "RADAR"
 position = Vector2i(25, 391)
-size = Vector2i(450, 200)
+size = Vector2i(450, 180)
 unresizable = true
 script = ExtResource("1_k42f2")
 RadarPingScene = ExtResource("2_chgsx")
 PingOffset = 4.756
 
-[node name="Label4" type="Label" parent="."]
-offset_left = 23.0
-offset_top = 15.0
-offset_right = 103.0
-offset_bottom = 38.0
-text = "Direction: "
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_right = 5.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cdgpr")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="DirectionKnob" parent="." instance=ExtResource("1_ldsf8")]
-position = Vector2(73, 113)
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -96.0
+offset_right = -9.0
+offset_bottom = -72.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_mkudj")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_iifk7")
+expand_mode = 1
+
+[node name="ScanLabel" type="Label" parent="TextureRect/TextureRect/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 2.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Scanning from: elevate"
+
+[node name="Label4" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 91.0
+offset_right = 78.0
+offset_bottom = 114.0
+rotation = -0.61448
+text = "Direction"
+
+[node name="DirectionKnob" parent="TextureRect" instance=ExtResource("1_ldsf8")]
+position = Vector2(80, 155)
+scale = Vector2(0.555, 0.555)
 MaxValue = 359
 Value = 180
 ChangeSpeed = 15.0
 AllowWrap = true
 MaxRotation = 359
 
-[node name="Label" type="Label" parent="."]
-offset_left = 195.0
-offset_top = 18.0
-offset_right = 247.0
-offset_bottom = 41.0
-text = "Angle: "
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 83.0
+offset_right = 221.0
+offset_bottom = 106.0
+rotation = -0.617049
+text = "Angle"
 
-[node name="AngleKnob" parent="." instance=ExtResource("1_ldsf8")]
-position = Vector2(217, 114)
+[node name="AngleKnob" parent="TextureRect" instance=ExtResource("1_ldsf8")]
+position = Vector2(217, 154)
+scale = Vector2(0.555, 0.555)
 MinValue = 10
 MaxValue = 75
 Value = 30
 MinRotation = 10
 MaxRotation = 75
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 326.0
-offset_top = 18.0
-offset_right = 402.0
-offset_bottom = 41.0
-text = "Strength: "
+[node name="Label2" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 90.0
+offset_right = 370.0
+offset_bottom = 113.0
+rotation = -0.653627
+text = "Strength"
 
-[node name="StrengthKnob" parent="." instance=ExtResource("1_ldsf8")]
-position = Vector2(366, 115)
+[node name="StrengthKnob" parent="TextureRect" instance=ExtResource("1_ldsf8")]
+position = Vector2(377, 146)
+rotation = -2.26893
+scale = Vector2(0.555, 0.555)
 MinValue = 30
 Value = 60
 MinRotation = -130
 MaxRotation = 130
 
-[node name="Label3" type="Label" parent="."]
+[node name="Label3" type="Label" parent="TextureRect"]
 visible = false
+layout_mode = 0
 offset_left = 486.0
-offset_top = 17.0
+offset_top = 49.0
 offset_right = 566.0
-offset_bottom = 40.0
+offset_bottom = 72.0
 text = "Precision: "
 
-[node name="Label5" type="Label" parent="."]
-offset_left = 232.0
-offset_top = -1.0
-offset_right = 384.0
-offset_bottom = 22.0
-text = "Scanning from: elev"
-
-[node name="PrecisionKnob" parent="." instance=ExtResource("1_ldsf8")]
+[node name="PrecisionKnob" parent="TextureRect" instance=ExtResource("1_ldsf8")]
 visible = false
-position = Vector2(523, 115)
+position = Vector2(523, 147)
 MinValue = 20
 MaxValue = 60
 Value = 20
@@ -118,7 +192,3 @@ target_position = Vector3(0, -10, 0)
 collision_mask = 16
 
 [connection signal="close_requested" from="." to="." method="close"]
-[connection signal="value_changed" from="DirectionKnob" to="." method="_on_direction_changed"]
-[connection signal="value_changed" from="AngleKnob" to="." method="_on_angle_changed"]
-[connection signal="value_changed" from="StrengthKnob" to="." method="_on_strength_changed"]
-[connection signal="value_changed" from="PrecisionKnob" to="." method="_on_precision_changed"]

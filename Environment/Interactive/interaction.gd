@@ -2,6 +2,7 @@ extends Node3D
 class_name InteractiveBase
 
 signal activated()
+signal revealed()
 
 @export var Descriptor = "Unnamed Object"
 
@@ -39,3 +40,4 @@ func hide_model():
 
 func reveal_model():
 	get_node('%Model').layers = 1
+	revealed.emit()

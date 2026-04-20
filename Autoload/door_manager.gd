@@ -182,6 +182,7 @@ func process_command(cmd:String, args:Array[String]):
 			if _doors.get(a):
 				if _doors[a].lock():
 					succeeded += 1
+					output.append('{0} locked'.format([a]))
 				else:
 					output.append('{0} failed to lock'.format([a]))
 			else:
@@ -193,8 +194,9 @@ func process_command(cmd:String, args:Array[String]):
 			if _doors.get(a):
 				if _doors[a].unlock():
 					succeeded += 1
+					output.append('{0} unlocked'.format([a]))
 				else:
-					output.append('{0} failed to lock'.format([a]))
+					output.append('{0} failed to unlock'.format([a]))
 			else:
 				output.append('Unrecognized door_id \'' + a + '\'')
 	elif cmd == 'doors':

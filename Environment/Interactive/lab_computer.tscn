@@ -1,0 +1,254 @@
+[gd_scene load_steps=13 format=3 uid="uid://dymdjkeg73suf"]
+
+[ext_resource type="Script" uid="uid://bf1pww85it0tt" path="res://Environment/Interactive/lab_computer.gd" id="1_ei0q3"]
+[ext_resource type="Texture2D" uid="uid://4q1oxkesn1qa" path="res://Icons/Images/InteractIcon.png" id="2_ei0q3"]
+[ext_resource type="Texture2D" uid="uid://bf7d44hvpmeol" path="res://Icons/Images/Indicator.png" id="3_ixl5q"]
+[ext_resource type="Script" uid="uid://blo4xe0qum1d6" path="res://Popups/computer_window.gd" id="4_ixl5q"]
+[ext_resource type="Texture2D" uid="uid://cxyrxf685rnxy" path="res://Icons/Images/Alert.png" id="5_ixl5q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h3yq5"]
+size = Vector3(0.75, 0.5, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h3yq5"]
+size = Vector3(0.75, 0.5, 0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8sae"]
+albedo_color = Color(0.0346984, 0.068321, 0.119835, 1)
+
+[sub_resource type="Gradient" id="Gradient_imy5r"]
+colors = PackedColorArray(0.452479, 0, 0, 1, 0.45098, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r18dc"]
+gradient = SubResource("Gradient_imy5r")
+
+[sub_resource type="Gradient" id="Gradient_7gl7d"]
+colors = PackedColorArray(0.25098, 0.25098, 0.25098, 1, 0.25098, 0.25098, 0.25098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wsdx8"]
+gradient = SubResource("Gradient_7gl7d")
+
+[node name="LabComputer" type="StaticBody3D"]
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("1_ei0q3")
+Descriptor = "Computer"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_h3yq5")
+
+[node name="Model" type="MeshInstance3D" parent="CollisionShape3D"]
+unique_name_in_owner = true
+mesh = SubResource("BoxMesh_h3yq5")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_q8sae")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.586804, 2, 0.901204)
+modulate = Color(0.146463, 0.60183, 0.142597, 1)
+pixel_size = 0.003
+texture = ExtResource("2_ei0q3")
+
+[node name="Label3D" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.226655, -0.0795771, 0.119615)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.0798981, 0.432113, 0.0768085, 1)
+text = "Computer"
+font_size = 72
+outline_size = 22
+horizontal_alignment = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.715424, 0.69869, 3.05407e-08, -0.69869, 0.715424, -1.24392e-08, -3.05407e-08, -1.24392e-08, 1, -0.405068, 0.353514, 0)
+sorting_offset = -1.0
+modulate = Color(0.146463, 0.60183, 0.142597, 1)
+pixel_size = 0.002
+texture = ExtResource("3_ixl5q")
+
+[node name="Window" type="Window" parent="."]
+title = "Secret Lab Computer"
+initial_position = 1
+size = Vector2i(350, 200)
+visible = false
+script = ExtResource("4_ixl5q")
+
+[node name="Password" type="Control" parent="Window"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Window/Password"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Emergency situation detected. Computer automatically locked"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Window/Password"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -24.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enter password to continue"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Window/Password"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = -91.5
+offset_right = -40.0
+offset_bottom = -54.5
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "Password"
+context_menu_enabled = false
+emoji_menu_enabled = false
+wrap_mode = 1
+
+[node name="Button" type="Button" parent="Window/Password"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.5
+offset_top = -48.5
+offset_right = 31.5
+offset_bottom = -17.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Submit"
+
+[node name="Download" type="Control" parent="Window"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Window/Download"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 97.0
+grow_horizontal = 2
+text = "52921 secure files found"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Window/Download"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 101.0
+offset_right = 125.0
+offset_bottom = 125.0
+
+[node name="Label" type="Label" parent="Window/Download/CheckBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -9.0
+offset_right = 162.0
+offset_bottom = 24.0
+grow_horizontal = 2
+text = "I am not a robot"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="Window/Download"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = 28.0
+offset_right = 43.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+text = "Download"
+
+[node name="TextureRect" type="TextureRect" parent="Window/Download"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -32.0
+offset_right = 163.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_r18dc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/Download/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect2" type="TextureRect" parent="Window/Download/TextureRect/MarginContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_wsdx8")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Window/Download/TextureRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Robot download detected
+Initiating self destruct"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Window/Download/TextureRect/MarginContainer"]
+custom_minimum_size = Vector2(49.585, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("5_ixl5q")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="Window/Download/TextureRect/MarginContainer"]
+custom_minimum_size = Vector2(44.485, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("5_ixl5q")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="pressed" from="Window/Password/Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="Window/Download/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="Window/Download/Button2" to="." method="_on_button_2_pressed"]

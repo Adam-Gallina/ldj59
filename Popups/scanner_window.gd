@@ -1,11 +1,11 @@
 extends PopupWindow
 
-@onready var _frequency_label = $Label
-@onready var _frequency : Knob = $FrequencyKnob
-@onready var _amplitude_label = $Label2
-@onready var _amplitude : Knob = $AmplitudeKnob
-@onready var _wavelength_label = $Label3
-@onready var _wavelength : Knob = $WavelengthKnob
+@onready var _frequency_label = $Control/TextureRect2/FrequencyLabel
+@onready var _frequency : Knob = $Control/TextureRect2/FrequencyKnob
+@onready var _amplitude_label = $Control/TextureRect3/AmplitudeLabel
+@onready var _amplitude : Knob = $Control/TextureRect3/AmplitudeKnob
+@onready var _wavelength_label = $Control/TextureRect4/WavelengthLabel
+@onready var _wavelength : Knob = $Control/TextureRect4/WavelengthKnob
 
 @onready var _wave_display : Line2D = $Line2D
 @export var WavePoints = 72
@@ -95,13 +95,13 @@ func close():
 
 
 func _on_frequency_knob_value_changed(new_value:int) -> void:
-	_frequency_label.text = 'Frequency: {0}'.format([new_value])
+	_frequency_label.text = 'FREQ: {0}'.format([new_value])
 
 func _on_amplitude_knob_value_changed(new_value:int) -> void:
-	_amplitude_label.text = 'Amplitude: {0}'.format([new_value])
+	_amplitude_label.text = 'AMP: {0}'.format([new_value])
 
 func _on_wavelength_knob_value_changed(new_value:int) -> void:
-	_wavelength_label.text = 'Wavelength: {0}'.format([new_value])
+	_wavelength_label.text = 'WAVE: {0}'.format([new_value])
 
 
 class DroneScan:

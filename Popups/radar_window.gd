@@ -2,16 +2,12 @@ extends PopupWindow
 
 signal object_found(obj)
 
-@onready var _direction_label = $Label4
-@onready var _direction : Knob = $DirectionKnob
-@onready var _angle_label = $Label
-@onready var _angle : Knob = $AngleKnob
-@onready var _strength_label = $Label2
-@onready var _strength : Knob = $StrengthKnob
-@onready var _precision_label = $Label3
-@onready var _precision : Knob = $PrecisionKnob
+@onready var _direction : Knob = $TextureRect/DirectionKnob
+@onready var _angle : Knob = $TextureRect/AngleKnob
+@onready var _strength : Knob = $TextureRect/StrengthKnob
+@onready var _precision : Knob = $TextureRect/PrecisionKnob
 
-@onready var _target_label = $Label5
+@onready var _target_label = $TextureRect/TextureRect/TextureRect2/ScanLabel
 
 @onready var _radar_edge : LineMesh3D = $LineMesh3D
 @onready var _radar_cap : LineMesh3D = $CapLineMesh3D
@@ -124,7 +120,7 @@ func process_command(cmd:String, args:Array[String]) -> CommandWindow.CommandOut
 				return CommandWindow.CommandOutput.new(false, ['{0} did not respond'.format([args[0]])])
 
 			_curr_target = _routers[args[0]]
-			_target_label = 'Scanning from: ' + args[0]
+			_target_label.text = 'Scanning from: ' + args[0]
 			start_radar()
 			return CommandWindow.CommandOutput.new(true, [])
 		elif args[0][0] == 'b':
@@ -147,20 +143,6 @@ func calc_precision() -> float:
 
 func calc_strength() -> float:
 	return _strength.Value / 10.
-
-
-func _on_direction_changed(new_value:int) -> void:
-	_direction_label.text = 'Direction: {0}'.format([new_value])
-
-func _on_angle_changed(new_value:int) -> void:
-	_angle_label.text = 'Angle: {0}'.format([new_value])
-
-func _on_strength_changed(new_value:int) -> void:
-	new_value /= 10
-	_strength_label.text = 'Strength: {0}'.format([new_value])
-
-func _on_precision_changed(new_value:int) -> void:
-	_precision_label.text = 'Precision: {0}'.format([new_value])
 
 
 func start_radar():
