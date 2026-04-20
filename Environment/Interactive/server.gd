@@ -49,12 +49,12 @@ func _process(_delta: float) -> void:
 
 func reveal_model():
 	super()
-	FakeDrone.show()
+	#FakeDrone.show()
 	$Sprite3D.show()
 
 func hide_model():
 	super()
-	FakeDrone.hide()
+	#FakeDrone.hide()
 	$Sprite3D.hide()
 
 
