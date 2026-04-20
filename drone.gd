@@ -15,11 +15,17 @@ var _scans = []
 @export var DoorRoomScanDist = 1
 @onready var _ray = $Area3D/RayCast3D
 
+@export var Faces : Array[Texture]
+@onready var icon = $CollisionShape3D/Sprite3D
+
 func _ready():
 	_control_window.hide()
 	_control_window.title = DroneID
 	_nav_agent.velocity_computed.connect(_on_velocity_calculated)
 	_nav_agent.navigation_finished.connect(_on_navigation_finished)
+
+	icon.texture = Faces.pick_random()
+	icon.get_node('Label3D').text = DroneID
 
 
 func _physics_process(_delta):
@@ -122,27 +128,42 @@ func process_command(cmd:String, args:Array[String]):
 	if cmd == 'ping' and DroneID in args:
 		CommandManager.log_message(DroneID + ': pong')
 
-	if cmd != DroneID: return null
+	
+	if cmd != DroneID:
+		if get_parent().MaxDrones == 1:
+			args.push_front(cmd)
+		else:
+			return null
+	
+	if args.size() == 0:
+		return CommandWindow.CommandOutput.new(false, [DroneID + ': Input a command'])
+
 
 	if args[0] == 'move':
-		if args[1][0] == Constants.DRONE_ID_PREFIX:
-			printerr('Do this already')
-		elif args[1][0] == Constants.ROOM_ID_PREFIX:
+		if args.size() < 2:
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': move requires 1 extra argument (DroneID move ID)'])
+		if args[1][0] == Constants.ROOM_ID_PREFIX:
 			if DoorManager.get_rooms().get(args[1]) and DoorManager.room_is_revealed(DoorManager.get_rooms().get(args[1]).get_rid()):
 				move(DoorManager.get_rooms()[args[1]].global_position)
 				return CommandWindow.CommandOutput.new(true, [])
 			else:
 				return CommandWindow.CommandOutput.new(false, ['Unrecognized id ' + args[1]])
 		elif args[1][0] == Constants.DOOR_ID_PREFIX:
-			if DoorManager.get_doors().get(args[1]):
+			if DoorManager.get_doors().get(args[1]) and DoorManager.get_doors()[args[1]].is_revealed():
 				move(DoorManager.get_doors()[args[1]].global_position)
 				return CommandWindow.CommandOutput.new(true, [])
 			else:
 				return CommandWindow.CommandOutput.new(false, ['Unrecognized id ' + args[1]])
+		else:
+			for d in get_tree().get_nodes_in_group(Constants.DRONE_GROUP):
+				if d.DroneID == args[1]:
+					move(d.global_position)
+					return CommandWindow.CommandOutput.new(true, [])
+			return CommandWindow.CommandOutput.new(false, ['Unrecognized id ' + args[1]])
 	elif args[0] == 'interface':
 		var i = get_room_interactions()
 		if i == null:
-			return CommandWindow.CommandOutput.new(false, [DroneID + ': Nothing to interface with'])
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': Nothing in range to interface with'])
 
 		move(i.global_position)
 		await move_complete
@@ -171,9 +192,20 @@ func process_command(cmd:String, args:Array[String]):
 		return CommandManager.CommandOutput.new(true, [])
 	elif args[0] == 'explode':
 		destroy(false)
-		return CommandWindow.CommandOutput.new(true, ['{0}: Goodbye o/'.format([DroneID])])
+		return CommandWindow.CommandOutput.new(true, ['{0}: Goodbye o/'.format([DroneID])])	
+	elif args[0] == 'face':
+		if args.size() < 2:
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': face requires 1 extra argument (DroneID face [face number])'])
+		var i = args[1].to_int()
+		if i >= Faces.size() or i < 0:
+			return CommandWindow.CommandOutput.new(false, [DroneID + ': invalid face number'])
+		icon.texture = Faces[i]
+		return CommandWindow.CommandOutput.new(true)
 	
-	return CommandWindow.CommandOutput.new(false, [DroneID + ': Unknown command'])
+	if get_parent().MaxDrones > 1:
+		return CommandWindow.CommandOutput.new(false, [DroneID + ': Unknown command'])
+	else:
+		return null
 
 
 func _on_area_3d_body_entered(body:Node3D) -> void:

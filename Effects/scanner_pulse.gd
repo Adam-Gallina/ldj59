@@ -6,6 +6,8 @@ extends Node3D
 
 @export var AnimDuration = .9
 
+var _animating = true
+
 func do_pulse(pulse_source:Node3D, pulse_target:Scannable, pulse_offset:float, additional_pulse:Array):
 	var dist = pulse_source.global_position.distance_to(pulse_target.get_parent().global_position)
 
@@ -38,7 +40,9 @@ func do_pulse(pulse_source:Node3D, pulse_target:Scannable, pulse_offset:float, a
 func animate_pulse(start_pos:Vector3, radius:float, start_ang:float, end_ang:float, duration):
 	var anim = 0
 
-	while anim < duration:
+	_animating = true
+
+	while anim < duration and _animating:
 		anim += get_process_delta_time()
 
 		var t = anim / duration
@@ -55,16 +59,18 @@ func animate_pulse(start_pos:Vector3, radius:float, start_ang:float, end_ang:flo
 
 		await get_tree().process_frame
 
-	
-	var end_dir = Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(end_ang))
-	pointer_line.display_line([start_pos, start_pos + end_dir * (radius - .5)])
+	if _animating:
+		var end_dir = Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(end_ang))
+		pointer_line.display_line([start_pos, start_pos + end_dir * (radius - .5)])
 
-	point_line.display_donut(start_pos + end_dir * radius, .2, 36)
+		point_line.display_donut(start_pos + end_dir * radius, .2, 36)
 
-	radius_line.display_arc(start_pos, radius - radius_line.MaxWidth/2, start_ang, end_ang, 72)
+		radius_line.display_arc(start_pos, radius - radius_line.MaxWidth/2, start_ang, end_ang, 72)
+		_animating = false
 
 
 func clear():
 	pointer_line.clear()
 	point_line.clear()
 	radius_line.clear()
+	_animating = false

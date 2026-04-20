@@ -26,4 +26,12 @@ func process_command(cmd:String, args:Array[String]):
 			DoorManager.reveal_model(self)
 			return CommandManager.CommandOutput.new(true, [RouterID + ': pong'])
 
+	if cmd == 'reboot':
+		if args.size() > 0 and args[0] == RouterID:
+			if PowerSource != null and not PowerSource.is_active():
+				return null
+			
+			DoorManager.reveal_model(self)
+			return CommandManager.CommandOutput.new(true, [RouterID + ': online'])
+
 	return null

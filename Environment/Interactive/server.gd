@@ -13,20 +13,20 @@ var _drone_disabled = false
 @export var FakeDrone : Node3D
 
 func interaction_start(drone:DroneBase) -> bool:
-	if not _drone_disabled:
-		_drone_disabled = true
+	#if not _drone_disabled:
+	#	_drone_disabled = true
 
-		for z in ScanZones:
-			z.monitoring = false
+	for z in ScanZones:
+		z.monitoring = false
 
-		get_tree().root.get_node('Map').MaxDrones += 1
-		var d = get_tree().root.get_node('Map').spawn_drone('x7', FakeDrone.global_position)
-		await interaction_end(d)
-		d.DroneID = DroneID
+	#	get_tree().root.get_node('Map').MaxDrones += 1
+	#	var d = get_tree().root.get_node('Map').spawn_drone('x7', FakeDrone.global_position)
+	#	await interaction_end(d)
+	#	d.DroneID = DroneID
 
-		FakeDrone.hide()
+	#	FakeDrone.hide()
 
-		return true
+	#	return true
 
 	
 	if drone != null:
@@ -50,10 +50,12 @@ func _process(_delta: float) -> void:
 func reveal_model():
 	super()
 	FakeDrone.show()
+	$Sprite3D.show()
 
 func hide_model():
 	super()
 	FakeDrone.hide()
+	$Sprite3D.hide()
 
 
 func _on_body_entered(body:Node3D, zone:int):

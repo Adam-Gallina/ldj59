@@ -17,12 +17,12 @@ script = ExtResource("1_h8h5b")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0)
 modulate = Color(0.513577, 0.346578, 0.341227, 1)
-pixel_size = 0.004
+pixel_size = 0.005
 texture = ExtResource("2_6c5hj")
 
 [node name="Label3D" type="Label3D" parent="Sprite3D"]
 sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 text = "r66"
-font_size = 87
+font_size = 112
 outline_size = 0

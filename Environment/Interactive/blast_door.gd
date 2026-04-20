@@ -6,7 +6,7 @@ extends InteractiveBase
 @export var Door : DoorBase
 
 func interaction_start(_drone:DroneBase) -> bool:
-	DoorManager.reveal_room(ScannedRoom.get_rid())
+	DoorManager.reveal_room(ScannedRoom.get_rid(), 0)
 	
 	var m = ScannedEnemy.get_node('NavigationAgent3D').get_navigation_map()
 	var _curr_room_rid = NavigationServer3D.map_get_closest_point_owner(m, ScannedEnemy.global_position)
@@ -32,6 +32,7 @@ func interaction_start(_drone:DroneBase) -> bool:
 
 		Door.close(true)
 	else:
+		DoorManager.reveal_room(ScannedRoom.get_rid(), 1)
 		CommandManager.log_message('Opening lab door.')
 		await get_tree().create_timer(.5).timeout
 		CommandManager.log_message('Opening lab door..')

@@ -8,7 +8,7 @@ extends Node3D
 
 @export var DroneButtons : Array[Button]
 var _buttons : Dictionary
-@export var MaxDrones = 1
+@export var MaxDrones = 3
 
 @export var DroneScene : PackedScene
 @export var DroneSpawnPos : Node3D

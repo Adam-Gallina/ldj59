@@ -89,7 +89,7 @@ func move():
 
 	await delay_message(3, 'Door open, so onwards and upwards we go')
 	await delay_message(2.5, '"To send a command to you M0NK3, first type the ID of that M0NK3, then the command, then any arguments"')
-	await delay_message(3.25, 'There\'s a handful of commands indexed, I\'ll go ahead and send you the file')
+	await delay_message(3.25, 'There\'s a handful of commands indexed, I\'ll go ahead and send the file to your DATA folder')
 
 	DataWindow.add_file('M0NK3_COMMANDS.txt', 'res://Popups/Documents/basic_commands.txt')
 	
@@ -114,7 +114,10 @@ func scan():
 	await delay_message(2.5, 'I\'m not entirely sure of the use case for that...but at least our job is easier')
 	await delay_message(2, 'The boys hacked a short-wave scanner onto your M0NK3 before we sent you down, and hooked it up to the terminal')
 	await delay_message(2.75, 'It\'s the button labelled "SCANNER". What do you expect. We aren\'t really paying them for their creativity')
-	await delay_message(3, 'With only the one scanner you won\'t be able to get an exact read on anything, but it\'ll give you an idea of the distance')
+
+	await get_node('../CanvasLayer/ScannerButton').pressed
+
+	await delay_message(1, 'With only the one scanner you won\'t be able to get an exact read on anything, but it\'ll give you an idea of the distance')
 	await delay_message(3, 'Your briefing file will have the generator details, be back when you find it')
 	await delay_message(2, 'Remember, "scan" to figure out the layout behind a door, and "move" to explore')
 
@@ -176,7 +179,8 @@ func monsters():
 	if not radar.is_open():
 		await get_node('../CanvasLayer/RadarButton').pressed
 
-	await delay_message(.5, 'Go ahead and point the radar over at r6, let\'s just make sure there\'s nothing exciting in there')
+	await delay_message(.5, 'It worked! Look back at the elevator and you\'ll see the radar over the map')
+	await delay_message(2, 'Go ahead and point the radar over at r6, let\'s just make sure there\'s nothing exciting in there')
 	
 	var hit = null
 	var enemy = get_node('../Enemy2')

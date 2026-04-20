@@ -1,0 +1,6 @@
+@Closer
+
+The lab routers been acting strange lately, and keeps changing its ID. 
+
+I was able to find it on the "routers" list, and then send a reboot to the ID to get it online again.
+I attached the docs below in case they didn't train you on that

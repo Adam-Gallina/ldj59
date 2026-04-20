@@ -21,7 +21,7 @@ points = PackedVector3Array(12, 0, 0, 0, 12.635, 0, 0, 0, 5, 0, 0, 0)
 physics_object_picking = true
 title = "RADAR"
 position = Vector2i(25, 391)
-size = Vector2i(600, 200)
+size = Vector2i(450, 200)
 unresizable = true
 script = ExtResource("1_k42f2")
 RadarPingScene = ExtResource("2_chgsx")
@@ -72,6 +72,7 @@ MinRotation = -130
 MaxRotation = 130
 
 [node name="Label3" type="Label" parent="."]
+visible = false
 offset_left = 486.0
 offset_top = 17.0
 offset_right = 566.0
@@ -79,17 +80,18 @@ offset_bottom = 40.0
 text = "Precision: "
 
 [node name="Label5" type="Label" parent="."]
-offset_left = 379.0
+offset_left = 232.0
 offset_top = -1.0
-offset_right = 496.0
+offset_right = 384.0
 offset_bottom = 22.0
 text = "Scanning from: elev"
 
 [node name="PrecisionKnob" parent="." instance=ExtResource("1_ldsf8")]
+visible = false
 position = Vector2(523, 115)
 MinValue = 20
 MaxValue = 60
-Value = 40
+Value = 20
 ChangeSpeed = 2.0
 MinRotation = -130
 MaxRotation = 130

@@ -32,6 +32,12 @@ func _process(_delta: float) -> void:
 			if _curr_command >= _command_history.size(): _curr_command = _command_history.size()
 			fill_from_history(_curr_command)
 
+	if Input.is_action_just_pressed('open_command'):
+		if not is_open():
+			open()
+		elif not _input.has_focus():
+			_input.grab_focus()
+
 
 func send_command(text:String):
 	_on_command_submitted(text)
@@ -52,6 +58,8 @@ func fill_from_history(i):
 #func process_command(_cmd:String, _args:Array[String]) -> CommandWindow.CommandOutput:
 #	return null
 func _on_command_submitted(new_text:String, override_input=true) -> void:
+	if new_text == '': return
+	
 	var inp = new_text.strip_edges().to_lower().split(' ')
 	var cmd = inp[0]
 	inp.remove_at(0)

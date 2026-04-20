@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://duwf6pfc8wr5i"]
+[gd_scene load_steps=12 format=3 uid="uid://duwf6pfc8wr5i"]
 
 [ext_resource type="Script" uid="uid://b3aut4et2ullu" path="res://drone.gd" id="1_uvgqj"]
-[ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="2_d5du7"]
+[ext_resource type="Texture2D" uid="uid://xql7xswgkes8" path="res://Drone/excited.png" id="2_6d57s"]
+[ext_resource type="Texture2D" uid="uid://dvicna4phtkf1" path="res://Drone/uncertain.png" id="2_puw62"]
+[ext_resource type="Texture2D" uid="uid://crmmc666iwxa8" path="res://Drone/grumpy.png" id="3_4qt7m"]
 [ext_resource type="Script" uid="uid://blcmop43p4fkk" path="res://Popups/control_window.gd" id="3_puw62"]
+[ext_resource type="Texture2D" uid="uid://voklk6st5xsj" path="res://Drone/happy.png" id="4_812hj"]
+[ext_resource type="Texture2D" uid="uid://rsdtt0bp4eq1" path="res://Drone/worried.png" id="6_5cw47"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_etgmo"]
 radius = 0.3
@@ -23,6 +27,7 @@ radius = 5.0
 collision_layer = 48
 collision_mask = 33
 script = ExtResource("1_uvgqj")
+Faces = Array[Texture]([ExtResource("2_6d57s"), ExtResource("3_4qt7m"), ExtResource("4_812hj"), ExtResource("2_puw62"), ExtResource("6_5cw47")])
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 0.25
@@ -48,8 +53,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")
 [node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
 layers = 4
+offset = Vector2(0, 19.045)
+modulate = Color(0.297299, 0.540491, 0.717237, 1)
 pixel_size = 0.005
-texture = ExtResource("2_d5du7")
+texture = ExtResource("2_puw62")
+
+[node name="Label3D" type="Label3D" parent="CollisionShape3D/Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.466715, 0)
+modulate = Color(0.258824, 0.498039, 0.65098, 1)
+outline_modulate = Color(0.0803136, 0.100338, 0.113046, 1)
+text = "longdronename"
 
 [node name="ControlWindow" type="Window" parent="."]
 physics_object_picking = true
@@ -97,6 +110,7 @@ collision_mask = 29
 shape = SubResource("CylinderShape3D_puw62")
 
 [node name="RayCast3D" type="RayCast3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 7
 
 [connection signal="button_down" from="ControlWindow/Button" to="ControlWindow" method="_button_pressed" binds= [Vector3(0, 0, -1)]]

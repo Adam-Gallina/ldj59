@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqes51hoed078"]
+[gd_scene load_steps=10 format=3 uid="uid://cqes51hoed078"]
 
 [ext_resource type="Script" uid="uid://hq7whw3d8vun" path="res://Environment/Interactive/server.gd" id="1_tjcjb"]
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="2_sc8gk"]
+[ext_resource type="Texture2D" uid="uid://4q1oxkesn1qa" path="res://Icons/Images/InteractIcon.png" id="3_58cnx"]
+[ext_resource type="Texture2D" uid="uid://bf7d44hvpmeol" path="res://Icons/Images/Indicator.png" id="4_2pedt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjcjb"]
 size = Vector3(0.75, 0.5, 0.75)
@@ -47,3 +49,27 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uvgqj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.422822, 0)
 radius = 0.4
 use_3d_avoidance = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.15839, 2, 0.476659)
+modulate = Color(0.146463, 0.60183, 0.142597, 1)
+pixel_size = 0.003
+texture = ExtResource("3_58cnx")
+
+[node name="Label3D" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.180342, -0.0795771, 0.119615)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.0798981, 0.432113, 0.0768085, 1)
+text = "Server"
+font_size = 72
+outline_size = 22
+horizontal_alignment = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.715424, 0.69869, 3.05407e-08, -0.69869, 0.715424, -1.24392e-08, -3.05407e-08, -1.24392e-08, 1, -0.586219, 0.277548, 0)
+sorting_offset = -1.0
+flip_v = true
+modulate = Color(0.146463, 0.60183, 0.142597, 1)
+pixel_size = 0.002
+texture = ExtResource("4_2pedt")

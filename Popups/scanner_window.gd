@@ -90,8 +90,8 @@ func open():
 	start_scanner()
 
 func close():
-	super()
 	stop_scanner()
+	super()
 
 
 func _on_frequency_knob_value_changed(new_value:int) -> void:

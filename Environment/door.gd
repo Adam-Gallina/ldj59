@@ -19,6 +19,8 @@ var _locked = false
 @export var PoweredCol : Color
 @export var UnpoweredCol : Color
 
+@onready var _anim = $AnimationPlayer
+
 func _ready() -> void:
 	if StartOpen:
 		open(true)
@@ -35,6 +37,9 @@ func is_open() -> bool:
 func is_active() -> bool:
 	return PowerSource == null or PowerSource.is_active()
 
+func is_revealed() -> bool:
+	return _model.layers > 0
+
 
 func _process(_delta):
 	$Sprite3D2.modulate = PoweredCol if is_active() else UnpoweredCol
@@ -48,6 +53,7 @@ func open(override_power=false) -> bool:
 
 	if not is_open():
 		$CollisionShape3D.position = Vector3.RIGHT * OpenOffset
+		_anim.play('open')
 		_open = true
 		
 	_nav_link.navigation_layers = 1<<1
@@ -61,6 +67,7 @@ func close(override_power=false) -> bool:
 		
 	if is_open():
 		$CollisionShape3D.position = Vector3.ZERO
+		_anim.play('close')
 		_open = false
 		
 	_nav_link.navigation_layers = 0

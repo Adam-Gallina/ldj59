@@ -9,6 +9,6 @@ const DRONE_GROUP = 'Drones'
 
 const COMMAND_FUNC = 'process_command'
 
-const DRONE_ID_PREFIX = 'b'
+const DRONE_ID_PREFIX = 'm'
 const ROOM_ID_PREFIX = 'r'
 const DOOR_ID_PREFIX = 'd'

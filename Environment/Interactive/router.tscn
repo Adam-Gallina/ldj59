@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://iweseymoqhwe"]
+[gd_scene load_steps=6 format=3 uid="uid://iweseymoqhwe"]
 
 [ext_resource type="Script" uid="uid://bapip6hkbryfi" path="res://Environment/Interactive/router.gd" id="1_adyp5"]
 [ext_resource type="Texture2D" uid="uid://duj6mmdnw4gir" path="res://Icons/Images/RouterIcon.png" id="2_w4kbf"]
@@ -11,7 +11,10 @@ height = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn6st"]
 albedo_color = Color(0.490659, 0.70366, 0.70366, 1)
 
-[node name="Router" type="Node3D" groups=["Commands"]]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w4kbf"]
+radius = 0.125
+
+[node name="Router" type="StaticBody3D" groups=["Commands"]]
 script = ExtResource("1_adyp5")
 
 [node name="Model" type="MeshInstance3D" parent="."]
@@ -35,3 +38,7 @@ text = "SomeID"
 font_size = 92
 outline_size = 22
 horizontal_alignment = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_w4kbf")
