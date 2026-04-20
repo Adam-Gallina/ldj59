@@ -7,7 +7,7 @@
 
 [node name="DataWindow" type="Window"]
 title = "DATA"
-position = Vector2i(720, 210)
+position = Vector2i(740, 230)
 size = Vector2i(200, 300)
 script = ExtResource("1_iaf63")
 FileButtonScene = ExtResource("2_5pqvg")

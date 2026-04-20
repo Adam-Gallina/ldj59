@@ -8,7 +8,10 @@ var _scrolling = false
 var _last_mouse_pos : Vector3 = Vector3.ZERO
 
 func _process(delta):
-	_scrolling = Input.is_action_pressed('pan')
+	if Input.is_action_just_pressed('pan') and WindowManager._curr_window == null:
+		_scrolling = true
+	if Input.is_action_just_released('pan'):
+		_scrolling = false
 
 	if _scrolling:
 		var mp = get_viewport().get_mouse_position()
@@ -24,8 +27,8 @@ func _process(delta):
 		_last_mouse_pos = Vector3.ZERO
 
 
-	if Input.is_action_just_pressed('zoom_in'):
+	if Input.is_action_just_pressed('zoom_in') and WindowManager._curr_window == null:
 		size -= ZoomSpeed * delta
-	if Input.is_action_just_pressed('zoom_out'):
+	if Input.is_action_just_pressed('zoom_out') and WindowManager._curr_window == null:
 		size += ZoomSpeed * delta
 	size = clamp(size, MinZoom, MaxZoom)

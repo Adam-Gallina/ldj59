@@ -1,5 +1,7 @@
 extends PopupWindow
 
+signal object_found(obj)
+
 @onready var _direction_label = $Label4
 @onready var _direction : Knob = $DirectionKnob
 @onready var _angle_label = $Label
@@ -60,9 +62,14 @@ func _process(delta):
 		var dist = _last_position.distance_to(c.global_position)
 		if dist >= _last_pulse and dist <= _curr_pulse:
 			var ping = RadarPingScene.instantiate()
+			if c.has_method('get_ping_color'):
+				ping.modulate = c.get_ping_color()
+
 			get_parent().add_child(ping)
 			ping.global_position = c.global_position + Vector3.UP * PingOffset
 			ping.spawn(calc_strength() / _last_precision)
+
+		object_found.emit(c)
 
 
 func draw_radar(pos:Vector3, rotation:float, angle:float, strength:float):

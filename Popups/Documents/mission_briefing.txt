@@ -1,1 +1,8 @@
-You are trying to clean the lab of an entity which we will give you little to no information about yet still expect you to survive :)
+Ur trying to clean the lab of an entity which we will give you little to no information about yet still expect you to survive :)
+
+Oh btw the generator signal is
+    Wave: 40
+    Freq: 60
+    Amp: 100
+
+Ummm that's about it, now hurry up and secure the entity pls and ty

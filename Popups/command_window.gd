@@ -11,6 +11,9 @@ class CommandOutput:
 
 const NativeCommands : Array[String] = ['ping']
 
+signal command_raw_sent(msg)
+signal command_sent(cmd, args)
+
 
 @onready var _history : TextEdit = $CanvasLayer/Output
 var _command_history : Array[String] = []
@@ -49,10 +52,15 @@ func fill_from_history(i):
 #func process_command(_cmd:String, _args:Array[String]) -> CommandWindow.CommandOutput:
 #	return null
 func _on_command_submitted(new_text:String, override_input=true) -> void:
-	var inp = new_text.to_lower().split(' ')
+	var inp = new_text.strip_edges().to_lower().split(' ')
 	var cmd = inp[0]
 	inp.remove_at(0)
 	var args = inp
+	for i in range(args.size()-1, -1, -1):
+		if args[i] == '':
+			args.remove_at(i)
+		else:
+			args[i].strip_edges()
 
 	if override_input:
 		_input.text = ''
@@ -61,6 +69,9 @@ func _on_command_submitted(new_text:String, override_input=true) -> void:
 	_curr_command = _command_history.size()
 
 	var processed = false
+
+	command_raw_sent.emit(new_text)
+	command_sent.emit(cmd, args)
 
 	for n in get_tree().get_nodes_in_group(Constants.COMMAND_GROUP):
 		if !n.has_method(Constants.COMMAND_FUNC): pass

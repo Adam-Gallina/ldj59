@@ -17,6 +17,7 @@ var _buttons : Dictionary
 @export var DEBUG_server_always_active = false
 
 @onready var _message_notification : TextureRect = $CanvasLayer/MessageButton/TextureRect
+@onready var _data_notification : TextureRect = $CanvasLayer/LogButton/TextureRect
 @export var NotificationMaxSize : float = 1.35
 @export var NotificationSpeed : float = .75
 var _notif_elapsed = 0.
@@ -26,6 +27,9 @@ func _ready():
 	_radar_window.close()
 	_scanner_window.close()
 	DataWindow.close()
+	DataWindow.message_received.connect(_on_file_received)
+	DataWindow.message_read.connect(_on_file_read)
+	_data_notification.hide()
 
 	_message_window.close()
 	_message_window.message_received.connect(_on_message_received)
@@ -41,9 +45,6 @@ func _ready():
 
 	if DEBUG_gen_start_active:
 		await $Rooms/Room5/Generator.interaction_start(null)
-	if DEBUG_server_always_active:
-		await $Rooms/Room9/Server.interaction_start(null)
-		await $Rooms/Room9/Server.interaction_start(null)
 
 
 func reveal_start():
@@ -53,16 +54,23 @@ func reveal_start():
 
 	CommandManager.send_command('deploy m1')
 
-	_message_window.log_message('test')
+	await get_tree().create_timer(.5).timeout
+	$Tutorial.start_tutorial()
+	
+	if DEBUG_server_always_active:
+		await $Rooms/Room9/Server.interaction_start(null)
+		await $Rooms/Room9/Server.interaction_start(null)
 
 
 func _process(delta: float) -> void:
-	if _message_notification.visible:
-		_notif_elapsed += delta
+	_notif_elapsed += delta
 
-		var t = (1 + sin(_notif_elapsed * NotificationSpeed * (2 * PI))) / 2
-		var s = 1 + (NotificationMaxSize - 1) * t
+	var t = (1 + sin(_notif_elapsed * NotificationSpeed * (2 * PI))) / 2
+	var s = 1 + (NotificationMaxSize - 1) * t
+	if _message_notification.visible:
 		_message_notification.scale = Vector2(s, s)
+	if _data_notification.visible:
+		_data_notification.scale = Vector2(s, s)
 
 
 func _on_cmd_pressed():
@@ -89,6 +97,13 @@ func _on_message_received():
 
 func _on_message_read():
 	_message_notification.hide()
+
+func _on_file_received():
+	_data_notification.show()
+
+func _on_file_read():
+	_data_notification.hide()
+
 
 func _on_radar_pressed() -> void:
 	if _radar_window.is_open():

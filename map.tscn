@@ -1,9 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://dnvl36cg1a0eb"]
+[gd_scene load_steps=59 format=3 uid="uid://dnvl36cg1a0eb"]
 
 [ext_resource type="Script" uid="uid://c7eb06wmiy07" path="res://camera.gd" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://cosvoyc47r2gr" path="res://game_controller.gd" id="1_e0an3"]
 [ext_resource type="Texture2D" uid="uid://dp6qtl52sxvo8" path="res://icon.svg" id="2_6qsgm"]
 [ext_resource type="Texture2D" uid="uid://cxyrxf685rnxy" path="res://Icons/Images/Alert.png" id="3_bssq0"]
+[ext_resource type="Script" uid="uid://bfsecx50nwsee" path="res://tutorial.gd" id="3_r5om4"]
 [ext_resource type="PackedScene" uid="uid://b5fk55hpj6vdq" path="res://Popups/radar_window.tscn" id="3_sb2pt"]
 [ext_resource type="Script" uid="uid://d2cgl764k8fuo" path="res://Environment/Interactive/scannable.gd" id="4_0t07s"]
 [ext_resource type="PackedScene" uid="uid://bk0j7ke65ekgl" path="res://Environment/basic_door.tscn" id="4_p5pve"]
@@ -20,6 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://d1aovyvwl5lol" path="res://Enemies/enemy.tscn" id="16_wbpbn"]
 [ext_resource type="PackedScene" uid="uid://c8xbk6qega6s7" path="res://Environment/Interactive/blast_door.tscn" id="17_4on3e"]
 [ext_resource type="PackedScene" uid="uid://cudpe824xra7q" path="res://Environment/file.tscn" id="19_jk4ss"]
+
+[sub_resource type="Gradient" id="Gradient_r5om4"]
+colors = PackedColorArray(0.25098, 0.25098, 0.25098, 1, 0.25098, 0.25098, 0.25098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jky6x"]
+gradient = SubResource("Gradient_r5om4")
 
 [sub_resource type="Environment" id="Environment_sb2pt"]
 background_mode = 1
@@ -201,9 +208,101 @@ size = Vector2(4, 8)
 script = ExtResource("1_e0an3")
 DroneButtons = [NodePath("CanvasLayer/Drone1Button"), NodePath("CanvasLayer/Drone2Button"), NodePath("CanvasLayer/Drone3Button")]
 DroneScene = ExtResource("7_71pa8")
-DroneSpawnPos = NodePath("Rooms/Room10")
+DroneSpawnPos = NodePath("Rooms/Room1")
 DEBUG_gen_start_active = true
-DEBUG_server_always_active = true
+
+[node name="Tutorial" type="Node" parent="."]
+script = ExtResource("3_r5om4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Tutorial"]
+
+[node name="WelcomeMessage" type="TextureRect" parent="Tutorial/CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.0
+offset_top = -222.0
+offset_right = 174.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_jky6x")
+
+[node name="Label" type="Label" parent="Tutorial/CanvasLayer/WelcomeMessage"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "Welcome to M0NK3_CONTROL v2!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial/CanvasLayer/WelcomeMessage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextEdit" type="TextEdit" parent="Tutorial/CanvasLayer/WelcomeMessage/MarginContainer"]
+layout_mode = 2
+text = "[Right Click] to pan around the map
+[Scroll Wheel] to zoom in and out"
+editable = false
+wrap_mode = 1
+
+[node name="WelcomeMessage2" type="TextureRect" parent="Tutorial/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.0
+offset_top = -222.0
+offset_right = 174.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_jky6x")
+
+[node name="Label" type="Label" parent="Tutorial/CanvasLayer/WelcomeMessage2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "Welcome to M0NK3_CONTROL v2!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial/CanvasLayer/WelcomeMessage2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextEdit" type="TextEdit" parent="Tutorial/CanvasLayer/WelcomeMessage2/MarginContainer"]
+layout_mode = 2
+text = "[Left Click] on the buttons to the right to use the many helpful features found in M0NK3_CONTROL v2!
+
+Have fun M0NK3-ing around!"
+editable = false
+wrap_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -234,6 +333,17 @@ offset_bottom = -206.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "DATA"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LogButton"]
+self_modulate = Color(1, 0.214128, 0, 1)
+layout_mode = 0
+offset_left = -12.0
+offset_top = -10.0
+offset_right = 7.0
+offset_bottom = 9.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("3_bssq0")
+expand_mode = 1
 
 [node name="MessageButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 3
@@ -350,12 +460,13 @@ grow_vertical = 2
 texture = ExtResource("2_6qsgm")
 expand_mode = 1
 
-[node name="RadarWindow" parent="." node_paths=PackedStringArray("Routers") instance=ExtResource("3_sb2pt")]
+[node name="RadarWindow" parent="." node_paths=PackedStringArray("_curr_target", "Routers") instance=ExtResource("3_sb2pt")]
 visible = false
-Routers = [NodePath("Router"), NodePath("../Rooms/Room9/Router"), NodePath("../Rooms/Room12/Router")]
+_curr_target = NodePath("Router")
+Routers = [NodePath("Router"), NodePath("../Rooms/Room6/Router"), NodePath("../Rooms/Room12/Router")]
 
 [node name="Router" parent="RadarWindow" instance=ExtResource("13_2wwcf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60228, 0, -1.63309)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48498, 0, -1.47323)
 RouterID = "elev"
 
 [node name="Scannable" type="Node" parent="RadarWindow/Router" groups=["Scannable"]]
@@ -586,7 +697,7 @@ transform = Transform3D(1, 3.61999e-06, 1.19209e-07, -3.61999e-06, 1, 3.61999e-0
 transform = Transform3D(1, 3.61999e-06, 1.19209e-07, -3.61999e-06, 1, 3.61999e-06, -1.19209e-07, -3.61999e-06, 1, 0, 0, -10)
 
 [node name="BasicWall149" parent="Walls" instance=ExtResource("4_urblq")]
-transform = Transform3D(1, 3.61999e-06, 1.19209e-07, -3.61999e-06, 1, 3.61999e-06, -1.19209e-07, -3.61999e-06, 1, 1, 0, -10)
+transform = Transform3D(1, 3.61999e-06, 1.19209e-07, -3.61999e-06, 1, 3.61999e-06, -1.19209e-07, -3.61999e-06, 1, 2, 0, -10)
 
 [node name="BasicWall151" parent="Walls" instance=ExtResource("4_urblq")]
 transform = Transform3D(1, 3.61999e-06, 1.19209e-07, -3.61999e-06, 1, 3.61999e-06, -1.19209e-07, -3.61999e-06, 1, 3, 0, -10)
@@ -1487,7 +1598,7 @@ DoorID = "d1"
 
 [node name="Door5" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
-DoorID = "d30"
+DoorID = "d7"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
 
 [node name="Door11" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
@@ -1506,17 +1617,16 @@ PowerSource = NodePath("../../Rooms/Room5/Generator")
 [node name="Door12" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, -8)
 DoorID = "d6"
-StartOpen = true
 PowerSource = NodePath("../../Rooms/Room5/Generator")
 
 [node name="Door15" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -10)
 DoorID = "d60"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
 
 [node name="Door8" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -18)
-DoorID = "d7"
+DoorID = "d30"
 PowerSource = NodePath("../../Rooms/Room5/Generator")
 
 [node name="Door9" parent="Doors" node_paths=PackedStringArray("PowerSource") instance=ExtResource("4_p5pve")]
@@ -1593,6 +1703,9 @@ PowerSource = NodePath("../../Rooms/Room5/Generator")
 navigation_mesh = SubResource("NavigationMesh_0t07s")
 RoomID = "r1"
 
+[node name="Sprite3D" parent="Rooms/Room1" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 1.10473)
+
 [node name="Floor" parent="Rooms/Room1" instance=ExtResource("7_05x41")]
 mesh = SubResource("PlaneMesh_6qsgm")
 skeleton = NodePath("../../..")
@@ -1661,6 +1774,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
 mesh = SubResource("PlaneMesh_ooc2g")
 skeleton = NodePath("../../..")
 
+[node name="Router" parent="Rooms/Room6" instance=ExtResource("13_2wwcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52997, 0.007267, -1.45434)
+RouterID = "sec"
+
 [node name="Room7" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
 navigation_mesh = SubResource("NavigationMesh_wbpbn")
@@ -1688,11 +1805,6 @@ RoomID = "r9"
 [node name="Floor" parent="Rooms/Room9" instance=ExtResource("7_05x41")]
 mesh = SubResource("PlaneMesh_wbpbn")
 skeleton = NodePath("../../..")
-
-[node name="Router" parent="Rooms/Room9" node_paths=PackedStringArray("PowerSource") instance=ExtResource("13_2wwcf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.71579, 0.007267, -1.69971)
-RouterID = "sec"
-PowerSource = NodePath("../Server")
 
 [node name="Server" parent="Rooms/Room9" node_paths=PackedStringArray("ScanZones", "ScanDoors") instance=ExtResource("14_ooc2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
@@ -1759,12 +1871,6 @@ Door = NodePath("../BlastDoor")
 
 [node name="BlastDoor" parent="Rooms/Room10" instance=ExtResource("17_4on3e")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, -1)
-
-[node name="File" parent="Rooms/Room10" instance=ExtResource("19_jk4ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28831, 0, 1.24492)
-skeleton = NodePath("../../Room5")
-filename = "M0NK3_ADV.txt"
-filepath = "res://Popups/Documents/advanced_commands.txt"
 
 [node name="Room11" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
@@ -1864,11 +1970,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 mesh = SubResource("PlaneMesh_n2jt6")
 skeleton = NodePath("../../..")
 
+[node name="File2" parent="Rooms/Room17" instance=ExtResource("19_jk4ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.631068, 0, 9.48738)
+skeleton = NodePath("../../Room5")
+filename = "ATTN_MORON.txt"
+filepath = "res://Popups/Documents/mission_briefing.txt"
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("16_wbpbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19178, 0, -19.2262)
+
+[node name="Enemy2" parent="." instance=ExtResource("16_wbpbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476371, 0, -7.88002)
 
 [connection signal="pressed" from="CanvasLayer/CommandButton" to="." method="_on_cmd_pressed"]
 [connection signal="pressed" from="CanvasLayer/LogButton" to="." method="_on_data_pressed"]
@@ -1881,3 +1996,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19178, 0, -19.2262)
 [connection signal="body_exited" from="Rooms/Room9/Server/Door17Area3D" to="Rooms/Room9/Server" method="_on_body_exited" binds= [1]]
 [connection signal="body_entered" from="Rooms/Room9/Server/Door18Area3D" to="Rooms/Room9/Server" method="_on_body_entered" binds= [2]]
 [connection signal="body_exited" from="Rooms/Room9/Server/Door18Area3D" to="Rooms/Room9/Server" method="_on_body_exited" binds= [2]]
+
+[editable path="Rooms/Room1"]

@@ -16,6 +16,8 @@ albedo_color = Color(0, 0.699931, 1, 1)
 [node name="Door" type="AnimatableBody3D" groups=["Doors"]]
 script = ExtResource("1_ba8gm")
 OpenOffset = 0.95
+PoweredCol = Color(0.301961, 0.411765, 0.411765, 1)
+UnpoweredCol = Color(0.411765, 0.350577, 0.301961, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

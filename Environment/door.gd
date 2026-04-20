@@ -8,12 +8,16 @@ class_name DoorBase
 
 @export var StartOpen = false
 var _open = false
+var _locked = false
 
 @export var CanScan = true
 
 @onready var _nav_link : NavigationLink3D = $NavigationLink3D
 
 @export var PowerSource : Node3D
+
+@export var PoweredCol : Color
+@export var UnpoweredCol : Color
 
 func _ready() -> void:
 	if StartOpen:
@@ -31,11 +35,19 @@ func is_open() -> bool:
 func is_active() -> bool:
 	return PowerSource == null or PowerSource.is_active()
 
+
+func _process(_delta):
+	$Sprite3D2.modulate = PoweredCol if is_active() else UnpoweredCol
+	$Label3D/Sprite3D.modulate = PoweredCol if is_active() else UnpoweredCol
+
+
 func open(override_power=false) -> bool:
 	if not is_active() and not override_power: return false
 
+	if _locked: return false
+
 	if not is_open():
-		_model.position = Vector3.RIGHT * OpenOffset
+		$CollisionShape3D.position = Vector3.RIGHT * OpenOffset
 		_open = true
 		
 	_nav_link.navigation_layers = 1<<1
@@ -44,9 +56,11 @@ func open(override_power=false) -> bool:
 
 func close(override_power=false) -> bool:
 	if not is_active() and not override_power: return false
+
+	if _locked: return false
 		
 	if is_open():
-		_model.position = Vector3.ZERO
+		$CollisionShape3D.position = Vector3.ZERO
 		_open = false
 		
 	_nav_link.navigation_layers = 0
@@ -54,14 +68,27 @@ func close(override_power=false) -> bool:
 	return true
 
 
+func lock(override_power=false) -> bool:
+	if not is_active() and not override_power: return false
+
+	_locked = true
+	return true
+
+func unlock(override_power=false) -> bool:
+	if not is_active() and not override_power: return false
+
+	_locked = false
+	return true
+
+
 func hide_model():
 	if _label != null:
 		_label.hide()
 	$Sprite3D2.hide()
-	get_node('%Model').layers = 0
+	_model.layers = 0
 
 func reveal_model():
 	if _label != null:
 		_label.show()
 	$Sprite3D2.show()
-	get_node('%Model').layers = 1
+	_model.layers = 1

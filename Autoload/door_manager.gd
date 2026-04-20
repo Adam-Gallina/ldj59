@@ -150,7 +150,7 @@ func process_command(cmd:String, args:Array[String]):
 			if _doors.get(a):
 				if _doors[a].open():
 					succeeded += 1
-					for r in _door_rooms[_doors[cmd]]:
+					for r in _door_rooms[_doors[a]]:
 						reveal_room(r)
 				else:
 					output.append('{0} failed to open'.format([a]))
@@ -165,6 +165,28 @@ func process_command(cmd:String, args:Array[String]):
 					succeeded += 1
 				else:
 					output.append('{0} failed to close'.format([a]))
+			else:
+				output.append('Unrecognized door_id \'' + a + '\'')
+	elif cmd == 'lock':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['lock requires at least one argument (lock doorID[s]'])
+		for a in args:
+			if _doors.get(a):
+				if _doors[a].lock():
+					succeeded += 1
+				else:
+					output.append('{0} failed to lock'.format([a]))
+			else:
+				output.append('Unrecognized door_id \'' + a + '\'')
+	elif cmd == 'unlock':
+		if args.size() == 0:
+			return CommandWindow.CommandOutput.new(false, ['unlock requires at least one argument (unlock doorID[s]'])
+		for a in args:
+			if _doors.get(a):
+				if _doors[a].unlock():
+					succeeded += 1
+				else:
+					output.append('{0} failed to lock'.format([a]))
 			else:
 				output.append('Unrecognized door_id \'' + a + '\'')
 	elif cmd == 'doors':

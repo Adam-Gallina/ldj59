@@ -21,6 +21,9 @@ var _drone_targets = []
 
 @onready var model = get_node('%Model')
 
+@export var PingColor = Color.RED
+func get_ping_color() -> Color: return PingColor
+
 
 func _ready() -> void:
 	_nav_agent.velocity_computed.connect(_on_velocity_calculated)
