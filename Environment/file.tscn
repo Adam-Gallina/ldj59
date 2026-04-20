@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cudpe824xra7q"]
+[gd_scene load_steps=4 format=3 uid="uid://cudpe824xra7q"]
 
 [ext_resource type="Script" uid="uid://ctrxitdxmda6g" path="res://Environment/Interactive/file.gd" id="1_t2sp1"]
 [ext_resource type="Texture2D" uid="uid://bmc18hrqyneks" path="res://Icons/Images/FileIcon.png" id="2_ey25g"]
 
-[node name="File" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bgsx0"]
+radius = 0.125
+
+[node name="File" type="StaticBody3D"]
+collision_layer = 9
+collision_mask = 0
 script = ExtResource("1_t2sp1")
 ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 Descriptor = "File"
 InteractOneShot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_bgsx0")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)

@@ -1696,9 +1696,6 @@ PowerSource = NodePath("../../Rooms/Room5/Generator")
 navigation_mesh = SubResource("NavigationMesh_0t07s")
 RoomID = "r1"
 
-[node name="Sprite3D" parent="Rooms/Room1" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 1.10473)
-
 [node name="Floor" parent="Rooms/Room1" instance=ExtResource("7_05x41")]
 mesh = SubResource("PlaneMesh_6qsgm")
 skeleton = NodePath("../../..")
@@ -1775,6 +1772,7 @@ RouterID = "sec"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.444439, 0, -1.45865)
 filename = "StillWeird.txt"
 filepath = "res://Popups/Documents/weird_signals.txt"
+ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 
 [node name="Room7" parent="Rooms" instance=ExtResource("8_sb2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
@@ -1986,6 +1984,7 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.631068, 0, 9.48738)
 filename = "ATTN_MORON.txt"
 filepath = "res://Popups/Documents/mission_briefing.txt"
+ScannedColor = Color(0.329412, 0.329412, 0.329412, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
@@ -2007,5 +2006,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476371, 0, -7.88002)
 [connection signal="body_exited" from="Rooms/Room9/Server/Door17Area3D" to="Rooms/Room9/Server" method="_on_body_exited" binds= [1]]
 [connection signal="body_entered" from="Rooms/Room9/Server/Door18Area3D" to="Rooms/Room9/Server" method="_on_body_entered" binds= [2]]
 [connection signal="body_exited" from="Rooms/Room9/Server/Door18Area3D" to="Rooms/Room9/Server" method="_on_body_exited" binds= [2]]
-
-[editable path="Rooms/Room1"]

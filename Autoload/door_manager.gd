@@ -9,6 +9,7 @@ func get_rooms() -> Dictionary: return _rooms
 
 ## { room RID : [bordered walls] }
 var _room_walls : Dictionary = {}
+var _room_objects : Dictionary = {}
 ## { door : [bordered room RIDs] }
 var _door_rooms : Dictionary = {}
 func get_rooms_by_door(door):
@@ -54,6 +55,7 @@ func load_walls():
 	var regions = NavigationServer3D.map_get_regions(m)
 	for r in regions:
 		_room_walls[r] = []
+		_room_objects[r] = []
 
 	for w in walls:
 		var model = w.get_node('%Model')
@@ -90,16 +92,22 @@ func load_walls():
 		_room_walls[rid].append(room)
 		hide_model(room)
 		for n in room.get_children():
-			_room_walls[rid].append(n)
+			_room_objects[rid].append(n)
 			hide_model(n)
 
 
 	walls_loaded.emit()
 
 
-func reveal_room(rid):
+func reveal_room(rid, full_reveal=2):
 	for w in _room_walls[rid]:
-		reveal_model(w)
+		reveal_model(w, full_reveal)
+	if full_reveal > 0:
+		for o in _room_objects[rid]:
+			if full_reveal == 1 and o.name.to_lower().contains('floor'):
+				reveal_model(o, full_reveal)
+			elif full_reveal == 2:
+				reveal_model(o)
 	if rid not in _revealed_rooms:
 		_revealed_rooms.append(rid)
 
@@ -112,10 +120,10 @@ func hide_model(model):
 	else:
 		model.hide_model()
 
-func reveal_model(model):
+func reveal_model(model, _full_reveal=2):
 	if model is VisualInstance3D:
-		model.layers = 1
-	else:
+		model.layers |= 1
+	elif model.has_method('reveal_model'):
 		model.reveal_model()
 
 func model_is_revealed(model):
@@ -137,7 +145,7 @@ func process_command(cmd:String, args:Array[String]):
 						continue
 
 					for r in _door_rooms[_doors[a]]:
-						reveal_room(r)
+						reveal_room(r, 0)
 					succeeded += 1
 				else:
 					output.append('{0} failed to scan'.format([a]))
@@ -151,7 +159,7 @@ func process_command(cmd:String, args:Array[String]):
 				if _doors[a].open():
 					succeeded += 1
 					for r in _door_rooms[_doors[a]]:
-						reveal_room(r)
+						reveal_room(r, 0)
 				else:
 					output.append('{0} failed to open'.format([a]))
 			else:
@@ -191,7 +199,7 @@ func process_command(cmd:String, args:Array[String]):
 				output.append('Unrecognized door_id \'' + a + '\'')
 	elif cmd == 'doors':
 		for r in _room_walls.keys():
-			reveal_room(r)
+			reveal_room(r, 2)
 		return CommandWindow.CommandOutput.new(true)
 	elif _doors.get(cmd):
 		if _doors[cmd].is_open():
@@ -203,7 +211,7 @@ func process_command(cmd:String, args:Array[String]):
 			if _doors[cmd].open():
 				succeeded += 1
 				for r in _door_rooms[_doors[cmd]]:
-					reveal_room(r)
+					reveal_room(r, 0)
 			else:
 				output.append('{0} failed to open'.format([cmd]))
 	else:

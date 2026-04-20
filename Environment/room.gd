@@ -10,6 +10,8 @@ func _ready() -> void:
 
 func hide_model():
 	$Sprite3D.hide()
+	$Sprite3D.layers = 0
 
 func reveal_model():
 	$Sprite3D.show()
+	$Sprite3D.layers = 1

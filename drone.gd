@@ -11,6 +11,10 @@ signal destroyed()
 
 var _curr_interaction : InteractiveBase
 
+var _scans = []
+@export var DoorRoomScanDist = 1
+@onready var _ray = $Area3D/RayCast3D
+
 func _ready():
 	_control_window.hide()
 	_control_window.title = DroneID
@@ -25,6 +29,18 @@ func _physics_process(_delta):
 		_nav_agent.set_velocity(next_v)
 	else:
 		_on_velocity_calculated(next_v)
+
+	for s in _scans:
+		var dist = global_position.distance_to(s.global_position)
+		_ray.target_position = s.global_position - global_position
+		_ray.force_raycast_update()
+		if not _ray.is_colliding() or _ray.get_collider() == s:
+			if s.is_in_group(Constants.DOOR_GROUP) and dist <= DoorRoomScanDist and s.is_open():
+				for r in DoorManager.get_rooms_by_door(s):
+					DoorManager.reveal_room(r, 1)
+			else:
+				DoorManager.reveal_model(s, 2)
+
 	
 func _on_velocity_calculated(safe_v : Vector3):
 	velocity = safe_v
@@ -158,3 +174,10 @@ func process_command(cmd:String, args:Array[String]):
 		return CommandWindow.CommandOutput.new(true, ['{0}: Goodbye o/'.format([DroneID])])
 	
 	return CommandWindow.CommandOutput.new(false, [DroneID + ': Unknown command'])
+
+
+func _on_area_3d_body_entered(body:Node3D) -> void:
+	_scans.append(body)
+
+func _on_area_3d_body_exited(body:Node3D) -> void:
+	_scans.erase(body)

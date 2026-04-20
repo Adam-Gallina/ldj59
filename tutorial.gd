@@ -23,8 +23,6 @@ func delay_message(delay, message):
 
 
 func start_tutorial():
-	monsters()
-	return
 	if DEBUG_fast_forward:
 		ping()
 		return
