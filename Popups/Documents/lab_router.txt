@@ -1,6 +1,14 @@
 @Closer
 
-The lab routers been acting strange lately, and keeps changing its ID. 
+The lab router's been acting strange lately, and keeps changing its ID. 
 
-I was able to find it on the server by running "routers", and then sending a reboot to the ID to get it online again.
+I was able to find it by interfacing with the server and running "routers", then sending a reboot to the new ID to get it online again.
 I attached the docs below in case they didn't train you on that
+
+
+-----------------------------
+
+**Commands require interfacing with the server**
+
+routers: List all router IDs on network and status of the router
+reboot <router ID>: Send a reboot to the router

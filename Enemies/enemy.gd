@@ -20,6 +20,7 @@ var _drone_targets = []
 @export var VisibleRange = 5.0
 
 @onready var model = get_node('%Model')
+@onready var icon = $CollisionShape3D/Sprite3D
 
 @export var PingColor = Color.RED
 func get_ping_color() -> Color: return PingColor
@@ -60,12 +61,15 @@ func _physics_process(_delta):
 			$RayCast3D.target_position = d.global_position - global_position
 			$RayCast3D.force_raycast_update()
 			if $RayCast3D.is_colliding():
-				model.layers = 0b0010
+				#model.layers = 0b0010
+				icon.hide()
 			else:
-				model.layers = 0b0011
+				icon.show()
+				#model.layers = 0b0011
 
 	if _drone_targets.size() == 0:
-		model.layers = 0b0010
+		#model.layers = 0b0010
+		icon.hide()
 
 	
 func _on_velocity_calculated(safe_v : Vector3):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://iweseymoqhwe"]
+[gd_scene load_steps=7 format=3 uid="uid://iweseymoqhwe"]
 
 [ext_resource type="Script" uid="uid://bapip6hkbryfi" path="res://Environment/Interactive/router.gd" id="1_adyp5"]
 [ext_resource type="Texture2D" uid="uid://duj6mmdnw4gir" path="res://Icons/Images/RouterIcon.png" id="2_w4kbf"]
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="3_qn6st"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_w4kbf"]
 top_radius = 0.125
@@ -35,6 +36,7 @@ sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0.3925, 0.662928, 0.639412, 1)
 text = "SomeID"
+font = ExtResource("3_qn6st")
 font_size = 92
 outline_size = 22
 horizontal_alignment = 0

@@ -3,7 +3,7 @@
 
 
 [X] Rewrite frequency of secure key because I lost it
-    Freq: 30 Amp:■■■■ Wave: 65
+    Frequency: 30 Amplitude:■■■■ Wavelength: 65
 [ ] Figure out a better system to contain ■■■■■■■■■■■■
 
 

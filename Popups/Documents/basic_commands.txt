@@ -1,3 +1,9 @@
-<bot ID> move <ID>: Move to the provided ID. Can be used to move to rooms, doors, other bots, etc
+<M0NK3 ID> move <ID>: Move to the provided ID. Can be used to move to rooms, doors, other M0NK3s, etc
 
-<bot ID> interface: Connect and interact with the nearest valid target
+<M0NK3 ID> interface: Connect and interact with the nearest valid target
+
+<M0NK3 ID> download: Scan and download the nearest valid file
+
+<M0NK3 ID> control: Take basic manual control of a M0NK3
+
+deploy <new M0NK3 ID>: Request a new M0NK3

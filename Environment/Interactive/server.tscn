@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://cqes51hoed078"]
+[gd_scene load_steps=13 format=4 uid="uid://cqes51hoed078"]
 
 [ext_resource type="Script" uid="uid://hq7whw3d8vun" path="res://Environment/Interactive/server.gd" id="1_tjcjb"]
 [ext_resource type="PackedScene" uid="uid://duwf6pfc8wr5i" path="res://drone.tscn" id="2_sc8gk"]
 [ext_resource type="Texture2D" uid="uid://4q1oxkesn1qa" path="res://Icons/Images/InteractIcon.png" id="3_58cnx"]
 [ext_resource type="Texture2D" uid="uid://bf7d44hvpmeol" path="res://Icons/Images/Indicator.png" id="4_2pedt"]
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="4_qrptu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjcjb"]
 size = Vector3(0.75, 0.5, 0.75)
@@ -167,6 +168,7 @@ sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0.0798981, 0.432113, 0.0768085, 1)
 text = "Server"
+font = ExtResource("4_qrptu")
 font_size = 72
 outline_size = 22
 horizontal_alignment = 0

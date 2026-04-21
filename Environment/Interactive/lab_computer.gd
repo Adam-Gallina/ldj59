@@ -1,9 +1,11 @@
 extends InteractiveBase
 
+signal boom
+
 @onready var ComputerWindow : PopupWindow = $Window
 @onready var password_window : Control = $Window/Password
 @onready var password_prompt : Label = $Window/Password/Label2
-@onready var password_input : TextEdit = $Window/Password/TextEdit
+@onready var password_input : LineEdit = $Window/Password/LineEdit
 
 @onready var download_window : Control = $Window/Download
 @onready var download_button : Control = $Window/Download/Button2
@@ -67,3 +69,8 @@ func _on_check_box_toggled(toggled_on:bool) -> void:
 
 func _on_button_2_pressed() -> void:
 	_show_error = true
+	boom.emit()
+
+
+func close() -> void:
+	ComputerWindow.close()

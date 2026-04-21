@@ -24,6 +24,12 @@ var _drone_scanners : Array[DroneScan] = []
 var _active = false
 var _t = 0
 
+func _ready():
+	_on_frequency_knob_value_changed(_frequency.Value)
+	_on_amplitude_knob_value_changed(_amplitude.Value)
+	_on_wavelength_knob_value_changed(_wavelength.Value)
+
+
 func _process(delta: float) -> void:
 	if not _active: return
 

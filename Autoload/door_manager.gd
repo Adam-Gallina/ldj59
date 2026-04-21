@@ -117,14 +117,18 @@ func room_is_revealed(rid):
 func hide_model(model):
 	if model is VisualInstance3D:
 		model.layers = 0
-	else:
+	elif model.has_method('hide_model'):
 		model.hide_model()
+	elif model.get_node_or_null('%Model'):
+		model.get_node('%Model').layers = 0
 
 func reveal_model(model, _full_reveal=2):
 	if model is VisualInstance3D:
 		model.layers |= 1
 	elif model.has_method('reveal_model'):
 		model.reveal_model()
+	elif model.get_node_or_null('%Model'):
+		model.get_node('%Model').layers |= 1
 
 func model_is_revealed(model):
 	return model.layers > 0

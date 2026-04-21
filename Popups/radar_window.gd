@@ -32,6 +32,8 @@ var _routers : Dictionary = {}
 func _ready() -> void:
 	for r in Routers:
 		_routers[r.RouterID] = r
+		
+	_target_label.text = 'Scanning from: ' + _curr_target.RouterID
 
 
 func _process(delta):

@@ -13,106 +13,6 @@ size = Vector3(3, 2, 0.2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0phs7"]
 albedo_color = Color(0, 0.699931, 1, 1)
 
-[sub_resource type="Animation" id="Animation_03cci"]
-resource_name = "open"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D/Sprite3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 3.14159)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label3D/Sprite3D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -3.14159)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite3D2:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.85),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite3D2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.84, 0.85),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.316654, 2.5, -1.00078e-07), Vector3(0.316654, 2.5, -1.00078e-07), Vector3(1.56934, 2.5, -3.19106e-07)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite3D2:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.35, 0.5, 0.65, 0.7, 0.85, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite3D3:flip_h")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.85),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite3D3:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.35, 0.5, 0.65, 0.7, 0.85, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite3D3:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.84, 0.85),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.294383, 2.5, 6.7591e-09), Vector3(-0.294383, 2.5, 6.7591e-09), Vector3(-1.569, 2.5, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_eeuam"]
 length = 0.001
 tracks/0/type = "value"
@@ -161,7 +61,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.316654, 2.5, -1.00078e-07)]
+"values": [Vector3(0.317, 2.117, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -209,7 +109,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.294383, 2.5, 6.7591e-09)]
+"values": [Vector3(-0.294, 2.117, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_l7gpv"]
@@ -261,7 +161,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.84, 0.85),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(1.56934, 2.5, -3.19106e-07), Vector3(1.56934, 2.5, -3.19106e-07), Vector3(0.316654, 2.5, -1.00078e-07)]
+"values": [Vector3(1.569, 2.117, 0), Vector3(1.569, 2.117, 0), Vector3(0.317, 2.117, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -309,7 +209,107 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.84, 0.85),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-1.569, 2.5, 0), Vector3(-1.569, 2.5, 0), Vector3(-0.294383, 2.5, 6.7591e-09)]
+"values": [Vector3(-1.569, 2.117, 0), Vector3(-1.569, 2.117, 0), Vector3(-0.294, 2.117, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_03cci"]
+resource_name = "open"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D/Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 3.14159)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label3D/Sprite3D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -3.14159)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D2:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.84, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.317, 2.117, 0), Vector3(0.317, 2.117, 0), Vector3(1.569, 2.117, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite3D2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.35, 0.5, 0.65, 0.7, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite3D3:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite3D3:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.35, 0.5, 0.65, 0.7, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1), Color(0.303357, 0.411747, 0.411747, 1), Color(0.301961, 0.411765, 0.411765, 0.47451), Color(0.303357, 0.411747, 0.411747, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite3D3:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.84, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.294, 2.117, 0), Vector3(-0.294, 2.117, 0), Vector3(-1.569, 2.117, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l7gpv"]
@@ -341,7 +341,7 @@ start_position = Vector3(0, 0, 1)
 end_position = Vector3(0, 0, -1)
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.316654, 2.5, -1.00078e-07)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.317, 2.117, 0)
 sorting_offset = -1.0
 offset = Vector2(300, 0)
 modulate = Color(0.303357, 0.411747, 0.411747, 1)
@@ -349,7 +349,7 @@ pixel_size = 0.0015
 texture = ExtResource("2_eeuam")
 
 [node name="Sprite3D3" type="Sprite3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, -0.294383, 2.5, 6.7591e-09)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, -0.294, 2.117, 0)
 sorting_offset = -1.0
 offset = Vector2(300, 0)
 modulate = Color(0.303357, 0.411747, 0.411747, 1)
@@ -357,7 +357,7 @@ pixel_size = 0.0015
 texture = ExtResource("2_eeuam")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.46813, 2.5, -1.14903e-07)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.468, 2.117, 0)
 sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 font_size = 52

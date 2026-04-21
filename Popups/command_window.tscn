@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cs3gtsyc6b0yp"]
+[gd_scene load_steps=3 format=3 uid="uid://cs3gtsyc6b0yp"]
 
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_6syc4"]
 [ext_resource type="Script" uid="uid://ma5pbphuaqkb" path="res://Popups/command_window.gd" id="1_d8106"]
 
 [node name="CommandWindow" type="Window"]
 title = "CMD "
 position = Vector2i(45, 55)
 size = Vector2i(200, 200)
+theme_override_fonts/title_font = ExtResource("1_6syc4")
 script = ExtResource("1_d8106")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -17,6 +19,7 @@ anchor_bottom = 1.0
 offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_6syc4")
 text = "/// Drone control init"
 editable = false
 context_menu_enabled = false
@@ -30,6 +33,7 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_6syc4")
 placeholder_text = "Enter Command"
 keep_editing_on_text_submit = true
 

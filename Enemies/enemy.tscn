@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1aovyvwl5lol"]
+[gd_scene load_steps=8 format=3 uid="uid://d1aovyvwl5lol"]
 
 [ext_resource type="Script" uid="uid://sxx60h1nbyki" path="res://Enemies/enemy.gd" id="1_3ih25"]
+[ext_resource type="Texture2D" uid="uid://crmmc666iwxa8" path="res://Drone/grumpy.png" id="2_47qgu"]
+[ext_resource type="Texture2D" uid="uid://djfo8152oofxe" path="res://Icons/Images/PingOutline.png" id="3_572h1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_chnrf"]
 radius = 0.4
@@ -37,10 +39,26 @@ shape = SubResource("CapsuleShape3D_chnrf")
 
 [node name="Model" type="MeshInstance3D" parent="CollisionShape3D"]
 unique_name_in_owner = true
+visible = false
 layers = 2
 mesh = SubResource("BoxMesh_chnrf")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3ih25")
+
+[node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+layers = 4
+offset = Vector2(0, 19.045)
+modulate = Color(0.656139, 0, 0, 1)
+pixel_size = 0.005
+texture = ExtResource("2_47qgu")
+
+[node name="Sprite3D2" type="Sprite3D" parent="CollisionShape3D/Sprite3D"]
+layers = 4
+offset = Vector2(0, 19.045)
+modulate = Color(0.642562, 0.642562, 0.642562, 1)
+pixel_size = 0.006
+texture = ExtResource("3_572h1")
 
 [node name="MoveTimer" type="Timer" parent="."]
 one_shot = true

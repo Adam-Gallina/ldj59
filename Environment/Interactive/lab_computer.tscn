@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://dymdjkeg73suf"]
+[gd_scene load_steps=16 format=4 uid="uid://dymdjkeg73suf"]
 
 [ext_resource type="Script" uid="uid://bf1pww85it0tt" path="res://Environment/Interactive/lab_computer.gd" id="1_ei0q3"]
 [ext_resource type="Texture2D" uid="uid://4q1oxkesn1qa" path="res://Icons/Images/InteractIcon.png" id="2_ei0q3"]
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="3_imy5r"]
 [ext_resource type="Texture2D" uid="uid://bf7d44hvpmeol" path="res://Icons/Images/Indicator.png" id="3_ixl5q"]
 [ext_resource type="Script" uid="uid://blo4xe0qum1d6" path="res://Popups/computer_window.gd" id="4_ixl5q"]
 [ext_resource type="Texture2D" uid="uid://cxyrxf685rnxy" path="res://Icons/Images/Alert.png" id="5_ixl5q"]
@@ -120,6 +121,7 @@ sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0.0798981, 0.432113, 0.0768085, 1)
 text = "Computer"
+font = ExtResource("3_imy5r")
 font_size = 72
 outline_size = 22
 horizontal_alignment = 0
@@ -136,6 +138,7 @@ title = "Secret Lab Computer"
 initial_position = 1
 size = Vector2i(350, 200)
 visible = false
+theme_override_fonts/title_font = ExtResource("3_imy5r")
 script = ExtResource("4_ixl5q")
 
 [node name="Password" type="Control" parent="Window"]
@@ -153,6 +156,7 @@ anchor_right = 1.0
 offset_top = 15.0
 offset_bottom = 64.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "Emergency situation detected. Computer automatically locked"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -167,10 +171,11 @@ offset_top = -24.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "Enter password to continue"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="Window/Password"]
+[node name="LineEdit" type="LineEdit" parent="Window/Password"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -182,10 +187,10 @@ offset_right = -40.0
 offset_bottom = -54.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_imy5r")
 placeholder_text = "Password"
 context_menu_enabled = false
 emoji_menu_enabled = false
-wrap_mode = 1
 
 [node name="Button" type="Button" parent="Window/Password"]
 layout_mode = 1
@@ -200,6 +205,7 @@ offset_right = 31.5
 offset_bottom = -17.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "Submit"
 
 [node name="Download" type="Control" parent="Window"]
@@ -218,6 +224,7 @@ anchor_right = 1.0
 offset_top = 48.0
 offset_bottom = 97.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "52921 secure files found"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -237,6 +244,7 @@ offset_left = -9.0
 offset_right = 162.0
 offset_bottom = 24.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "I am not a robot"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -254,6 +262,7 @@ offset_right = 43.5
 offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_imy5r")
 disabled = true
 text = "Download"
 
@@ -293,6 +302,7 @@ expand_mode = 1
 [node name="Label" type="Label" parent="Window/Download/TextureRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_imy5r")
 text = "Robot download detected
 Initiating self destruct"
 horizontal_alignment = 1
@@ -314,6 +324,8 @@ texture = ExtResource("5_ixl5q")
 expand_mode = 1
 stretch_mode = 4
 
+[connection signal="close_requested" from="Window" to="." method="close"]
+[connection signal="text_submitted" from="Window/Password/LineEdit" to="." method="_on_button_pressed" unbinds=1]
 [connection signal="pressed" from="Window/Password/Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="Window/Download/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="Window/Download/Button2" to="." method="_on_button_2_pressed"]

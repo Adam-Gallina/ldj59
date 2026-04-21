@@ -1,9 +1,12 @@
-[gd_scene format=3 uid="uid://djxqixlr73ckx"]
+[gd_scene load_steps=2 format=3 uid="uid://djxqixlr73ckx"]
+
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_lpo2l"]
 
 [node name="FileButton" type="Button"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_lpo2l")
 text = "SOME_FILE.txt"
 alignment = 0

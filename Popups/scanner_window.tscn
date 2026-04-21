@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cli381degrfda"]
+[gd_scene load_steps=10 format=3 uid="uid://cli381degrfda"]
 
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_e8wf5"]
 [ext_resource type="PackedScene" uid="uid://2lsysx0ihdq3" path="res://UI/knob.tscn" id="1_kisy2"]
 [ext_resource type="Script" uid="uid://jekpm6m81gmi" path="res://Popups/scanner_window.gd" id="1_xhnyg"]
 [ext_resource type="Texture2D" uid="uid://cemtr0cl5dvfl" path="res://Popups/Images/Metal046B_1K-JPG_Color.jpg" id="2_684bp"]
@@ -19,6 +20,7 @@ title = "SCANNER"
 position = Vector2i(920, 36)
 size = Vector2i(150, 535)
 unresizable = true
+theme_override_fonts/title_font = ExtResource("1_e8wf5")
 script = ExtResource("1_xhnyg")
 ScannerEffects = [NodePath("ScannerPulse"), NodePath("ScannerPulse2"), NodePath("ScannerPulse3"), NodePath("ScannerPulse4")]
 
@@ -55,6 +57,7 @@ offset_bottom = -167.85
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_e8wf5")
 theme_override_font_sizes/font_size = 31
 text = "FREQ: 150"
 
@@ -91,6 +94,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_e8wf5")
 text = "AMP: 150"
 
 [node name="AmplitudeKnob" parent="Control/TextureRect3" instance=ExtResource("1_kisy2")]
@@ -126,6 +130,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_e8wf5")
 text = "WAVE: 150"
 
 [node name="WavelengthKnob" parent="Control/TextureRect4" instance=ExtResource("1_kisy2")]

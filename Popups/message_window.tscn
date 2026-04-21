@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4bu58rb8rc7g"]
+[gd_scene load_steps=3 format=3 uid="uid://b4bu58rb8rc7g"]
 
 [ext_resource type="Script" uid="uid://m0n4hc1i22wq" path="res://Popups/message_window.gd" id="1_1k3kn"]
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_lrooh"]
 
 [node name="MessageWindow" type="Window"]
 title = "MSG"
 position = Vector2i(720, 210)
 size = Vector2i(300, 200)
+theme_override_fonts/title_font = ExtResource("1_lrooh")
 script = ExtResource("1_1k3kn")
 
 [node name="TextEdit" type="TextEdit" parent="."]
@@ -14,8 +16,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_lrooh")
 text = "~ Chat started with TONY TORIAL"
 editable = false
 wrap_mode = 1
+
+[node name="TypingLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -147.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_lrooh")
+text = "Tony is typing..."
 
 [connection signal="close_requested" from="." to="." method="close"]

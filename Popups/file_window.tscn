@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dboioetadrk0"]
+[gd_scene load_steps=3 format=3 uid="uid://dboioetadrk0"]
 
 [ext_resource type="Script" uid="uid://bym4ymjm2jyf7" path="res://Popups/file_window.gd" id="1_8t6u0"]
+[ext_resource type="FontFile" uid="uid://b5x7c83v5c62t" path="res://Fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_kob81"]
 
 [node name="FileWindow" type="Window"]
 auto_translate_mode = 1
 position = Vector2i(285, 220)
 size = Vector2i(400, 200)
+theme_override_fonts/title_font = ExtResource("1_kob81")
 script = ExtResource("1_8t6u0")
 
 [node name="TextEdit" type="TextEdit" parent="."]
@@ -14,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_kob81")
 editable = false
 wrap_mode = 1
 

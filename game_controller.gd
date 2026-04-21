@@ -26,6 +26,10 @@ var _message_elapsed = 0
 @export var NotificationColor : Color
 @export var NotificationSpeed : float = .75
 
+var _alarm = false
+var _alarm_elapsed = 0
+@export var AlarmSpeed = 2
+
 func _ready():
 	CommandManager.close()
 	_radar_window.close()
@@ -76,6 +80,13 @@ func _process(delta: float) -> void:
 			_data_elapsed = NotificationSpeed
 			_data_notification.self_modulate = NotificationColor if _data_notification.self_modulate == NotificationClear else NotificationClear
 
+	if _alarm or _alarm_elapsed > 0:
+		_alarm_elapsed += delta
+		var t = (1 + sin(_alarm_elapsed * AlarmSpeed * (2 * PI))) / 2
+		if not _alarm and t <= .1:
+			_alarm_elapsed = 0	
+		$DirectionalLight3D.light_color = lerp(Color.WHITE, Color.RED, t)
+
 
 func _on_cmd_pressed():
 	if CommandManager.is_open():
@@ -122,6 +133,12 @@ func _on_scanner_pressed() -> void:
 	else:
 		_scanner_window.open()
 
+
+func start_alarm():
+	_alarm = true
+
+func stop_alarm():
+	_alarm = false
 
 func spawn_drone(droneID:String, spawn_pos:Vector3):
 	var d = DroneScene.instantiate()

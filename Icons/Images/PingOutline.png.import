@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crmmc666iwxa8"
-path.s3tc="res://.godot/imported/grumpy.png-98f3aac8ed53d0bde71aa5f7a5570659.s3tc.ctex"
+uid="uid://djfo8152oofxe"
+path.s3tc="res://.godot/imported/PingOutline.png-3125b8ae3e9f0c3d53eda22d6e1072a0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Drone/grumpy.png"
-dest_files=["res://.godot/imported/grumpy.png-98f3aac8ed53d0bde71aa5f7a5570659.s3tc.ctex"]
+source_file="res://Icons/Images/PingOutline.png"
+dest_files=["res://.godot/imported/PingOutline.png-3125b8ae3e9f0c3d53eda22d6e1072a0.s3tc.ctex"]
 
 [params]
 

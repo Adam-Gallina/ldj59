@@ -8,3 +8,5 @@ M0NK3 not happy enough? "<M0NK3 ID> face 2"
 M0NK3 needs to lock in? "<M0NK3 ID> face 1"
 
 And there's 3 more face options where those came from!
+
+Not sure of your M0NK3 ID? Simply look below your M0NK3 icon on the M0NK3 COMMAND v2 screen!

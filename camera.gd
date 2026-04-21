@@ -7,7 +7,11 @@ extends Camera3D
 var _scrolling = false
 var _last_mouse_pos : Vector3 = Vector3.ZERO
 
+var _can_control = true
+
 func _process(delta):
+	if not _can_control: return
+	
 	if Input.is_action_just_pressed('pan') and WindowManager._curr_window == null:
 		_scrolling = true
 	if Input.is_action_just_released('pan'):
@@ -15,7 +19,7 @@ func _process(delta):
 
 	if _scrolling:
 		var mp = get_viewport().get_mouse_position()
-		var wp = project_position(mp, 0) - global_position
+		var wp = project_position(mp, 10) - global_position
 		wp.y = 0
 
 		if _scrolling and _last_mouse_pos != Vector3.ZERO:
@@ -28,7 +32,10 @@ func _process(delta):
 
 
 	if Input.is_action_just_pressed('zoom_in') and WindowManager._curr_window == null:
-		size -= ZoomSpeed * delta
+		#size -= ZoomSpeed * delta
+		global_position.y -= ZoomSpeed * delta
 	if Input.is_action_just_pressed('zoom_out') and WindowManager._curr_window == null:
-		size += ZoomSpeed * delta
-	size = clamp(size, MinZoom, MaxZoom)
+		#size += ZoomSpeed * delta
+		global_position.y += ZoomSpeed * delta
+	#size = clamp(size, MinZoom, MaxZoom)
+	global_position.y = clamp(global_position.y, MinZoom, MaxZoom)

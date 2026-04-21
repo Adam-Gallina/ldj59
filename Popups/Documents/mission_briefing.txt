@@ -1,8 +1,8 @@
-Ur trying to clean the lab of an entity which we will give you little to no information about yet still expect you to survive :)
+Ur trying to reach our lab and recover researh data regardinng an entity which we will give you little to no information about yet still expect you to survive :)
 
 Oh btw the generator signal is
-    Freq: 60
-    Amp: 100
-    Wave: 40
+    Frequency: 60
+    Amplitude: 100
+    Wavelength: 40
 
-Ummm that's about it, now hurry up and secure the entity pls and ty
+Ummm that's about it, now hurry up and secure the research pls and ty

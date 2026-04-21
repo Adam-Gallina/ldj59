@@ -41,4 +41,5 @@ func hide_model():
 	$Sprite3D.hide()
 
 func reveal_model():
+	revealed.emit()
 	$Sprite3D.show()
